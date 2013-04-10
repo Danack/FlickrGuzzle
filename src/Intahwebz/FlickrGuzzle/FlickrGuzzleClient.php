@@ -12,7 +12,7 @@ use Guzzle\Http\Exception;
 
 use Guzzle\Service\Command\OperationCommand;
 
-class FlickrAPIClient extends Client{
+class FlickrGuzzleClient extends Client{
 
 	/**
 	 * Factory method to create a new FlickrAPIClient
@@ -25,7 +25,7 @@ class FlickrAPIClient extends Client{
 	 *
 	 * @param array|Collection $config Configuration data
 	 *
-	 * @return self
+	 * @return FlickrGuzzleClient
 	 */
 	public static function factory($config = array())
 	{
