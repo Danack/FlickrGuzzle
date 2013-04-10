@@ -1,0 +1,16 @@
+{
+	"name": "intahwebz/flickrguzzle",
+	"description": "A Flickr wrapper to allow you to call the Flickr api with Guzzle as the backend.",
+	"keywords": ["flickr", "api", "http", "rest", "web service", "curl", "client", "HTTP client"],
+	"license": "MIT",
+	"require":{
+		"guzzle/danackguzzle": "3.3.*@dev"
+	},
+	"authors": [
+		{
+			"name": "Dan Ackroyd",
+			"email": "Danack@basereality.com",
+			"homepage": "http://www.basereality.com"
+		}
+	]
+}
