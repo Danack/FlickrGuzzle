@@ -17,16 +17,16 @@ class PhotoInfo {
 		['license', 'license'],
 		['rotation', 'rotation'],
 
-		['visibility', 'visibility', 'class' => 'Intahwebz\\FlickrAPI\\DTO\\Visibility' ],
-		['photo', NULL, 'class' => 'Intahwebz\\FlickrAPI\\DTO\\Photo' ],
-		['dates', 'dates', 'class' => 'Intahwebz\\FlickrAPI\\DTO\\Dates', ],//  ],
-		['urls', ['urls', 'url'], 'class' => 'Intahwebz\\FlickrAPI\\DTO\\URL', 'multiple' => TRUE ],
-		['tags', ['tags', 'tag'], 'class' => 'Intahwebz\\FlickrAPI\\DTO\\Tag', 'multiple' => TRUE ],
-		['usage', 'usage', 'class' => 'Intahwebz\\FlickrAPI\\DTO\\Usage' ],
-		//['geoPerms', 'geoperms', 'class' => 'Intahwebz\\FlickrAPI\\DTO\\GeoPerms' ],
-		['editability', 'editability', 'class' => 'Intahwebz\\FlickrAPI\\DTO\\Editability' ],
+		['visibility', 'visibility', 'class' => 'Intahwebz\\FlickrGuzzle\\DTO\\Visibility' ],
+		['photo', NULL, 'class' => 'Intahwebz\\FlickrGuzzle\\DTO\\Photo' ],
+		['dates', 'dates', 'class' => 'Intahwebz\\FlickrGuzzle\\DTO\\Dates', ],//  ],
+		['urls', ['urls', 'url'], 'class' => 'Intahwebz\\FlickrGuzzle\\DTO\\URL', 'multiple' => TRUE ],
+		['tags', ['tags', 'tag'], 'class' => 'Intahwebz\\FlickrGuzzle\\DTO\\Tag', 'multiple' => TRUE ],
+		['usage', 'usage', 'class' => 'Intahwebz\\FlickrGuzzle\\DTO\\Usage' ],
+		//['geoPerms', 'geoperms', 'class' => 'Intahwebz\\FlickrGuzzle\\DTO\\GeoPerms' ],
+		['editability', 'editability', 'class' => 'Intahwebz\\FlickrGuzzle\\DTO\\Editability' ],
 
-		['publicEditability', 'publiceditability', 'class' => 'Intahwebz\\FlickrAPI\\DTO\\PublicEditability' ],
+		['publicEditability', 'publiceditability', 'class' => 'Intahwebz\\FlickrGuzzle\\DTO\\PublicEditability' ],
 	);
 
 	var $views;

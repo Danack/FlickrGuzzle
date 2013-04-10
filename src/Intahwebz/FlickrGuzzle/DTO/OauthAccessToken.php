@@ -12,7 +12,7 @@ class OauthAccessToken {
 	public static $dataMap = array(
 		['oauthToken', 'oauth_token'],
 		['oauthTokenSecret', 'oauth_token_secret'],
-		['user', NULL, 'class' => 'Intahwebz\\FlickrAPI\\DTO\\User' ]
+		['user', NULL, 'class' => 'Intahwebz\\FlickrGuzzle\\DTO\\User' ]
 	);
 
 	var $oauthToken;

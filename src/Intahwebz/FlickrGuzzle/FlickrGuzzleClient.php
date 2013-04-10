@@ -101,7 +101,7 @@ class FlickrGuzzleClient extends Client{
 		$data = $command->getRequest()->getResponse()->getBody(TRUE);
 
 		$xmlResponses = array(
-			"Intahwebz\\FlickrAPI\\DTO\\FileUploadResponse"
+			"Intahwebz\\FlickrGuzzle\\DTO\\FileUploadResponse"
 		);
 
 		if (in_array($className, $xmlResponses) == TRUE) {
@@ -119,8 +119,8 @@ class FlickrGuzzleClient extends Client{
 		}
 
 		$hilariousNonStandardResponses = array(
-			'Intahwebz\\FlickrAPI\\DTO\\OauthAccessToken',
-			'Intahwebz\\FlickrAPI\\DTO\\OauthRequestToken',
+			'Intahwebz\\FlickrGuzzle\\DTO\\OauthAccessToken',
+			'Intahwebz\\FlickrGuzzle\\DTO\\OauthRequestToken',
 		);
 
 		if (in_array($className, $hilariousNonStandardResponses) == TRUE) {
@@ -130,14 +130,14 @@ class FlickrGuzzleClient extends Client{
 		}
 
 		$aliasedResponses = array(
-			'Intahwebz\\FlickrAPI\\DTO\\CameraBrandList' => 'brands',
-			"Intahwebz\\FlickrAPI\\DTO\\CameraDetailList" => 'cameras',
-			"Intahwebz\\FlickrAPI\\DTO\\PhotoList" => 'photos',
-			"Intahwebz\\FlickrAPI\\DTO\\Photo" => NULL,
-			"Intahwebz\\FlickrAPI\\DTO\\PhotoInfo" => 'photo',
-			"Intahwebz\\FlickrAPI\\DTO\\OauthCheck" => 'oauth',
-			"Intahwebz\\FlickrAPI\\DTO\\MethodInfo" => NULL,
-			"Intahwebz\\FlickrAPI\\DTO\\MethodList" => 'methods',
+			'Intahwebz\\FlickrGuzzle\\DTO\\CameraBrandList' => 'brands',
+			"Intahwebz\\FlickrGuzzle\\DTO\\CameraDetailList" => 'cameras',
+			"Intahwebz\\FlickrGuzzle\\DTO\\PhotoList" => 'photos',
+			"Intahwebz\\FlickrGuzzle\\DTO\\Photo" => NULL,
+			"Intahwebz\\FlickrGuzzle\\DTO\\PhotoInfo" => 'photo',
+			"Intahwebz\\FlickrGuzzle\\DTO\\OauthCheck" => 'oauth',
+			"Intahwebz\\FlickrGuzzle\\DTO\\MethodInfo" => NULL,
+			"Intahwebz\\FlickrGuzzle\\DTO\\MethodList" => 'methods',
 		);
 
 		if (array_key_exists($className, $aliasedResponses) == TRUE) {

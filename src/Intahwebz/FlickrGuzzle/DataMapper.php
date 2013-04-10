@@ -10,7 +10,7 @@ namespace Intahwebz\FlickrGuzzle;
  * Allows objects to be created directly from an array of data, mapping keynames in the array to member
  * variable names.
  *
- * @package Intahwebz\FlickrAPI
+ * @package Intahwebz\FlickrGuzzle
  */
 trait DataMapper {
 

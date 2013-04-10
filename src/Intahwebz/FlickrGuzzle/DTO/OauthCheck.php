@@ -11,7 +11,7 @@ use Intahwebz\FlickrGuzzle\DataMapper;
  *
  * This should only be used as the result of an call to check that an OauthAccessToken is valid. It should not be written to.
  *
- * @package Intahwebz\FlickrAPI\DTO
+ * @package Intahwebz\FlickrGuzzle\DTO
  */
 class OauthCheck {
 
@@ -23,7 +23,7 @@ class OauthCheck {
 //		['oauthToken', 'oauth_token'],
 //		['oauthTokenSecret', 'oauth_token_secret'],
 		['permissions', 'perms'],
-		['user', 'user', 'class' => 'Intahwebz\\FlickrAPI\\DTO\\User' ]
+		['user', 'user', 'class' => 'Intahwebz\\FlickrGuzzle\\DTO\\User' ]
 	);
 
 	var $permissions;

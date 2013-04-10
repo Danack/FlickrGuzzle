@@ -16,7 +16,7 @@ return array (
 			"httpMethod" => "GET",
 			'uri' => 'http://www.flickr.com/services/oauth/request_token',
 			"summary" => "Starts the Oauth process.",
-			"responseClass" => "Intahwebz\\FlickrAPI\\DTO\\OauthRequestToken",
+			"responseClass" => "Intahwebz\\FlickrGuzzle\\DTO\\OauthRequestToken",
 
 			"parameters" => array(
 				'oauth_callback' => array(
@@ -32,7 +32,7 @@ return array (
 			"httpMethod" => "GET",
 			'uri' => 'http://www.flickr.com/services/oauth/access_token',
 			"summary" => "Exchanges Oauth request token for access token.",
-			"responseClass" => "Intahwebz\\FlickrAPI\\DTO\\OauthAccessToken",
+			"responseClass" => "Intahwebz\\FlickrGuzzle\\DTO\\OauthAccessToken",
 
 			"parameters" => array(
 
@@ -56,7 +56,7 @@ return array (
 			"httpMethod" => "POST",
 			'uri' => 'http://api.flickr.com/services/upload/',
 			"summary" => "Uploads a photo.",
-			"responseClass" => "Intahwebz\\FlickrAPI\\DTO\\FileUploadResponse",
+			"responseClass" => "Intahwebz\\FlickrGuzzle\\DTO\\FileUploadResponse",
 
 			"parameters" => array(
 				'format' => array(
@@ -140,7 +140,7 @@ return array (
 		"CheckToken" => array(
 			'extends' => 'defaultGetOperation',
 			"summary" => "Checks whether the Oauth token+secret are valid",
-			"responseClass" => "Intahwebz\\FlickrAPI\\DTO\\OauthCheck",
+			"responseClass" => "Intahwebz\\FlickrGuzzle\\DTO\\OauthCheck",
 			"parameters" => array(
 				'oauth_token' => array(
 					"location" => "query",
@@ -160,7 +160,7 @@ return array (
 		"GetPhotoList" => array(
 			'extends' => 'defaultGetOperation',
             "summary" => "Get a set of thumbnails",
-			"responseClass" => "Intahwebz\\FlickrAPI\\DTO\\PhotoList",
+			"responseClass" => "Intahwebz\\FlickrGuzzle\\DTO\\PhotoList",
             "parameters" => array(
 				"per_page" => array(
 					"location" => "query",
@@ -200,7 +200,7 @@ return array (
 		"AddTag" => array(
 			'extends' => 'defaultGetOperation',
 			"summary" => "Get a set of thumbnails",
-			"responseClass" => "Intahwebz\\FlickrAPI\\DTO\\PhotoList",
+			"responseClass" => "Intahwebz\\FlickrGuzzle\\DTO\\PhotoList",
 			"parameters" => array(
 				"photo_id" => array(
 					"location" => "query",
@@ -223,7 +223,7 @@ return array (
 		"RemoveTag" => array(
 			'extends' => 'defaultGetOperation',
 			"summary" => "Get a set of thumbnails",
-			"responseClass" => "Intahwebz\\FlickrAPI\\DTO\\PhotoList",
+			"responseClass" => "Intahwebz\\FlickrGuzzle\\DTO\\PhotoList",
 			"parameters" => array(
 
 				'tag_id' => array(
@@ -242,7 +242,7 @@ return array (
 		"GetUntaggedPhoto" => array(
 			'extends' => 'defaultGetOperation',
 			"summary" => "Get a set of thumbnails",
-			"responseClass" => "Intahwebz\\FlickrAPI\\DTO\\PhotoList",
+			"responseClass" => "Intahwebz\\FlickrGuzzle\\DTO\\PhotoList",
 			"parameters" => array(
 				'per_page' => array(
 					"location" => "query",
@@ -267,7 +267,7 @@ return array (
 		"GetPublicPhotoList" => array(
 			'extends' => 'defaultGetOperation',
 			"summary" => "Get a set of thumbnails",
-			"responseClass" => "Intahwebz\\FlickrAPI\\DTO\\PhotoList",
+			"responseClass" => "Intahwebz\\FlickrGuzzle\\DTO\\PhotoList",
 			"parameters" => array(
 				"per_page" => array(
 					"location" => "query",
@@ -290,7 +290,7 @@ return array (
 		"GetPhotoInfo" => array(
 			'extends' => 'defaultGetOperation',
 			"summary" => "Get a set of thumbnails",
-			"responseClass" => "Intahwebz\\FlickrAPI\\DTO\\PhotoInfo",
+			"responseClass" => "Intahwebz\\FlickrGuzzle\\DTO\\PhotoInfo",
 			"parameters" => array(
 				"photo_id" => array(
 					"location" => "query",
@@ -309,7 +309,7 @@ return array (
 		"GetBrands" => array(
 			'extends' => 'defaultGetOperation',
 			"summary" => "Returns all the brands of cameras that Flickr knows about.",
-			"responseClass" => "Intahwebz\\FlickrAPI\\DTO\\CameraBrandList",
+			"responseClass" => "Intahwebz\\FlickrGuzzle\\DTO\\CameraBrandList",
 			"parameters" => array(
 				'method'    => array(
 					"location" => "query",
@@ -322,7 +322,7 @@ return array (
 		"GetBrandModels" => array(
 			'extends' => 'defaultGetOperation',
 			"summary" => "Retrieve all the models for a given camera brand.",
-			"responseClass" => "Intahwebz\\FlickrAPI\\DTO\\CameraDetailList",
+			"responseClass" => "Intahwebz\\FlickrGuzzle\\DTO\\CameraDetailList",
 			"parameters" => array(
 				'brand'    => array(
 					"location" => "query",
@@ -340,7 +340,7 @@ return array (
 		"getMethodInfo" => array(
 			'extends' => 'defaultGetOperation',
 			"summary" => "Retrieve all the models for a given camera brand.",
-			"responseClass" => "Intahwebz\\FlickrAPI\\DTO\\MethodInfo",
+			"responseClass" => "Intahwebz\\FlickrGuzzle\\DTO\\MethodInfo",
 			"parameters" => array(
 				'method_name'    => array(
 					"location" => "query",
@@ -359,7 +359,7 @@ return array (
 		"GetMethodsList" => array(
 			'extends' => 'defaultGetOperation',
 			"summary" => "Retrieve all the models for a given camera brand.",
-			"responseClass" => "Intahwebz\\FlickrAPI\\DTO\\MethodList",
+			"responseClass" => "Intahwebz\\FlickrGuzzle\\DTO\\MethodList",
 			"parameters" => array(
 				'method'    => array(
 					"location" => "query",
@@ -725,7 +725,7 @@ return array (
 		"flickr.cameras.getBrandModels" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Retrieve all the models for a given camera brand.',
-			"responseClass" => "Intahwebz\\FlickrAPI\\DTO\\CameraDetailList",
+			"responseClass" => "Intahwebz\\FlickrGuzzle\\DTO\\CameraDetailList",
 			'parameters' => array(
 				'brand'    => array(
 					'location' => 'query',
@@ -743,7 +743,7 @@ return array (
 		"flickr.cameras.getBrands" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns all the brands of cameras that Flickr knows about.',
-			"responseClass" => "Intahwebz\\FlickrAPI\\DTO\\CameraBrandList",
+			"responseClass" => "Intahwebz\\FlickrGuzzle\\DTO\\CameraBrandList",
 			'parameters' => array(
 				'method'    => array(
 					'location' => 'query',
@@ -2625,7 +2625,7 @@ More information about the pandas can be found on the <a href="http://code.flick
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Return photos from the given user\'s photostream. Only photos visible to the calling user will be returned. This method must be authenticated; to return public photos for a user, use <a href="/services/api/flickr.people.getPublicPhotos.html">flickr.people.getPublicPhotos</a>.',
 			'needsSigning' => true,
-			"responseClass" => "Intahwebz\\FlickrAPI\\DTO\\PhotoList",
+			"responseClass" => "Intahwebz\\FlickrGuzzle\\DTO\\PhotoList",
 			'parameters' => array(
 				'user_id'    => array(
 					'location' => 'query',
@@ -3666,7 +3666,7 @@ Before users may assign location data to a photo they must define who, by defaul
 		"flickr.photos.getInfo" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get information about a photo. The calling user must have permission to view the photo.',
-			"responseClass" => "Intahwebz\\FlickrAPI\\DTO\\PhotoInfo",
+			"responseClass" => "Intahwebz\\FlickrGuzzle\\DTO\\PhotoInfo",
 			'parameters' => array(
 				'photo_id'    => array(
 					'location' => 'query',
@@ -3864,7 +3864,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns a list of your photos with no tags.',
 			'needsSigning' => true,
-			"responseClass" => "Intahwebz\\FlickrAPI\\DTO\\PhotoList",
+			"responseClass" => "Intahwebz\\FlickrGuzzle\\DTO\\PhotoList",
 			'parameters' => array(
 				'min_upload_date'    => array(
 					'location' => 'query',
@@ -6608,7 +6608,7 @@ Possible values are:
 		"flickr.reflection.getMethodInfo" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns information for a given flickr API method.',
-			"responseClass" => "Intahwebz\\FlickrAPI\\DTO\\MethodInfo",
+			"responseClass" => "Intahwebz\\FlickrGuzzle\\DTO\\MethodInfo",
 			'parameters' => array(
 				'method_name'    => array(
 					'location' => 'query',
@@ -6626,7 +6626,7 @@ Possible values are:
 		"flickr.reflection.getMethods" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns a list of available flickr API methods.',
-			"responseClass" => "Intahwebz\\FlickrAPI\\DTO\\MethodList",
+			"responseClass" => "Intahwebz\\FlickrGuzzle\\DTO\\MethodList",
 			'parameters' => array(
 				'method'    => array(
 					'location' => 'query',
