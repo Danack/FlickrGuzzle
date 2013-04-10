@@ -1,9 +1,9 @@
 <?php
 
 
-namespace Intahwebz\FlickrAPI\DTO;
+namespace Intahwebz\FlickrGuzzle\DTO;
 
-use Intahwebz\FlickrAPI\DataMapper;
+use Intahwebz\FlickrGuzzle\DataMapper;
 
 class Editability {
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Intahwebz\FlickrAPI\DTO;
+namespace Intahwebz\FlickrGuzzle\DTO;
 
 use Intahwebz\Utils as Utils;
-use Intahwebz\FlickrAPI\DataMapper;
+use Intahwebz\FlickrGuzzle\DataMapper;
 
 //Photo sizes
 //s	small square 75x75

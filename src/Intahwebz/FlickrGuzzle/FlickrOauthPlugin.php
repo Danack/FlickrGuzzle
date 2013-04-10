@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Intahwebz\FlickrAPI;
+namespace Intahwebz\FlickrGuzzle;
 
 use Guzzle\Plugin\Oauth\OauthPlugin;
 use Guzzle\Http\Message\EntityEnclosingRequest;
@@ -18,10 +18,10 @@ class FlickrOauthPlugin extends OauthPlugin {
 	public function		shouldPostFieldsBeSigned($request) {
 		if (!$this->config->get('disable_post_params') ){
 			if ($request instanceof EntityEnclosingRequest ) {
-				return true;
+				return TRUE;
 			}
 		}
-		return false;
+		return FALSE;
 	}
 }
 

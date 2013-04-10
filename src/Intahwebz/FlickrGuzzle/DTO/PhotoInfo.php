@@ -1,16 +1,14 @@
 <?php
 
 
-namespace Intahwebz\FlickrAPI\DTO;
+namespace Intahwebz\FlickrGuzzle\DTO;
 
-use Intahwebz\FlickrAPI\DataMapper;
+use Intahwebz\FlickrGuzzle\DataMapper;
 
 class PhotoInfo {
 
 
-	use DataMapper{
-		createFromData as createFromDataAuto;
-	}
+	use DataMapper;
 
 	static protected $dataMap = array(
 		['views', 'views'],
@@ -20,10 +18,10 @@ class PhotoInfo {
 		['rotation', 'rotation'],
 
 		['visibility', 'visibility', 'class' => 'Intahwebz\\FlickrAPI\\DTO\\Visibility' ],
-		['photo', null, 'class' => 'Intahwebz\\FlickrAPI\\DTO\\Photo' ],
+		['photo', NULL, 'class' => 'Intahwebz\\FlickrAPI\\DTO\\Photo' ],
 		['dates', 'dates', 'class' => 'Intahwebz\\FlickrAPI\\DTO\\Dates', ],//  ],
-		['urls', ['urls', 'url'], 'class' => 'Intahwebz\\FlickrAPI\\DTO\\URL', 'multiple' => true ],
-		['tags', ['tags', 'tag'], 'class' => 'Intahwebz\\FlickrAPI\\DTO\\Tag', 'multiple' => true ],
+		['urls', ['urls', 'url'], 'class' => 'Intahwebz\\FlickrAPI\\DTO\\URL', 'multiple' => TRUE ],
+		['tags', ['tags', 'tag'], 'class' => 'Intahwebz\\FlickrAPI\\DTO\\Tag', 'multiple' => TRUE ],
 		['usage', 'usage', 'class' => 'Intahwebz\\FlickrAPI\\DTO\\Usage' ],
 		//['geoPerms', 'geoperms', 'class' => 'Intahwebz\\FlickrAPI\\DTO\\GeoPerms' ],
 		['editability', 'editability', 'class' => 'Intahwebz\\FlickrAPI\\DTO\\Editability' ],

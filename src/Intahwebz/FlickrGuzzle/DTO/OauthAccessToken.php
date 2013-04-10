@@ -1,9 +1,9 @@
 <?php
 
 
-namespace Intahwebz\FlickrAPI\DTO;
+namespace Intahwebz\FlickrGuzzle\DTO;
 
-use Intahwebz\FlickrAPI\DataMapper;
+use Intahwebz\FlickrGuzzle\DataMapper;
 
 class OauthAccessToken {
 
@@ -12,7 +12,7 @@ class OauthAccessToken {
 	public static $dataMap = array(
 		['oauthToken', 'oauth_token'],
 		['oauthTokenSecret', 'oauth_token_secret'],
-		['user', null, 'class' => 'Intahwebz\\FlickrAPI\\DTO\\User' ]
+		['user', NULL, 'class' => 'Intahwebz\\FlickrAPI\\DTO\\User' ]
 	);
 
 	var $oauthToken;

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Intahwebz\FlickrAPI;
+namespace Intahwebz\FlickrGuzzle;
 
 
 /**
@@ -94,7 +94,7 @@ trait DataMapper {
 					$alias = implode('->', $dataVariableNameArray);
 				}
 
-				throw new \Exception("DataMapper cannot find value from [".$alias."] for mapping to actual value.");
+				throw new \Exception("DataMapper cannot find value from [".$alias."] for mapping to actual value");
 			}
 
 			if($multiple == TRUE){

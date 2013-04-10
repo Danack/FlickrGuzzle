@@ -1,9 +1,9 @@
 <?php
 
 
-namespace Intahwebz\FlickrAPI;
+namespace Intahwebz\FlickrGuzzle;
 
-use Intahwebz\FlickrAPI\DTO\OauthAccessToken;
+use Intahwebz\FlickrGuzzle\DTO\OauthAccessToken;
 
 use Guzzle\Common\Collection;
 use Guzzle\Service\Client;
@@ -32,18 +32,18 @@ class FlickrAPIClient extends Client{
 		if ($config instanceof OauthAccessToken) {
 			$oauthAccessToken = $config;
 			$config = array(
-				'oauth' => true,
+				'oauth' => TRUE,
 				'token' => $oauthAccessToken->oauthToken,
 				'token_secret' => $oauthAccessToken->oauthTokenSecret,
 
 			);
 		}
-		else if ($config === false) {
+		else if ($config === FALSE) {
 			$config = array();
 		}
-		else if ($config === true) {
+		else if ($config === TRUE) {
 			$config = array(
-				'oauth' => true,
+				'oauth' => TRUE,
 			);
 		}
 
@@ -136,10 +136,13 @@ class FlickrAPIClient extends Client{
 			"Intahwebz\\FlickrAPI\\DTO\\Photo" => NULL,
 			"Intahwebz\\FlickrAPI\\DTO\\PhotoInfo" => 'photo',
 			"Intahwebz\\FlickrAPI\\DTO\\OauthCheck" => 'oauth',
+			"Intahwebz\\FlickrAPI\\DTO\\MethodInfo" => NULL,
+			"Intahwebz\\FlickrAPI\\DTO\\MethodList" => 'methods',
 		);
 
 		if (array_key_exists($className, $aliasedResponses) == TRUE) {
 			$dataJson = json_decode($data, TRUE);
+
 			if (array_key_exists('stat', $dataJson) == TRUE &&
 				$dataJson['stat'] != 'ok') {
 				$this->processErrorResponse($dataJson);
@@ -152,6 +155,8 @@ class FlickrAPIClient extends Client{
 			else{
 				$aliasedData = $dataJson;
 			}
+
+			//var_dump($aliasedData);
 
 			$object = $className::createFromData($aliasedData);
 

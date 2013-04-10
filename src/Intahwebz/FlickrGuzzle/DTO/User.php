@@ -1,17 +1,17 @@
 <?php
 
 
-namespace Intahwebz\FlickrAPI\DTO;
+namespace Intahwebz\FlickrGuzzle\DTO;
 
-use Intahwebz\FlickrAPI\DataMapper;
+use Intahwebz\FlickrGuzzle\DataMapper;
 
 class User {
 
 	use DataMapper;
 
 	static protected $dataMap = array(
-		['nsid', 'nsid', 'optional' => true],			//Returned by PhotoInfo?
-		['nsid', 'user_nsid', 'optional' => true],		//returned by OauthAccessToken
+		['nsid', 'nsid', 'optional' => TRUE],			//Returned by PhotoInfo?
+		['nsid', 'user_nsid', 'optional' => TRUE],		//returned by OauthAccessToken
 		['username', 'username'],
 		['fullname','fullname'],
 	);

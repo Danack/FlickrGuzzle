@@ -1,9 +1,9 @@
 <?php
 
 
-namespace Intahwebz\FlickrAPI\DTO;
+namespace Intahwebz\FlickrGuzzle\DTO;
 
-use Intahwebz\FlickrAPI\DataMapper;
+use Intahwebz\FlickrGuzzle\DataMapper;
 
 
 class CameraBrandList {
@@ -11,7 +11,7 @@ class CameraBrandList {
 	use DataMapper;
 
 	static protected $dataMap = array(
-		['cameraBrands', 'brand', 'class' => 'Intahwebz\\FlickrAPI\\DTO\\CameraBrand', 'multiple' => true ],
+		['cameraBrands', 'brand', 'class' => 'Intahwebz\\FlickrAPI\\DTO\\CameraBrand', 'multiple' => TRUE ],
 	);
 
 	var $cameraBrands = array();

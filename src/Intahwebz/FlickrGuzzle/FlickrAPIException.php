@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Intahwebz\FlickrAPI;
+namespace Intahwebz\FlickrGuzzle;
 
 
 class FlickrAPIException extends \Exception {

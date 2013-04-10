@@ -1,9 +1,9 @@
 <?php
 
 
-namespace Intahwebz\FlickrAPI\DTO;
+namespace Intahwebz\FlickrGuzzle\DTO;
 
-use Intahwebz\FlickrAPI\DataMapper;
+use Intahwebz\FlickrGuzzle\DataMapper;
 
 class PhotoList {
 
@@ -14,7 +14,7 @@ class PhotoList {
 		['pages', 'pages'],
 		['perPage', 'perpage'],
 		['total', 'total'],
-		['photos', 'photo', 'class' => 'Intahwebz\\FlickrAPI\\DTO\\Photo', 'multiple' => true ],
+		['photos', 'photo', 'class' => 'Intahwebz\\FlickrAPI\\DTO\\Photo', 'multiple' => TRUE ],
 	);
 
 	var $page;

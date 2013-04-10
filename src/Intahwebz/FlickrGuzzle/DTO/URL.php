@@ -1,9 +1,9 @@
 <?php
 
 
-namespace Intahwebz\FlickrAPI\DTO;
+namespace Intahwebz\FlickrGuzzle\DTO;
 
-use Intahwebz\FlickrAPI\DataMapper;
+use Intahwebz\FlickrGuzzle\DataMapper;
 
 class URL {
 
@@ -15,5 +15,5 @@ class URL {
 	);
 
 	var $type;			//="photopage">
-	var $url = null;	//http://www.flickr.com/photos/bees/2733/</url>
+	var $url = NULL;	//http://www.flickr.com/photos/bees/2733/</url>
 }
