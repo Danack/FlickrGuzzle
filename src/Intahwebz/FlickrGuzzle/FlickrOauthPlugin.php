@@ -18,10 +18,10 @@ class FlickrOauthPlugin extends OauthPlugin {
 	public function		shouldPostFieldsBeSigned($request) {
 		if (!$this->config->get('disable_post_params') ){
 			if ($request instanceof EntityEnclosingRequest ) {
-				return TRUE;
+				return true;
 			}
 		}
-		return FALSE;
+		return false;
 	}
 }
 
