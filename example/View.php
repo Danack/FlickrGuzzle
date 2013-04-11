@@ -314,6 +314,23 @@ class View {
 		echo "</div>";
 	}
 
+	function lookupUser(){
+		echo "Probably hard coded to Danack<br/>&nbsp;<br/>";
+
+		$lookupUser = $this->variables['lookupUser'];
+		echo "UserID: ".$lookupUser->userID."<br/>";
+  		echo "Username: ".$lookupUser->username."<br/>";
+		$this->renderFooter();
+	}
+
+	function lookupGroup(){
+		$lookupGroup = $this->variables['lookupGroup'];
+
+		echo "GroupID: ".$lookupGroup->groupID."<br/>";
+  		echo "Group name ".$lookupGroup->groupName."<br/>";
+
+		$this->renderFooter();
+	}
 }
 
 

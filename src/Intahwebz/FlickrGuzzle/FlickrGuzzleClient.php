@@ -128,6 +128,11 @@ class FlickrGuzzleClient extends Client{
 			"Intahwebz\\FlickrGuzzle\\DTO\\ActivityInfo" => 'items',
 			"Intahwebz\\FlickrGuzzle\\DTO\\PhotoInfoTransform" => 'photoid',
 			"Intahwebz\\FlickrGuzzle\\DTO\\NoteID" => 'note',
+			'Intahwebz\\FlickrGuzzle\\DTO\\LookupUser' => 'user',
+			'Intahwebz\\FlickrGuzzle\\DTO\\LookupGroup' => 'group',
+			'Intahwebz\\FlickrGuzzle\\DTO\\LookupGallery' => 'gallery',
+
+
 		);
 
 		if (array_key_exists($className, $aliasedResponses) == TRUE) {
@@ -288,12 +293,13 @@ class FlickrGuzzleClient extends Client{
 		foreach($serviceDescription['operations'] as $operationName => $operation) {
 			if ($operationName != 'defaultGetOperation') {
 				$operationCount++;
-				if (array_key_exists('responseClass', $operation) == true &&
-					$operation['responseClass'] != null) {
-					$operationWithResponseClassCount++;
-				}
-				else{
-					$functionsLeftToImplement[] = $operationName;
+				if (array_key_exists('responseClass', $operation) == true) {
+					if ( $operation['responseClass'] != null) {
+						$operationWithResponseClassCount++;
+					}
+					else{
+						$functionsLeftToImplement[] = $operationName;
+					}
 				}
 			}
 		}

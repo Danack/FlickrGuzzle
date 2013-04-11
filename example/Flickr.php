@@ -46,9 +46,12 @@ class Flickr{
 
 			'User comments' => 'userComments',
 			'User photos' => 'userPhotos',
+
+			'Lookup gallery' => 'lookupGallery',
+			'Lookup user' => 'lookupUser',
+			'Lookup group' => 'lookupGroup',
+
 			'Logout'		=> 'logout',
-
-
 		);
 
 		$this->view->assign('routes', $routes);
@@ -408,6 +411,44 @@ class Flickr{
 		$this->view->addStatusMessage("Note should have been deleted from photo.");
 		$this->photo($photoID);
 	}
+
+	function	lookupGallery(){
+		$params = array(
+			'url' => 'http://www.flickr.com/photos/sfhipchick/galleries/72157629326823342/'
+		);
+
+		$flickrGuzzleClient = FlickrGuzzleClient::factory();
+		$cameraBrandList = $flickrGuzzleClient->getCommand('flickr.urls.lookupGallery', $params)->execute();
+		$this->view->assign('cameraBrandList', $cameraBrandList);
+		$this->view->setTemplate("flickr/brands");
+	}
+
+
+
+	function	lookupUser(){
+		$params = array(
+			'url' => 'http://www.flickr.com/photos/danack/'
+		);
+
+		$flickrGuzzleClient = FlickrGuzzleClient::factory();
+		$lookupUser = $flickrGuzzleClient->getCommand('flickr.urls.lookupUser', $params)->execute();
+		$this->view->assign('lookupUser', $lookupUser);
+		$this->view->setTemplate("flickr/lookupUser");
+	}
+
+	function	lookupGroup(){
+		$params = array(
+			'url' => 'http://www.flickr.com/groups/rainbowlorikeets/'
+		);
+
+		$flickrGuzzleClient = FlickrGuzzleClient::factory();
+		$lookupGroup = $flickrGuzzleClient->getCommand('flickr.urls.lookupGroup', $params)->execute();
+		$this->view->assign('lookupGroup', $lookupGroup);
+		$this->view->setTemplate("flickr/lookupGroup");
+	}
+
+
+
 
 }
 

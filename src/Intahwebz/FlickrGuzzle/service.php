@@ -7145,16 +7145,7 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 		"flickr.urls.lookupGallery" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns gallery info, by url.',
-			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
-			/* Example
-<gallery id="6065-72157617483228192" url="/photos/straup/galleries/72157617483228192" owner="35034348999@N01" 
-primary_photo_id="292882708" 
-date_create="1241028772" date_update="1270111667" 
-count_photos="17" count_videos="0" server="112" farm="1" secret="7f29861bc4">
-	<title>Cat Pictures I've Sent To Kevin Collins</title>
-	<description />
-</gallery>
-*/
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\LookupGallery',
 			'parameters' => array(
 				'url'    => array(
 					'location' => 'query',
@@ -7172,12 +7163,7 @@ count_photos="17" count_videos="0" server="112" farm="1" secret="7f29861bc4">
 		"flickr.urls.lookupGroup" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns a group NSID, given the url to a group\'s page or photo pool.',
-			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
-			/* Example
-<group id="34427469792@N01">
-	<groupname>FlickrCentral</groupname> 
-</group>
-*/
+			'responseClass' => 'Intahwebz\\FlickrGuzzle\\DTO\\LookupGroup',
 			'parameters' => array(
 				'url'    => array(
 					'location' => 'query',
@@ -7195,12 +7181,7 @@ count_photos="17" count_videos="0" server="112" farm="1" secret="7f29861bc4">
 		"flickr.urls.lookupUser" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns a user NSID, given the url to a user\'s photos or profile.',
-			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
-			/* Example
-<user id="12037949632@N01">
-	<username>Stewart</username> 
-</user>
-*/
+			'responseClass' => 'Intahwebz\\FlickrGuzzle\\DTO\\LookupUser',
 			'parameters' => array(
 				'url'    => array(
 					'location' => 'query',

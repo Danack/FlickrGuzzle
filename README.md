@@ -8,12 +8,15 @@ A Guzzle based Flickr API.
 Example
 =======
 
+A comprehensive set of examples is included as a standalone web application. To get this running:
 
 1 Install the requirements via composer (php composer.phar install --dev)
 
-2 Point a web server at the directly FlickrGuzzle/example with the directory index set to index.php
+2 Point a web server at the directory FlickrGuzzle/example with the directory index set to index.php
 
 3 Copy FlickrGuzzle/example/configSample.php to FlickrGuzzle/example/config.php and put your Flickr key and secret in there.
+
+You should now be able to point your browser to the
 
 
 WARNING
@@ -54,7 +57,7 @@ Have their own end-point, which is different from the rest of the API. Also thes
 Non-implemented functions
 =========================
 
-The following functions are not implemented and never will be
+The following functions are not implemented and never will be.
 
 * Deprecated auth functions
 	* flickr.auth.checkToken
