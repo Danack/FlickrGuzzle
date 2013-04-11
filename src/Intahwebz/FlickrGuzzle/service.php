@@ -3732,7 +3732,6 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Delete a note from a photo.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'note_id'    => array(
 					'location' => 'query',

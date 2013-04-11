@@ -257,6 +257,20 @@ class View {
 		echo "</td></tr></table>";
 
 
+		foreach ($photoInfo->notes as $note) {
+			echo "<form method='post' accept-charset='utf-8' action='/index.php'>";
+
+			echo "'".$note->text."'";
+
+			echo "<input type='hidden' name='function' value='deleteNote' />";
+			echo "<input type='hidden' name='photoID' value='".$photoID."' />";
+			echo "<input type='hidden' name='noteID' value='".$note->noteID."' />";
+			echo "<input type='submit' name='submitButton' class='clickyButton' value='Delete note'/>";
+
+			echo "</form>";
+		}
+
+
 		echo "PhotoInfo: <br/>";
 		var_dump($photoInfo);
 

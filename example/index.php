@@ -68,6 +68,13 @@ try{
 			break;
 		}
 
+		case 'deleteNote': {
+			$photoID = getVariable('photoID', false);
+			$noteID = getVariable('noteID', false);
+			$flickr->deleteNote($photoID, $noteID);
+			break;
+		}
+
 		case 'apiProgress': {
 			$flickr->apiProgress();
 			break;

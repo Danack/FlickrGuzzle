@@ -393,6 +393,22 @@ class Flickr{
 		$this->photo($photoID);
 	}
 
+
+	function deleteNote($photoID, $noteID) {
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
+		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
+
+		$params = array(
+			'note_id'	=> $noteID,
+		);
+
+		$command = $flickrGuzzleClient->getCommand('flickr.photos.notes.delete', $params);
+		$command->execute();
+
+		$this->view->addStatusMessage("Note should have been deleted from photo.");
+		$this->photo($photoID);
+	}
+
 }
 
 
