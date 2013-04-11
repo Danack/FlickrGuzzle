@@ -61,6 +61,13 @@ try{
 			break;
 		}
 
+		case 'noteAdd': {
+			$photoID = getVariable('photoID', false);
+			$noteText = getVariable('noteText', false);
+			$flickr->addNote($photoID, $noteText);
+			break;
+		}
+
 		case 'apiProgress': {
 			$flickr->apiProgress();
 			break;

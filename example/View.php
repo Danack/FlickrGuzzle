@@ -244,11 +244,11 @@ class View {
 
 		echo "<table><tr><td>";
 
-
-		echo "PhotoID: ".$photoID."<br/>";
+		$url = "/index.php?function=photo&photoID=".$photoID;
+		echo "<a href='$url'>PhotoID: ".$photoID."<br/>";
 		$photo = $photoInfo->photo;
 
-		echo "<img src='".$photo->getImageURL()."' />";
+		echo "<img src='".$photo->getImageURL()."' /></a>";
 
 		echo "</td><td>";
 
@@ -265,10 +265,10 @@ class View {
 
 	function displayPhotoButtons($photoID){
 		$this->displayRotateButton($photoID);
+		$this->displayNoteAddButton($photoID);
 	}
 
 	function	displayRotateButton($photoID){
-
 		echo "<div class='bordered'>";
 		echo "<form method='post' accept-charset='utf-8' action='/index.php'>";
 
@@ -282,6 +282,20 @@ class View {
 			echo "</select>";
 
 			echo "<input type='submit' name='submitButton' class='clickyButton' value='Rotate photo'/>";
+		echo "</form>";
+		echo "</div>";
+	}
+
+	function	displayNoteAddButton($photoID){
+		echo "<div class='bordered'>";
+		echo "<form method='post' accept-charset='utf-8' action='/index.php'>";
+
+		echo "<input type='hidden' name='function' value='noteAdd' />";
+		echo "<input type='hidden' name='photoID' value='".$photoID."' />";
+
+		echo "<input type='text' name='noteText' width='80' >";
+
+		echo "<input type='submit' name='submitButton' class='clickyButton' value='Add note'/>";
 		echo "</form>";
 		echo "</div>";
 	}

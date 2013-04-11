@@ -371,6 +371,28 @@ class Flickr{
 		$this->view->addStatusMessage("Photo should have been rotated by  ".$degrees.".");
 		$this->photo($photoID);
 	}
+
+	function addNote($photoID, $noteText) {
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
+		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
+
+		$params = array(
+			'photo_id'	=> $photoID,
+			'note_text'	=> $noteText,
+
+			'note_x' => 50,
+			'note_y' => 150,
+			'note_w' => 150,
+			'note_h' => 150,
+		);
+
+		$command = $flickrGuzzleClient->getCommand('flickr.photos.notes.add', $params);
+		$photoTransformInfo = $command->execute();
+
+		$this->view->addStatusMessage("Note should have been added to photo.");
+		$this->photo($photoID);
+	}
+
 }
 
 

@@ -11,6 +11,7 @@ function pageStart(){
  <style type="text/css">
 .bordered{
     border: 2px solid #000000;
+    margin-bottom: 5px;
 }
 
 form {

@@ -26,6 +26,7 @@ class PhotoInfo {
 		['editability', 'editability', 'class' => 'Intahwebz\\FlickrGuzzle\\DTO\\Editability' ],
 
 		['publicEditability', 'publiceditability', 'class' => 'Intahwebz\\FlickrGuzzle\\DTO\\PublicEditability' ],
+		['notes', ['notes', 'note'], 'class' => 'Intahwebz\\FlickrGuzzle\\DTO\\Note', 'multiple' => true ]
 	);
 
 	var $views;
@@ -79,7 +80,7 @@ class PhotoInfo {
 	/**
 	 * @var Note[]
 	 */
-	var $flickrNotes = array();
+	var $notes = array();
 
 	/**
 	 * @var Tag[]

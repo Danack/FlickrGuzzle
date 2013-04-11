@@ -3689,7 +3689,8 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Add a note to a photo. Coordinates and sizes are in pixels, based on the 500px image size shown on individual photo pages.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
+			'responseClass' => 'Intahwebz\\FlickrGuzzle\\DTO\\NoteID',
+
 			/* Example
 <note id="1234" />
 */
