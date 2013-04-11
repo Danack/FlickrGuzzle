@@ -19,22 +19,23 @@ class View {
 
 		echo "<h1>FlickrGuzzle</h1>";
 
-		$renderFunctions = array(
-			"flickr/flickrNotAuthed" => 'flickrNotAuthed',
-			"flickr/flickrAuthRequest" => 'flickrAuthRequest',
-			"flickr/index" => 'index',
-			"flickr/brands" => 'cameraBrands',
-			"flickr/brandModels" => 'brandModels',
-			"flickr/photoList" => 'photoList',
-			"flickr/apiProgress" => 'apiProgress',
-		);
+//		$renderFunctions = array(
+//			"flickr/flickrNotAuthed" => 'flickrNotAuthed',
+//			"flickr/flickrAuthRequest" => 'flickrAuthRequest',
+//			"flickr/index" => 'index',
+//			"flickr/brands" => 'cameraBrands',
+//			"flickr/brandModels" => 'brandModels',
+//			"flickr/photoList" => 'photoList',
+//			"flickr/apiProgress" => 'apiProgress',
+//		);
+//
+//		if (array_key_exists($this->template, $renderFunctions) == false) {
+//			echo "Unknown template [".$this->template."]";
+//			return;
+//		}
 
-		if (array_key_exists($this->template, $renderFunctions) == false) {
-			echo "Unknown template [".$this->template."]";
-			return;
-		}
 
-		$renderFunction = $renderFunctions[$this->template];
+		$renderFunction = str_replace('flickr/', '', $this->template);
 
 		$this->{$renderFunction}();
 	}
@@ -150,6 +151,40 @@ class View {
 		$percentageString = sprintf("%01.2f", $percentage);
 
 		echo "Percentage complete: ".$percentageString."% <br/>";
+		$this->renderFooter();
+	}
+
+	function institutionList(){
+		/** @var $instituionList InstitutionList */
+		$institutionList = $this->variables['institutionList'];
+
+		foreach ($institutionList->institutions as $institution) {
+
+			$name = $institution->name;
+			$siteURL = false;
+
+			//var_dump($institution->urls);
+
+			foreach ($institution->urls as $url) {
+				if ($url->type == 'site') {
+					$siteURL = $url->url; //ugh
+
+					if (strpos($siteURL, 'http://') === false &&
+						strpos($siteURL, 'https://') === false) {
+						$siteURL = 'http://'.$siteURL;
+					}
+				}
+			}
+
+			if ($siteURL != false ) {
+				echo "<a href='".$siteURL."'>";
+				echo $name."</a><br/>";
+			}
+			else{
+				echo $name."<br/>";
+			}
+		}
+
 		$this->renderFooter();
 	}
 }

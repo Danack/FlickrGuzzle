@@ -38,13 +38,22 @@ class Flickr{
 			'Camera Brands' => 'flickrCameraBrands',
 			'Method List' => 'flickrMethodList',
 			//'Generate method info' => 'flickrMethodListGenerate',
-
+			'Institution List' => 'institutionList',
 			'API progress' => 'apiProgress',
-
 		);
 
 		$this->view->assign('routes', $routes);
 	}
+
+
+
+	function	institutionList(){
+		$flickrGuzzleClient = FlickrGuzzleClient::factory();
+		$institutionList = $flickrGuzzleClient->getCommand('flickr.commons.getInstitutions')->execute();
+		$this->view->assign('institutionList', $institutionList);
+		$this->view->setTemplate("flickr/institutionList");
+	}
+
 
 	function	displayMethodList(){
 		$flickrGuzzleClient = FlickrGuzzleClient::factory();
@@ -175,10 +184,7 @@ class Flickr{
 	}
 
 
-
-
 	function photoList($page){
-
 
 		$authedFlickrGuzzleClient = false;
 
@@ -193,6 +199,7 @@ class Flickr{
 
 				$command = $flickrGuzzleClient->getCommand('flickr.auth.oauth.checkToken', $params);
 				$oauthCheck  = $command->execute();
+
 				//Could check values in $oauthCheck but why? We already have oauthAccessToken
 				$authedFlickrGuzzleClient = $flickrGuzzleClient;
 			}
@@ -236,7 +243,7 @@ class Flickr{
 			$photoList = $command->execute();
 			$this->view->assign('photoList', $photoList);
 
-			$this->view->setTemplate("flickr/index");
+			$this->view->setTemplate("flickr/photoList");
 		}
 	}
 

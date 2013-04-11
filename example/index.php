@@ -17,14 +17,6 @@ require_once "View.php";
 require_once "Flickr.php";
 
 
-/*$routes = array(
-	'Index' => 'index',
-	'Photos' => 'photoList',
-	'Upload' => 'flickrUpload',
-	'Camera Brands' => 'flickrCameraBrands',
-	'Method List' => 'flickrMethodList',
-); */
-
 session_name(SESSION_NAME);
 session_start();
 
@@ -45,6 +37,11 @@ try{
 
 		case 'apiProgress': {
 			$flickr->apiProgress();
+			break;
+		}
+
+		case 'institutionList': {
+			$flickr->institutionList();
 			break;
 		}
 

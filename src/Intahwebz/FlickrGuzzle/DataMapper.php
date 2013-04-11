@@ -94,7 +94,11 @@ trait DataMapper {
 					$alias = implode('->', $dataVariableNameArray);
 				}
 
-				throw new \Exception("DataMapper cannot find value from [".$alias."] for mapping to actual value");
+				var_dump($data);
+				//$dataString = implode(',', $data);
+
+				throw new \Exception("DataMapper cannot find value from [".$alias."] for mapping to actual value in array ");
+				//.var_export($data)
 			}
 
 			if($multiple == TRUE){

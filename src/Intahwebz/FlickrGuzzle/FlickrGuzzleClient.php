@@ -123,6 +123,7 @@ class FlickrGuzzleClient extends Client{
 			"Intahwebz\\FlickrGuzzle\\DTO\\OauthCheck" => 'oauth',
 			"Intahwebz\\FlickrGuzzle\\DTO\\MethodInfo" => NULL,
 			"Intahwebz\\FlickrGuzzle\\DTO\\MethodList" => 'methods',
+			"Intahwebz\\FlickrGuzzle\\DTO\\InstitutionList" => 'institutions',
 		);
 
 		if (array_key_exists($className, $aliasedResponses) == TRUE) {

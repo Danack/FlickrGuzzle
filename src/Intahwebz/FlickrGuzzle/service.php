@@ -2,10 +2,6 @@
 
 return array (
 
-	//		var $rest_endpoint = 'http://api.flickr.com/services/rest/';
-	//		var $upload_endpoint = 'http://api.flickr.com/services/upload/';
-	//		var $replace_endpoint = 'http://api.flickr.com/services/replace/';
-
 	"name" => "FlickAPI",
     "baseUrl" => "http://api.flickr.com/services/rest/",
     "description" => "Flickr API using Guzzle as a backend",
@@ -134,241 +130,6 @@ return array (
 			)
 		),
 
-
-		/*
-
-		"CheckToken" => array(
-			'extends' => 'defaultGetOperation',
-			"summary" => "Checks whether the Oauth token+secret are valid",
-			"responseClass" => "Intahwebz\\FlickrGuzzle\\DTO\\OauthCheck",
-			"parameters" => array(
-				'oauth_token' => array(
-					"location" => "query",
-					"description" => "The Oauth token that will be checked for validity.",
-					'required' => false,
-				),
-				'method'    => array(
-					"location" => "query",
-					"description" => "Which flickr call is being made.",
-					'default' => 'flickr.auth.oauth.checkToken',
-				),
-			)
-		), */
-
-		/*
-
-		"GetPhotoList" => array(
-			'extends' => 'defaultGetOperation',
-            "summary" => "Get a set of thumbnails",
-			"responseClass" => "Intahwebz\\FlickrGuzzle\\DTO\\PhotoList",
-            "parameters" => array(
-				"per_page" => array(
-					"location" => "query",
-                    "description" => "How many photos to fetch per page",
-                    "required" => true
-				),
-				'page' => array(
-					"location" => "query",
-					"description" => "Page offset.",
-					"required" => false
-				),
-				'method'    => array(
-					"location" => "query",
-					"description" => "Which flickr call is being made.",
-					'default' => 'flickr.people.getPhotos',
-				),
-				'user_id' => array(
-					"location" => "query",
-					"description" => "userID (NSID) of whose photos to get.",
-					"required" => true
-				),
-
-				//safe_search
-				//min_upload_date
-				//max_upload_date
-				//min_taken_date
-				//max_taken_date
-				//content_type
-				//privacy_filter
-				//extras
-			)
-		),
-
-
-
-
-		"AddTag" => array(
-			'extends' => 'defaultGetOperation',
-			"summary" => "Get a set of thumbnails",
-			"responseClass" => "Intahwebz\\FlickrGuzzle\\DTO\\PhotoList",
-			"parameters" => array(
-				"photo_id" => array(
-					"location" => "query",
-					"description" => "Which photo to add the tag to.",
-					"required" => true
-				),
-				'tags' => array(
-					"location" => "query",
-					"description" => "Tags to add",
-					"required" => true
-				),
-				'method'    => array(
-					"location" => "query",
-					"description" => "Which flickr call is being made.",
-					'default' => 'flickr.photos.addTags',
-				),
-			)
-		),
-
-		"RemoveTag" => array(
-			'extends' => 'defaultGetOperation',
-			"summary" => "Get a set of thumbnails",
-			"responseClass" => "Intahwebz\\FlickrGuzzle\\DTO\\PhotoList",
-			"parameters" => array(
-
-				'tag_id' => array(
-					"location" => "query",
-					"description" => "Which tags to remove",
-					"required" => true
-				),
-				'method'    => array(
-					"location" => "query",
-					"description" => "Which flickr call is being made.",
-					'default' => 'flickr.photos.removeTag',
-				),
-			)
-		),
-
-		"GetUntaggedPhoto" => array(
-			'extends' => 'defaultGetOperation',
-			"summary" => "Get a set of thumbnails",
-			"responseClass" => "Intahwebz\\FlickrGuzzle\\DTO\\PhotoList",
-			"parameters" => array(
-				'per_page' => array(
-					"location" => "query",
-					"description" => "",
-					"required" => true
-				),
-				'page' => array(
-					"location" => "query",
-					"description" => "",
-					"required" => true
-				),
-				'method'    => array(
-					"location" => "query",
-					"description" => "Which flickr call is being made.",
-					'default' => 'flickr.photos.getUntagged',
-				),
-			)
-		),
-
-
-
-		"GetPublicPhotoList" => array(
-			'extends' => 'defaultGetOperation',
-			"summary" => "Get a set of thumbnails",
-			"responseClass" => "Intahwebz\\FlickrGuzzle\\DTO\\PhotoList",
-			"parameters" => array(
-				"per_page" => array(
-					"location" => "query",
-					"description" => "How many photos to fetch per page",
-					"required" => true
-				),
-				'page' => array(
-					"location" => "query",
-					"description" => "Page offset.",
-					"required" => false
-				),
-				'method'    => array(
-					"location" => "query",
-					"description" => "Which flickr call is being made.",
-					'default' => 'flickr.people.getPublicPhotos',
-				),
-			)
-		),
-
-		"GetPhotoInfo" => array(
-			'extends' => 'defaultGetOperation',
-			"summary" => "Get a set of thumbnails",
-			"responseClass" => "Intahwebz\\FlickrGuzzle\\DTO\\PhotoInfo",
-			"parameters" => array(
-				"photo_id" => array(
-					"location" => "query",
-					"description" => "The id of the photo to get information for.",
-					"required" => true
-				),
-				'method'    => array(
-					"location" => "query",
-					"description" => "Which flickr call is being made.",
-					'default' => 'flickr.photos.getInfo',
-				),
-			)
-		),
-
-
-		"GetBrands" => array(
-			'extends' => 'defaultGetOperation',
-			"summary" => "Returns all the brands of cameras that Flickr knows about.",
-			"responseClass" => "Intahwebz\\FlickrGuzzle\\DTO\\CameraBrandList",
-			"parameters" => array(
-				'method'    => array(
-					"location" => "query",
-					"description" => "Which flickr call is being made.",
-					'default' => 'flickr.cameras.getBrands',
-				),
-			)
-		),
-
-		"GetBrandModels" => array(
-			'extends' => 'defaultGetOperation',
-			"summary" => "Retrieve all the models for a given camera brand.",
-			"responseClass" => "Intahwebz\\FlickrGuzzle\\DTO\\CameraDetailList",
-			"parameters" => array(
-				'brand'    => array(
-					"location" => "query",
-					"description" => "Which brand to get the models for.",
-					"required" => true,
-				),
-				'method'    => array(
-					"location" => "query",
-					"description" => "Which flickr call is being made.",
-					'default' => 'flickr.cameras.getBrandModels',
-				),
-			)
-		),
-
-		"getMethodInfo" => array(
-			'extends' => 'defaultGetOperation',
-			"summary" => "Retrieve all the models for a given camera brand.",
-			"responseClass" => "Intahwebz\\FlickrGuzzle\\DTO\\MethodInfo",
-			"parameters" => array(
-				'method_name'    => array(
-					"location" => "query",
-					"description" => "Which method_name to get info of.",
-					"required" => true,
-				),
-				'method'    => array(
-					"location" => "query",
-					"description" => "Which flickr call is being made.",
-					'default' => 'flickr.reflection.getMethodInfo',
-				),
-			)
-		),
-
-
-		"GetMethodsList" => array(
-			'extends' => 'defaultGetOperation',
-			"summary" => "Retrieve all the models for a given camera brand.",
-			"responseClass" => "Intahwebz\\FlickrGuzzle\\DTO\\MethodList",
-			"parameters" => array(
-				'method'    => array(
-					"location" => "query",
-					"description" => "Which flickr call is being made.",
-					'default' => 'flickr.reflection.getMethods',
-				),
-			)
-		), */
-
 // Start of autogenerated service
 // 1
 		"flickr.activity.userComments" => array(
@@ -484,104 +245,13 @@ return array (
 			),
 		),
 
-// 3
-		"flickr.auth.checkToken" => array(
-			'extends' => 'defaultGetOperation',
-			'summary' => 'Returns the credentials attached to an authentication token. This call <b>must</b> be signed, and is <b><a href="/services/api/auth.oauth.html">deprecated in favour of OAuth</a></b>.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
-			/* Example
-<auth>
-	<token>976598454353455</token>
-	<perms>read</perms>
-	<user nsid="12037949754@N01" username="Bees" fullname="Cal H" />
-</auth>
-*/
-			'parameters' => array(
-				'auth_token'    => array(
-					'location' => 'query',
-					'description' => 'todo - describe variable',
-				),
-				'method'    => array(
-					'location' => 'query',
-					'description' => 'Which flickr call is being made.',
-					'default' => 'flickr.auth.checkToken',
-				),
-			),
-		),
-
-// 4
-		"flickr.auth.getFrob" => array(
-			'extends' => 'defaultGetOperation',
-			'summary' => 'Returns a frob to be used during authentication. <b>This method call must be signed</b>, and is <b><a href="/services/api/auth.oauth.html">deprecated in favour of OAuth</a></b>.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
-			/* Example
-<frob>746563215463214621</frob>
-*/
-			'parameters' => array(
-				'method'    => array(
-					'location' => 'query',
-					'description' => 'Which flickr call is being made.',
-					'default' => 'flickr.auth.getFrob',
-				),
-			),
-		),
-
-// 5
-		"flickr.auth.getFullToken" => array(
-			'extends' => 'defaultGetOperation',
-			'summary' => 'Get the full authentication token for a mini-token. <b>This method call must be signed</b>, and is <b><a href="/services/api/auth.oauth.html">deprecated in favour of OAuth</a></b>.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
-			/* Example
-<auth>
-	<token>976598454353455</token>
-	<perms>write</perms>
-	<user nsid="12037949754@N01" username="Bees" fullname="Cal H" />
-</auth>
-*/
-			'parameters' => array(
-				'mini_token'    => array(
-					'location' => 'query',
-					'description' => 'todo - describe variable',
-				),
-				'method'    => array(
-					'location' => 'query',
-					'description' => 'Which flickr call is being made.',
-					'default' => 'flickr.auth.getFullToken',
-				),
-			),
-		),
-
-// 6
-		"flickr.auth.getToken" => array(
-			'extends' => 'defaultGetOperation',
-			'summary' => 'Returns the auth token for the given frob, if one has been attached. <b>This method call must be signed</b>, and is <b><a href="/services/api/auth.oauth.html">deprecated in favour of OAuth</a></b>.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
-			/* Example
-<auth>
-	<token>976598454353455</token>
-	<perms>write</perms>
-	<user nsid="12037949754@N01" username="Bees" fullname="Cal H" />
-</auth>
-*/
-			'parameters' => array(
-				'frob'    => array(
-					'location' => 'query',
-					'description' => 'todo - describe variable',
-				),
-				'method'    => array(
-					'location' => 'query',
-					'description' => 'Which flickr call is being made.',
-					'default' => 'flickr.auth.getToken',
-				),
-			),
-		),
 
 // 7
 		"flickr.auth.oauth.checkToken" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns the credentials attached to an OAuth authentication token.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => 'Intahwebz\\FlickrGuzzle\\DTO\\OauthCheck',
 			/* Example
 <oauth>
     <token>72157627611980735-09e87c3024f733da</token>
@@ -602,25 +272,25 @@ return array (
 			),
 		),
 
-// 8
-		"flickr.auth.oauth.getAccessToken" => array(
-			'extends' => 'defaultGetOperation',
-			'summary' => 'Exchange an auth token from the old Authentication API, to an OAuth access token. Calling this method will delete the auth token used to make the request.',
-			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
-			/* Example
-<auth> 
-	<access_token oauth_token="72157607082540144-8d5d7ea7696629bf" oauth_token_secret="f38bf58b2d95bc8b" /> 
-</auth> 
-*/
-			'parameters' => array(
-				'method'    => array(
-					'location' => 'query',
-					'description' => 'Which flickr call is being made.',
-					'default' => 'flickr.auth.oauth.getAccessToken',
-				),
-			),
-		),
+//// 8
+//		"flickr.auth.oauth.getAccessToken" => array(
+//			'extends' => 'defaultGetOperation',
+//			'summary' => 'Exchange an auth token from the old Authentication API, to an OAuth access token. Calling this method will delete the auth token used to make the request.',
+//			'needsSigning' => true,
+//			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+//			/* Example
+//<auth>
+//	<access_token oauth_token="72157607082540144-8d5d7ea7696629bf" oauth_token_secret="f38bf58b2d95bc8b" />
+//</auth>
+//*/
+//			'parameters' => array(
+//				'method'    => array(
+//					'location' => 'query',
+//					'description' => 'Which flickr call is being made.',
+//					'default' => 'flickr.auth.oauth.getAccessToken',
+//				),
+//			),
+//		),
 
 // 9
 		"flickr.blogs.getList" => array(
@@ -821,21 +491,7 @@ iconsmall="http://farm1.static.flickr.com/187/cols/56_43fac2cf79_s.jpg">
 		"flickr.commons.getInstitutions" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Retrieves a list of the current Commons institutions.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
-			/* Example
-<rsp stat="ok">
- <institutions>
-  <institution nsid="123456@N01" date_launch="1232000000">
-   <name>Institution</name>
-    <urls>
-     <url type="site">http://example.com/</url>
-     <url type="license">http://example.com/commons/license</url>
-     <url type="flickr">http://flickr.com/photos/institution</url>
-    </urls>
-   </institution>
-  </institutions>
-</rsp>
-*/
+			'responseClass' => "Intahwebz\\FlickrGuzzle\\DTO\\InstitutionList",
 			'parameters' => array(
 				'method'    => array(
 					'location' => 'query',
