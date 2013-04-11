@@ -7,12 +7,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Danack/guzzle.git",
-                "reference": "14b0625dfcd8817568d862608828d8d7e74a82ee"
+                "reference": "325b7e633ebcc8e81a77dcf8b53d6a5f62d4e680"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Danack/guzzle/zipball/14b0625dfcd8817568d862608828d8d7e74a82ee",
-                "reference": "14b0625dfcd8817568d862608828d8d7e74a82ee",
+                "url": "https://api.github.com/repos/Danack/guzzle/zipball/325b7e633ebcc8e81a77dcf8b53d6a5f62d4e680",
+                "reference": "325b7e633ebcc8e81a77dcf8b53d6a5f62d4e680",
                 "shasum": ""
             },
             "require": {
@@ -93,7 +93,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2013-04-10 12:41:48"
+            "time": "2013-04-10 23:49:51"
         },
         {
             "name": "symfony/event-dispatcher",

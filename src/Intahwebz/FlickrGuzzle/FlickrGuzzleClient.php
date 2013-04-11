@@ -10,7 +10,7 @@ use Guzzle\Service\Client;
 use Guzzle\Service\Description\ServiceDescription;
 use Guzzle\Http\Exception;
 
-use Guzzle\Service\Command\OperationCommand;
+use Guzzle\Service\Command\AbstractCommand;
 
 class FlickrGuzzleClient extends Client{
 
@@ -80,24 +80,13 @@ class FlickrGuzzleClient extends Client{
 		return $client;
 	}
 
-
-//	public function getCommand($name, array $args = array()) {
-//		$command = parent::getCommand($name, $args);
-//
-//		if ($this->oauthToken != null) {
-//			$command->add('oauth_token', $this->oauthToken);
-//		}
-//
-//		return $command;
-//	}
-
 	/**
 	 * Creates DTO objects from the response.
 	 *
 	 * @param $className
 	 * @param OperationCommand $command
 	 */
-	public function createObject($className, OperationCommand  $command){
+	public function createObject($className, AbstractCommand $command){
 		$data = $command->getRequest()->getResponse()->getBody(TRUE);
 
 		$xmlResponses = array(
@@ -112,9 +101,6 @@ class FlickrGuzzleClient extends Client{
 //				<photoid>8636447595</photoid>
 //			</rsp>
 			$parsedResponse = $this->getResponseFromXML($data);
-
-//			var_dump($parsedResponse);
-
 			return $className::createFromData($parsedResponse);
 		}
 
@@ -125,7 +111,6 @@ class FlickrGuzzleClient extends Client{
 
 		if (in_array($className, $hilariousNonStandardResponses) == TRUE) {
 			$params = splitParameters($data);
-			//var_dump($data);
 			return $className::createFromData($params);
 		}
 
