@@ -30,8 +30,7 @@ TODO
 * Create tests.
 * Start tagging versions.
 * Figure out what to do about every flickr function having it's own set of error codes :(
-
-
+* Implement the replace function at http://api.flickr.com/services/replace/
 
 Function end point
 ==================
@@ -52,17 +51,17 @@ The following functions are not implemented and never will be
 
 * Deprecated auth functions
 
-** flickr.auth.checkToken
-** flickr.auth.getFrob
-** flickr.auth.getFullToken
-** flickr.auth.getToken
+	* flickr.auth.checkToken
+	* flickr.auth.getFrob
+	* flickr.auth.getFullToken
+	* flickr.auth.getToken
 
 
 * Test functions
 
-** flickr.test.echo
-** flickr.test.login
-** flickr.test.null
+	* flickr.test.echo
+	* flickr.test.login
+	* flickr.test.null
 
 
 
