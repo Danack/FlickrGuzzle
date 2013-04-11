@@ -10,35 +10,49 @@ class LookupGallery {
 	use DataMapper;
 
 	static protected $dataMap = array(
-		['$galleryID', '$galleryID'],
-		['$url', '$url'],
-		['$owner', '$owner'],
-		['primary_photo_id', 'primary_photo_id'],
-		['date_create', 'date_create'],
-		['date_update', 'date_update'],
-		['count_photos', 'count_photos'],
-		['count_videos', 'count_videos'],
-		['server', 'server'],
-		['farm', 'farm'],
-		['secret', 'secret'],
-		['title', 'title'],
-		['description', 'description'],
+		['galleryID', 'id'],
+		['url', 'url'],
+		['owner', 'owner'],
+		['primaryPhotoID', 'primary_photo_id'],
+		['dateCreate', 'date_create'],
+		['dateUpdate', 'date_update'],
+		['countPhotos', 'count_photos'],
+		['countVideos', 'count_videos'],
+		['countViews', 'count_views'],
+		['countComments', 'count_comments'],
+		['server', 'server', 'optional' => true],
+		['farm', 'farm', 'optional' => true],
+		['secret', 'secret', 'optional' => true ],
+		['title', ['title', '_content']],
+		['description', ['description', '_content' ]],
+
+		['primaryPhotoServer', 'primary_photo_server'],
+		['primaryPhotoFarm', 'primary_photo_farm'],
+		['primaryPhotoSecret', 'primary_photo_secret'],
+
 	);
 
 	var $galleryID;
 	var $url;
 	var $owner;
-	var $primary_photo_id;
-	var $date_create;
-	var $date_update;
-	var $count_photos;
-	var $count_videos;
+	var $primaryPhotoID;
+	var $dateCreate;
+	var $dateUpdate;
+
+	var $countPhotos;
+	var $countVideos;
+	var $countViews;
+	var $countComments;
+
+	var $primaryPhotoServer;
+	var $primaryPhotoFarm;
+	var $primaryPhotoSecret;
+
 	var $server;
 	var $farm;
 	var $secret;
 	var $title;
 	var $description;
-
 }
 
 

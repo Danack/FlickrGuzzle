@@ -418,12 +418,10 @@ class Flickr{
 		);
 
 		$flickrGuzzleClient = FlickrGuzzleClient::factory();
-		$cameraBrandList = $flickrGuzzleClient->getCommand('flickr.urls.lookupGallery', $params)->execute();
-		$this->view->assign('cameraBrandList', $cameraBrandList);
-		$this->view->setTemplate("flickr/brands");
+		$lookupGallery = $flickrGuzzleClient->getCommand('flickr.urls.lookupGallery', $params)->execute();
+		$this->view->assign('lookupGallery', $lookupGallery);
+		$this->view->setTemplate("flickr/lookupGallery");
 	}
-
-
 
 	function	lookupUser(){
 		$params = array(

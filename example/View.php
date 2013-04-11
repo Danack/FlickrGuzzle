@@ -331,6 +331,19 @@ class View {
 
 		$this->renderFooter();
 	}
+
+	function lookupGallery(){
+		$lookupGallery = $this->variables['lookupGallery'];
+
+		var_dump($lookupGallery);
+
+//		echo "GroupID: ".$lookupGroup->groupID."<br/>";
+//		echo "Group name ".$lookupGroup->groupName."<br/>";
+
+		$this->renderFooter();
+	}
+
+
 }
 
 
