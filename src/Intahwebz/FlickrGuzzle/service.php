@@ -7080,23 +7080,23 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 			),
 		),
 
-// 198
-		"flickr.test.echo" => array(
-			'extends' => 'defaultGetOperation',
-			'summary' => 'A testing method which echo\'s all parameters back in the response.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
-			/* Example
-<method>echo</method>
-<foo>bar</foo>
-*/
-			'parameters' => array(
-				'method'    => array(
-					'location' => 'query',
-					'description' => 'Which flickr call is being made.',
-					'default' => 'flickr.test.echo',
-				),
-			),
-		),
+//// 198
+//		"flickr.test.echo" => array(
+//			'extends' => 'defaultGetOperation',
+//			'summary' => 'A testing method which echo\'s all parameters back in the response.',
+//			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+//			/* Example
+//<method>echo</method>
+//<foo>bar</foo>
+//*/
+//			'parameters' => array(
+//				'method'    => array(
+//					'location' => 'query',
+//					'description' => 'Which flickr call is being made.',
+//					'default' => 'flickr.test.echo',
+//				),
+//			),
+//		),
 
 //// 199
 //		"flickr.test.login" => array(

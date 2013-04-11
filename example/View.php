@@ -151,6 +151,17 @@ class View {
 		$percentageString = sprintf("%01.2f", $percentage);
 
 		echo "Percentage complete: ".$percentageString."% <br/>";
+
+		$functionsLeftToImplement = $apiProgress['functionsLeftToImplement'];
+
+		echo "<h2>Functions left to implement</h2>";
+
+		foreach ($functionsLeftToImplement as $functionLeftToImplement) {
+			echo $functionLeftToImplement;
+			echo "<br/>";
+		}
+
+
 		$this->renderFooter();
 	}
 

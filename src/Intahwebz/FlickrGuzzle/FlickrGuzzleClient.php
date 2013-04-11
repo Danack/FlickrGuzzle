@@ -326,17 +326,25 @@ class FlickrGuzzleClient extends Client{
 		$operationCount = 0;
 		$operationWithResponseClassCount = 0;
 
-		foreach($serviceDescription['operations'] as $operation) {
-			$operationCount++;
-			if (array_key_exists('responseClass', $operation) == true &&
-				$operation['responseClass'] != null) {
-				$operationWithResponseClassCount++;
+		$functionsLeftToImplement = array();
+
+		foreach($serviceDescription['operations'] as $operationName => $operation) {
+			if ($operationName != 'defaultGetOperation') {
+				$operationCount++;
+				if (array_key_exists('responseClass', $operation) == true &&
+					$operation['responseClass'] != null) {
+					$operationWithResponseClassCount++;
+				}
+				else{
+					$functionsLeftToImplement[] = $operationName;
+				}
 			}
 		}
 
 		$result = array(
 			'operationCount' => $operationCount,
 			'operationWithResponseClassCount' => $operationWithResponseClassCount,
+			'functionsLeftToImplement' => $functionsLeftToImplement
 		);
 
 		return $result;
