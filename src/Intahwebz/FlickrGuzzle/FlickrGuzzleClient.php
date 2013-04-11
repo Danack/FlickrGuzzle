@@ -118,16 +118,19 @@ class FlickrGuzzleClient extends Client{
 			'Intahwebz\\FlickrGuzzle\\DTO\\CameraBrandList' => 'brands',
 			"Intahwebz\\FlickrGuzzle\\DTO\\CameraDetailList" => 'cameras',
 			"Intahwebz\\FlickrGuzzle\\DTO\\PhotoList" => 'photos',
-			"Intahwebz\\FlickrGuzzle\\DTO\\Photo" => NULL,
+			"Intahwebz\\FlickrGuzzle\\DTO\\Photo" => null,
 			"Intahwebz\\FlickrGuzzle\\DTO\\PhotoInfo" => 'photo',
 			"Intahwebz\\FlickrGuzzle\\DTO\\OauthCheck" => 'oauth',
-			"Intahwebz\\FlickrGuzzle\\DTO\\MethodInfo" => NULL,
+			"Intahwebz\\FlickrGuzzle\\DTO\\MethodInfo" => null,
 			"Intahwebz\\FlickrGuzzle\\DTO\\MethodList" => 'methods',
 			"Intahwebz\\FlickrGuzzle\\DTO\\InstitutionList" => 'institutions',
+			"Intahwebz\\FlickrGuzzle\\DTO\\LicenseList" => null,
 		);
 
 		if (array_key_exists($className, $aliasedResponses) == TRUE) {
 			$dataJson = json_decode($data, TRUE);
+
+
 
 			if (array_key_exists('stat', $dataJson) == TRUE &&
 				$dataJson['stat'] != 'ok') {
@@ -147,64 +150,65 @@ class FlickrGuzzleClient extends Client{
 			$object = $className::createFromData($aliasedData);
 
 			if ($object == FALSE) {
-				throw new \Exception("Failed to create object $className - or possibly just failed to return the object from the createFromData function.");
+
+				//TODO - this is for development only.
+				var_dump($dataJson);
+
+				throw new FlickrGuzzleException("Failed to create object $className - or possibly just failed to return the object from the createFromData function.");
 			}
 
 			return $object;
 		}
 
-		echo "Ooops classname [".$className."] is not mapped";
-		echo "Json was:<br/>";
-		var_dump($data);
-		exit(0);
+		throw new FlickrGuzzleException("Class-name [".$className."] has no instructions on how to create it in createObject.");
 	}
 
-	function getFlickrImageURL($imageInfo){
-		$farmID = $imageInfo['farm'];
-		$serverID = $imageInfo['server'];
-		$id = $imageInfo['id'];
-		$secret = $imageInfo['secret'];
-		$size = 'q';
-
-		return "http://farm".$farmID.".staticflickr.com/".$serverID."/${id}_${secret}_${size}.jpg";
-	}
-
-
-	function getPhotoInfo($photoID, $secret = FALSE){
-		$params = array(
-			'method'    => 'flickr.photos.getInfo',
-			'api_key' => FLICKR_KEY,// (Required) Your API application key. See here for more details.
-			'photo_id' => $photoID, // (Required) The id of the photo to get information for.
-			'format' => 'json',
-			'nojsoncallback' => 1,
-		);
-
-		if($secret !== FALSE){
-			$params['secret'] = $secret; // (Optional) - skips auth check if set.
-		}
-
-		$client = new Client('http://api.flickr.com/services/rest/');
-		$request = $client->get();
-		$request->getQuery()->merge($params);
-
-		$response = $request->send();
-
-		$data = $response->json();
-
-		$photoInfo = PhotoInfo::createFromData($data['photo']);
-
-		return $photoInfo;
-	}
+//	function getFlickrImageURL($imageInfo){
+//		$farmID = $imageInfo['farm'];
+//		$serverID = $imageInfo['server'];
+//		$id = $imageInfo['id'];
+//		$secret = $imageInfo['secret'];
+//		$size = 'q';
+//
+//		return "http://farm".$farmID.".staticflickr.com/".$serverID."/${id}_${secret}_${size}.jpg";
+//	}
 
 
-	function	removeTag(){
+//	function getPhotoInfo($photoID, $secret = FALSE){
+//		$params = array(
+//			'method'    => 'flickr.photos.getInfo',
+//			'api_key' => FLICKR_KEY,// (Required) Your API application key. See here for more details.
+//			'photo_id' => $photoID, // (Required) The id of the photo to get information for.
+//			'format' => 'json',
+//			'nojsoncallback' => 1,
+//		);
+//
+//		if($secret !== FALSE){
+//			$params['secret'] = $secret; // (Optional) - skips auth check if set.
+//		}
+//
+//		$client = new Client('http://api.flickr.com/services/rest/');
+//		$request = $client->get();
+//		$request->getQuery()->merge($params);
+//
+//		$response = $request->send();
+//
+//		$data = $response->json();
+//
+//		$photoInfo = PhotoInfo::createFromData($data['photo']);
+//
+//		return $photoInfo;
+//	}
 
-		//	api_key (Required)
-		//Your API application key. See here for more details.
-		//	tag_id (Required)
-		//	The tag to remove from the photo.
 
-	}
+//	function	removeTag(){
+//
+//		//	api_key (Required)
+//		//Your API application key. See here for more details.
+//		//	tag_id (Required)
+//		//	The tag to remove from the photo.
+//
+//	}
 
 	function	processErrorResponse($dataJson){
 		$errorCode = 0;

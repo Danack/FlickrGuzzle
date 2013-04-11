@@ -84,6 +84,10 @@ try{
 
 
 		default: {
+			if (method_exists ($flickr, $function)) {
+				$flickr->{$function}();
+				break;
+			}
 			echo "Unknown function [".$function."]<br/>";
 			break;
 		}

@@ -3709,28 +3709,7 @@ Before users may assign location data to a photo they must define who, by defaul
 		"flickr.photos.licenses.getInfo" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Fetches a list of available photo licenses for Flickr.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
-			/* Example
-<licenses>
-        <license id="0" name="All Rights Reserved" url="" />
-	<license id="1" name="Attribution-NonCommercial-ShareAlike License"
-		url="http://creativecommons.org/licenses/by-nc-sa/2.0/" /> 
-	<license id="2" name="Attribution-NonCommercial License"
-		url="http://creativecommons.org/licenses/by-nc/2.0/" /> 
-	<license id="3" name="Attribution-NonCommercial-NoDerivs License"
-		url="http://creativecommons.org/licenses/by-nc-nd/2.0/" /> 
-	<license id="4" name="Attribution License"
-		url="http://creativecommons.org/licenses/by/2.0/" /> 
-	<license id="5" name="Attribution-ShareAlike License"
-		url="http://creativecommons.org/licenses/by-sa/2.0/" /> 
-	<license id="6" name="Attribution-NoDerivs License"
-		url="http://creativecommons.org/licenses/by-nd/2.0/" /> 
-	<license id="7" name="No known copyright restrictions"
-		url="http://flickr.com/commons/usage/" />
-        <license id="8" name="United States Government Work"
-                url="http://www.usa.gov/copyright.shtml" />
-</licenses>
-*/
+			'responseClass' => "Intahwebz\\FlickrGuzzle\\DTO\\LicenseList",
 			'parameters' => array(
 				'method'    => array(
 					'location' => 'query',
@@ -7119,41 +7098,41 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 			),
 		),
 
-// 199
-		"flickr.test.login" => array(
-			'extends' => 'defaultGetOperation',
-			'summary' => 'A testing method which checks if the caller is logged in then returns their username.',
-			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
-			/* Example
-<user id="12037949754@N01">
-	<username>Bees</username> 
-</user>
-
-*/
-			'parameters' => array(
-				'method'    => array(
-					'location' => 'query',
-					'description' => 'Which flickr call is being made.',
-					'default' => 'flickr.test.login',
-				),
-			),
-		),
-
-// 200
-		"flickr.test.null" => array(
-			'extends' => 'defaultGetOperation',
-			'summary' => 'Null test',
-			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
-			'parameters' => array(
-				'method'    => array(
-					'location' => 'query',
-					'description' => 'Which flickr call is being made.',
-					'default' => 'flickr.test.null',
-				),
-			),
-		),
+//// 199
+//		"flickr.test.login" => array(
+//			'extends' => 'defaultGetOperation',
+//			'summary' => 'A testing method which checks if the caller is logged in then returns their username.',
+//			'needsSigning' => true,
+//			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+//			/* Example
+//<user id="12037949754@N01">
+//	<username>Bees</username>
+//</user>
+//
+//*/
+//			'parameters' => array(
+//				'method'    => array(
+//					'location' => 'query',
+//					'description' => 'Which flickr call is being made.',
+//					'default' => 'flickr.test.login',
+//				),
+//			),
+//		),
+//
+//// 200
+//		"flickr.test.null" => array(
+//			'extends' => 'defaultGetOperation',
+//			'summary' => 'Null test',
+//			'needsSigning' => true,
+//			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+//			'parameters' => array(
+//				'method'    => array(
+//					'location' => 'query',
+//					'description' => 'Which flickr call is being made.',
+//					'default' => 'flickr.test.null',
+//				),
+//			),
+//		),
 
 // 201
 		"flickr.urls.getGroup" => array(

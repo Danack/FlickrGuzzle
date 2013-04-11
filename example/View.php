@@ -154,6 +154,20 @@ class View {
 		$this->renderFooter();
 	}
 
+	function licenseList() {
+		/** @var $licenseList LicenseList */
+		$licenseList = $this->variables['licenseList'];
+
+		foreach ($licenseList->licenses as $license) {
+			echo "ID: ".$license->id."&nbsp;";
+			echo "Name: ".$license->name."&nbsp;";
+			echo "URL: ".$license->url;
+			echo "<br/>";
+		}
+
+		$this->renderFooter();
+	}
+
 	function institutionList(){
 		/** @var $instituionList InstitutionList */
 		$institutionList = $this->variables['institutionList'];

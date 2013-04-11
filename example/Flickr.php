@@ -39,13 +39,12 @@ class Flickr{
 			'Method List' => 'flickrMethodList',
 			//'Generate method info' => 'flickrMethodListGenerate',
 			'Institution List' => 'institutionList',
+			'License list' => 'licenseList',
 			'API progress' => 'apiProgress',
 		);
 
 		$this->view->assign('routes', $routes);
 	}
-
-
 
 	function	institutionList(){
 		$flickrGuzzleClient = FlickrGuzzleClient::factory();
@@ -53,6 +52,15 @@ class Flickr{
 		$this->view->assign('institutionList', $institutionList);
 		$this->view->setTemplate("flickr/institutionList");
 	}
+
+
+	function	licenseList(){
+		$flickrGuzzleClient = FlickrGuzzleClient::factory();
+		$licenseList = $flickrGuzzleClient->getCommand('flickr.photos.licenses.getInfo')->execute();
+		$this->view->assign('licenseList', $licenseList);
+		$this->view->setTemplate("flickr/licenseList");
+	}
+
 
 
 	function	displayMethodList(){
