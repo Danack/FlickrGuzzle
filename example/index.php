@@ -30,6 +30,13 @@ try{
 	$function = getVariable('function', 'index');
 
 	switch($function){
+
+		case 'logout': {
+			$flickr->clearSessionVariables();
+			$flickr->index();
+			break;
+		}
+
 		case 'index':{
 			$flickr->index();
 			break;
@@ -97,6 +104,8 @@ try{
 }
 catch(\Exception $e){
 	echo "Exception caught: ".$e->getMessage();
+
+	$flickr->view->renderFooter();
 }
 
 pageEnd();

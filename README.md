@@ -5,9 +5,16 @@ Flickr Guzzle
 
 A Guzzle based Flickr API. 
 
-This is currently just here for reference. Although the code is here and can be made to work for a small set of functions, I need to refactor the namespaces to have the correct project name, 'FlickrGuzzle', so they don't currently autoload.
+Example
+=======
 
-The deprecated functions (e.g. flickr.auth.*) are not implemented.
+
+1 Install the requirements via composer (php composer.phar install --dev)
+
+2 Point a web server at the directly FlickrGuzzle/example with the directory index set to index.php
+
+3 Copy FlickrGuzzle/example/configSample.php to FlickrGuzzle/example/config.php and put your Flickr key and secret in there.
+
 
 WARNING
 =======
@@ -50,15 +57,12 @@ Non-implemented functions
 The following functions are not implemented and never will be
 
 * Deprecated auth functions
-
 	* flickr.auth.checkToken
 	* flickr.auth.getFrob
 	* flickr.auth.getFullToken
 	* flickr.auth.getToken
 
-
 * Test functions
-
 	* flickr.test.echo
 	* flickr.test.login
 	* flickr.test.null

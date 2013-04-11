@@ -8,6 +8,8 @@ use Intahwebz\FlickrGuzzle\DTO\MethodInfo;
 use Intahwebz\FlickrGuzzle\DTO\OauthAccessToken;
 use Intahwebz\FlickrGuzzle\DTO\PhotoList;
 
+use Intahwebz\Utils\UserUploadedFile;
+
 
 define('FLICKR_IMAGES_PER_PAGE', 12);
 
@@ -41,10 +43,38 @@ class Flickr{
 			'Institution List' => 'institutionList',
 			'License list' => 'licenseList',
 			'API progress' => 'apiProgress',
+
+			'User comments' => 'userComments',
+			'User photos' => 'userPhotos',
+			'Logout'		=> 'logout',
+
+
 		);
 
 		$this->view->assign('routes', $routes);
 	}
+
+
+
+	function	userComments(){
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
+		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
+		$activityInfo = $flickrGuzzleClient->getCommand('flickr.activity.userComments')->execute();
+		$this->view->assign('activityInfo', $activityInfo);
+		$this->view->setTemplate("flickr/activityInfo");
+	}
+
+
+	function	userPhotos(){
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
+		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
+		$activityInfo = $flickrGuzzleClient->getCommand('flickr.activity.userPhotos')->execute();
+		$this->view->assign('activityInfo', $activityInfo);
+		$this->view->setTemplate("flickr/activityInfo");
+	}
+
+
+
 
 	function	institutionList(){
 		$flickrGuzzleClient = FlickrGuzzleClient::factory();
@@ -213,17 +243,17 @@ class Flickr{
 			}
 			catch(FlickrAPIException $fae) {
 				echo "Exception caught: ".$fae->getMessage();
-				//exit(0);
+				$this->view->setTemplate("flickr/index");
 			}
 			catch (ClientErrorResponseException $cere) {
 				echo "Errror accessing token, clearing session: ".$cere->getMessage();
 				$this->clearSessionVariables();
-				exit(0);
+				$this->view->setTemplate("flickr/index");
 			}
 			catch (ValidationException $ve) {
 				echo "You done goofed: ".$ve->getMessage() ;
 				$this->clearSessionVariables();
-				exit(0);
+				$this->view->setTemplate("flickr/index");
 			}
 		}
 
@@ -285,6 +315,39 @@ class Flickr{
 		$apiProgresss = FlickrGuzzleClient::getAPIProgress();
 		$this->view->assign('apiProgresss', $apiProgresss);
 		$this->view->setTemplate("flickr/apiProgress");
+	}
+
+	function	flickrUpload() {
+
+		$userUploadedFile = UserUploadedFile::getUserUploadedFile('fileUpload');
+
+		$title = getVariable('title', false);
+		$description = getVariable('description', false);
+
+		if ($userUploadedFile != false) {
+			//echo "Hey there is a file to upload.";
+
+			$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
+			$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
+
+			$params = array(
+				'photo' => $userUploadedFile->tmpName,
+				'title' => $title,
+				'description' => $description,
+			);
+
+			$command = $flickrGuzzleClient->getCommand('UploadPhoto', $params);
+
+			/** @var $result FileUploadResponse */
+			$fileUploadResponse = $command->execute();
+
+			$this->view->addStatusMessage("Photo uploaded ".$fileUploadResponse->photoID);
+		}
+		else{
+			//echo "Nothing to upload.";
+		}
+
+		$this->view->setTemplate("flickr/flickrUpload");
 	}
 
 }

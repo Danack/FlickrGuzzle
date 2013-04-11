@@ -3,9 +3,6 @@
 	"description": "A Flickr wrapper to allow you to call the Flickr api with Guzzle as the backend.",
 	"keywords": ["flickr", "api", "http", "rest", "web service", "curl", "client", "HTTP client"],
 	"license": "MIT",
-	"require":{
-		"guzzle/danackguzzle": "3.3.*@dev"
-	},
 
 	"autoload": {
 		"psr-0": {
@@ -19,5 +16,13 @@
 			"email": "Danack@basereality.com",
 			"homepage": "http://www.basereality.com"
 		}
-	]
+	],
+
+	"require":{
+		"guzzle/danackguzzle": "3.3.*@dev"
+	},
+
+	"require-dev": {
+		"intahwebz/utils": "dev-master"
+	}
 }

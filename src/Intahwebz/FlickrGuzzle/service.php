@@ -136,35 +136,7 @@ return array (
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns a list of recent activity on photos commented on by the calling user. <b>Do not poll this method more than once an hour</b>.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
-			/* Example
-<items>
-	<item type="photoset" id="395" owner="12037949754@N01" 
-		primary="6521" secret="5a3cc65d72" server="2" 
-		comments="1" views="33" photos="7" more="0">
-		<title>A set of photos</title>
-		<activity>
-			<event type="comment"
-			user="12037949754@N01" username="Bees"
-			dateadded="1144086424">yay</event>
-		</activity>
-	</item>
-
-	<item type="photo" id="10289" owner="12037949754@N01"
-		secret="34da0d3891" server="2" comments="1"
-		notes="0" views="47" faves="0" more="0">
-		<title>A photo</title>
-		<activity>
-			<event type="comment"
-			user="12037949754@N01" username="Bees"
-			dateadded="1133806604">test</event>
-			<event type="note"
-			user="12037949754@N01" username="Bees"
-			dateadded="1118785229">nice</event>
-		</activity>
-	</item>
-</items>
-*/
+			'responseClass' => 'Intahwebz\\FlickrGuzzle\\DTO\\ActivityInfo',
 			'parameters' => array(
 				'per_page'    => array(
 					'location' => 'query',
@@ -187,40 +159,10 @@ return array (
 // 2
 		"flickr.activity.userPhotos" => array(
 			'extends' => 'defaultGetOperation',
-			'summary' => 'Returns a list of recent activity on photos belonging to the calling user. <b>Do not poll this method more than once an hour</b>.',
+			'summary' => 'Returns a list of recent activity on photos belonging to the calling user. <b>Do not poll this method more than once an hour</b>. DJA - Looks like this funtion does not return info in real time. E.g. upload a photo, call this photo, see that there is no activity reportd.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
-			/* Example
-<items>
-	<item type="photoset" id="395" owner="12037949754@N01" 
-		primary="6521" secret="5a3cc65d72" server="2" 
-		commentsold="1" commentsnew="1"
-		views="33" photos="7" more="0">
-		<title>A set of photos</title>
-		<activity>
-			<event type="comment"
-			user="12037949754@N01" username="Bees"
-			dateadded="1144086424">yay</event>
-		</activity>
-	</item>
+			'responseClass' => 'Intahwebz\\FlickrGuzzle\\DTO\\ActivityInfo',
 
-	<item type="photo" id="10289" owner="12037949754@N01"
-		secret="34da0d3891" server="2"
-		commentsold="1" commentsnew="1"
-		notesold="0" notesnew="1"
-		views="47" faves="0" more="0">
-		<title>A photo</title>
-		<activity>
-			<event type="comment"
-			user="12037949754@N01" username="Bees"
-			dateadded="1133806604">test</event>
-			<event type="note"
-			user="12037949754@N01" username="Bees"
-			dateadded="1118785229">nice</event>
-		</activity>
-	</item>
-</items>
-*/
 			'parameters' => array(
 				'timeframe'    => array(
 					'location' => 'query',
@@ -277,7 +219,7 @@ return array (
 //			'extends' => 'defaultGetOperation',
 //			'summary' => 'Exchange an auth token from the old Authentication API, to an OAuth access token. Calling this method will delete the auth token used to make the request.',
 //			'needsSigning' => true,
-//			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+//			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 //			/* Example
 //<auth>
 //	<access_token oauth_token="72157607082540144-8d5d7ea7696629bf" oauth_token_secret="f38bf58b2d95bc8b" />
@@ -297,7 +239,7 @@ return array (
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get a list of configured blogs for the calling user.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <blogs>
 	<blog id="73" name="Bloxus test" needspassword="0"
@@ -324,7 +266,7 @@ return array (
 		"flickr.blogs.getServices" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Return a list of Flickr supported blogging services',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <services>
 <service id="beta.blogger.com">Blogger</service>
@@ -354,7 +296,7 @@ return array (
 			'extends' => 'defaultGetOperation',
 			'summary' => '',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'blog_id'    => array(
 					'location' => 'query',
@@ -428,7 +370,7 @@ return array (
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns information for a single collection.  Currently can only be called by the collection owner, this may change.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <collection id="12-72157594586579649" child_count="6" datecreate="1173812218" iconlarge="http://farm1.static.flickr.com/187/cols/73743fac2cf79_l.jpg" iconsmall="http://farm1.static.flickr.com/187/cols/72157594586579649_43fac2cf79_s.jpg" server="187" secret="36">
 <title>All My Photos</title>
@@ -458,7 +400,7 @@ return array (
 		"flickr.collections.getTree" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns a tree (or sub tree) of collections belonging to a given user.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <collections>
 <collection id="12-72157594586579649" title="All My Photos" description="a collection" iconlarge="http://farm1.static.flickr.com/187/cols/37_43fac2cf79_l.jpg" 
@@ -506,7 +448,7 @@ iconsmall="http://farm1.static.flickr.com/187/cols/56_43fac2cf79_s.jpg">
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get a list of contacts for the calling user.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <contacts page="1" pages="1" perpage="1000" total="3">
 	<contact nsid="12037949629@N01" username="Eric" iconserver="1"
@@ -556,7 +498,7 @@ iconsmall="http://farm1.static.flickr.com/187/cols/56_43fac2cf79_s.jpg">
 
 This method is still considered experimental. We don\'t plan for it to change or to go away but so long as this notice is present you should write your code accordingly.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'date_lastupload'    => array(
 					'location' => 'query',
@@ -580,7 +522,7 @@ This method is still considered experimental. We don\'t plan for it to change or
 		"flickr.contacts.getPublicList" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get the contact list for a user.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <contacts page="1" pages="1" perpage="1000" total="3">
 	<contact nsid="12037949629@N01" username="Eric" iconserver="1" ignored="1" /> 
@@ -621,7 +563,7 @@ This method is still considered experimental. We don\'t plan for it to change or
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get suggestions for tagging people in photos based on the calling user\'s contacts.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <rsp stat="ok">
 <contacts page="1" pages="1" perpage="1000" total="1">
@@ -663,7 +605,7 @@ This method is still considered experimental. We don\'t plan for it to change or
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Adds a photo to a user\'s favorites list.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'photo_id'    => array(
 					'location' => 'query',
@@ -681,7 +623,7 @@ This method is still considered experimental. We don\'t plan for it to change or
 		"flickr.favorites.getContext" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns next and previous favorites for a photo in a user\'s favorites.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <rsp stat='ok'>
 <count>3</count>
@@ -728,7 +670,7 @@ This method is still considered experimental. We don\'t plan for it to change or
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns a list of the user\'s favorite photos. Only photos which the calling user has permission to see are returned.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'user_id'    => array(
 					'location' => 'query',
@@ -777,7 +719,7 @@ This method is still considered experimental. We don\'t plan for it to change or
 		"flickr.favorites.getPublicList" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns a list of favorite public photos for the given user.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'user_id'    => array(
 					'location' => 'query',
@@ -826,7 +768,7 @@ This method is still considered experimental. We don\'t plan for it to change or
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Removes a photo from a user\'s favorites list.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'photo_id'    => array(
 					'location' => 'query',
@@ -850,7 +792,7 @@ This method is still considered experimental. We don\'t plan for it to change or
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Add a photo to a gallery.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'gallery_id'    => array(
 					'location' => 'query',
@@ -878,7 +820,7 @@ This method is still considered experimental. We don\'t plan for it to change or
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Create a new gallery for the calling user.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
   <gallery id="50736-72157623680420409" url="http://www.flickr.com/photos/kellan/galleries/72157623680420409" /> 
 
@@ -910,7 +852,7 @@ This method is still considered experimental. We don\'t plan for it to change or
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Modify the meta-data for a gallery.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'gallery_id'    => array(
 					'location' => 'query',
@@ -938,7 +880,7 @@ This method is still considered experimental. We don\'t plan for it to change or
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Edit the comment for a gallery photo.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'gallery_id'    => array(
 					'location' => 'query',
@@ -965,7 +907,7 @@ This method is still considered experimental. We don\'t plan for it to change or
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Modify the photos in a gallery. Use this method to add, remove and re-order photos.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'gallery_id'    => array(
 					'location' => 'query',
@@ -991,7 +933,7 @@ This method is still considered experimental. We don\'t plan for it to change or
 		"flickr.galleries.getInfo" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => '',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <gallery id="6065-72157617483228192" url="http://www.flickr.com/photos/straup/galleries/72157617483228192" 
 owner="35034348999@N01" 
@@ -1018,7 +960,7 @@ owner="35034348999@N01"
 		"flickr.galleries.getList" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Return the list of galleries created by a user.  Sorted from newest to oldest.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <galleries total="9" page="1" pages="1" per_page="100" user_id="34427469121@N01">
    <gallery id="5704-72157622637971865" 
@@ -1068,7 +1010,7 @@ owner="35034348999@N01"
 		"flickr.galleries.getListForPhoto" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Return the list of galleries to which a photo has been added.  Galleries are returned sorted by date which the photo was added to the gallery.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <galleries total="7" page="1" pages="1" per_page="100">
     <gallery id="9634-72157621980433950" 
@@ -1118,7 +1060,7 @@ owner="35034348999@N01"
 		"flickr.galleries.getPhotos" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Return the list of photos for a gallery',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <photos page="1" pages="1" perpage="500" total="2">
 	<photo id="2822546461" owner="78398753@N00" secret="2dbcdb589f" server="1" farm="1" title="FOO" 
@@ -1162,7 +1104,7 @@ owner="35034348999@N01"
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Browse the group category tree, finding groups and sub-categories.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <category name="Alt" path="/Alt" pathids="/63">
 	<subcat id="80" name="18+" count="0" /> 
@@ -1193,7 +1135,7 @@ owner="35034348999@N01"
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Post a new reply to a group discussion topic.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'topic_id'    => array(
 					'location' => 'query',
@@ -1216,7 +1158,7 @@ owner="35034348999@N01"
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Delete a reply from a group topic.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'topic_id'    => array(
 					'location' => 'query',
@@ -1239,7 +1181,7 @@ owner="35034348999@N01"
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Edit a topic reply.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'topic_id'    => array(
 					'location' => 'query',
@@ -1265,7 +1207,7 @@ owner="35034348999@N01"
 		"flickr.groups.discuss.replies.getInfo" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get information on a group topic reply.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <?xml version="1.0" encoding="utf-8" ?>
 <rsp stat="ok">
@@ -1295,7 +1237,7 @@ owner="35034348999@N01"
 		"flickr.groups.discuss.replies.getList" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get a list of replies from a group discussion topic.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <rsp stat="ok">
   <replies>
@@ -1349,7 +1291,7 @@ owner="35034348999@N01"
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Post a new discussion topic to a group.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'group_id'    => array(
 					'location' => 'query',
@@ -1375,7 +1317,7 @@ owner="35034348999@N01"
 		"flickr.groups.discuss.topics.getInfo" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get information about a group discussion topic.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <?xml version="1.0" encoding="utf-8" ?>
 <rsp stat="ok">
@@ -1401,7 +1343,7 @@ owner="35034348999@N01"
 		"flickr.groups.discuss.topics.getList" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get a list of discussion topics in a group.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <rsp stat="ok">
   <topics group_id="46744914@N00" iconserver="1" iconfarm="1" name="Tell a story in 5 frames (Visual story telling)" members="12428" privacy="3" lang="en-us" ispoolmoderated="1" total="4621" page="1" per_page="2" pages="2310">
@@ -1457,7 +1399,7 @@ owner="35034348999@N01"
 		"flickr.groups.getInfo" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get information about a group.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <group id="34427465497@N01" iconserver="1" iconfarm="1" lang="en-us" ispoolmoderated="0">
 	<name>GNEverybody</name>
@@ -1491,7 +1433,7 @@ owner="35034348999@N01"
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Join a public group as a member.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'group_id'    => array(
 					'location' => 'query',
@@ -1515,7 +1457,7 @@ owner="35034348999@N01"
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Request to join a group that is invitation-only.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'group_id'    => array(
 					'location' => 'query',
@@ -1546,7 +1488,7 @@ owner="35034348999@N01"
 
 <br /><br />If the user is the last person in the group, the group will be deleted.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'group_id'    => array(
 					'location' => 'query',
@@ -1570,7 +1512,7 @@ owner="35034348999@N01"
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get a list of the members of a group.  The call must be signed on behalf of a Flickr member, and the ability to see the group membership will be determined by the Flickr member\'s group privileges.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <members page="1" pages="1" perpage="100" total="33">
 <member nsid="123456@N01" username="foo" iconserver="1" iconfarm="1" membertype="2"/>
@@ -1613,7 +1555,7 @@ owner="35034348999@N01"
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Add a photo to a group\'s pool.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'photo_id'    => array(
 					'location' => 'query',
@@ -1635,7 +1577,7 @@ owner="35034348999@N01"
 		"flickr.groups.pools.getContext" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns next and previous photos for a photo in a group pool.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <prevphoto id="2980" secret="973da1e709"
 	title="boo!" url="/photos/bees/2980/" /> 
@@ -1679,7 +1621,7 @@ owner="35034348999@N01"
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns a list of groups to which you can add photos.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <groups page="1" pages="1" per_page="400" total="3">
 	<group nsid="33853651696@N01" name="Art and Literature Hoedown"
@@ -1713,7 +1655,7 @@ owner="35034348999@N01"
 		"flickr.groups.pools.getPhotos" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns a list of pool photos for a given group, based on the permissions of the group and the user logged in (if any).',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <photos page="1" pages="1" perpage="1" total="1">
 	<photo id="2645" owner="12037949754@N01" title="36679_o"
@@ -1770,7 +1712,7 @@ owner="35034348999@N01"
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Remove a photo from a group pool.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'photo_id'    => array(
 					'location' => 'query',
@@ -1792,7 +1734,7 @@ owner="35034348999@N01"
 		"flickr.groups.search" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Search for groups. 18+ groups will only be returned for authenticated calls where the authenticated user is over 18.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <groups page="1" pages="14" perpage="5" total="67">
 	<group nsid="3000@N02"
@@ -1834,7 +1776,7 @@ owner="35034348999@N01"
 		"flickr.interestingness.getList" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns the list of interesting photos for the most recent day or a user-specified date.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'date'    => array(
 					'location' => 'query',
@@ -1873,7 +1815,7 @@ owner="35034348999@N01"
 		"flickr.machinetags.getNamespaces" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Return a list of unique namespaces, optionally limited by a given predicate, in alphabetical order.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <namespaces page="1" total="5" perpage="500" pages="1">
   <namespace usage="6538" predicates="13">aero</namespace>
@@ -1912,7 +1854,7 @@ owner="35034348999@N01"
 		"flickr.machinetags.getPairs" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Return a list of unique namespace and predicate pairs, optionally limited by predicate or namespace, in alphabetical order.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <pairs page="1" total="1228" perpage="500" pages="3">
    <pair namespace="aero" predicate="airline" usage="1093">aero:airline</pair>
@@ -1954,7 +1896,7 @@ owner="35034348999@N01"
 		"flickr.machinetags.getPredicates" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Return a list of unique predicates, optionally limited by a given namespace.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <predicates page="1" pages="1" total="3" perpage="500">
     <predicate usage="20" namespaces="1">elbow</predicate>
@@ -1991,7 +1933,7 @@ owner="35034348999@N01"
 		"flickr.machinetags.getRecentValues" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Fetch recently used (or created) machine tags values.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <values namespace="taxonomy" predicate="common" page="1" total="500" perpage="500" pages="1">
     <value usage="4" namespace="taxonomy" predicate="common"
@@ -2028,7 +1970,7 @@ owner="35034348999@N01"
 		"flickr.machinetags.getValues" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Return a list of unique values for a namespace and predicate.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <values namespace="upcoming" predicate="event" page="1" pages="1" total="3" perpage="500">
     <value usage="3">123</value>
@@ -2074,7 +2016,7 @@ owner="35034348999@N01"
 			'summary' => 'Return a list of <a href="http://www.flickr.com/explore/panda">Flickr pandas</a>, from whom you can request photos using the <a href="/services/api/flickr.panda.getPhotos.htm">flickr.panda.getPhotos</a> API method.
 <br/><br/>
 More information about the pandas can be found on the <a href="http://code.flickr.com/blog/2009/03/03/panda-tuesday-the-history-of-the-panda-new-apis-explore-and-you/">dev blog</a>.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <pandas>
    <panda>ling ling</panda>
@@ -2097,7 +2039,7 @@ More information about the pandas can be found on the <a href="http://code.flick
 			'summary' => 'Ask the <a href="http://www.flickr.com/explore/panda">Flickr Pandas</a> for a list of recent public (and "safe") photos.
 <br/><br/>
 More information about the pandas can be found on the <a href="http://code.flickr.com/blog/2009/03/03/panda-tuesday-the-history-of-the-panda-new-apis-explore-and-you/">dev blog</a>.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <photos interval="60000" lastupdate="1235765058272" total="120" panda="ling ling">
     <photo title="Shorebirds at Pillar Point" id="3313428913" secret="2cd3cb44cb"
@@ -2139,7 +2081,7 @@ More information about the pandas can be found on the <a href="http://code.flick
 		"flickr.people.findByEmail" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Return a user\'s NSID, given their email address',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <user nsid="12037949632@N01">
 	<username>Stewart</username> 
@@ -2162,7 +2104,7 @@ More information about the pandas can be found on the <a href="http://code.flick
 		"flickr.people.findByUsername" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Return a user\'s NSID, given their username.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <user nsid="12037949632@N01">
 	<username>Stewart</username> 
@@ -2186,7 +2128,7 @@ More information about the pandas can be found on the <a href="http://code.flick
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns the list of groups a user is a member of.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <groups>
   <group nsid="17274427@N00" name="Cream of the Crop - Please read the rules" iconfarm="1" iconserver="1" admin="0" eighteenplus="0" invitation_only="0" members="11935" pool_count="12522" />
@@ -2217,7 +2159,7 @@ More information about the pandas can be found on the <a href="http://code.flick
 		"flickr.people.getInfo" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get information about a user.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <person nsid="12037949754@N01" ispro="0" iconserver="122" iconfarm="1">
 	<username>bees</username>
@@ -2260,7 +2202,7 @@ More information about the pandas can be found on the <a href="http://code.flick
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns the photo and video limits that apply to the calling user account.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <person nsid="30135021@N05">
 	<photos maxdisplaypx="1024" maxupload="15728640" />
@@ -2349,7 +2291,7 @@ More information about the pandas can be found on the <a href="http://code.flick
 		"flickr.people.getPhotosOf" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns a list of photos containing a particular Flickr member.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <photos page="2" has_next_page="1" perpage="10">
 	<photo id="2636" owner="47058503995@N01" 
@@ -2403,7 +2345,7 @@ More information about the pandas can be found on the <a href="http://code.flick
 		"flickr.people.getPublicGroups" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns the list of public groups a user is a member of.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <groups>
 	<group nsid="34427469792@N01" name="FlickrCentral"
@@ -2436,7 +2378,7 @@ More information about the pandas can be found on the <a href="http://code.flick
 		"flickr.people.getPublicPhotos" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get a list of public photos for the given user.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'user_id'    => array(
 					'location' => 'query',
@@ -2475,7 +2417,7 @@ More information about the pandas can be found on the <a href="http://code.flick
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns information for the calling user related to photo uploads.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <user id="12037949754@N01" ispro="1">
 	<username>Bees</username> 
@@ -2511,7 +2453,7 @@ More information about the pandas can be found on the <a href="http://code.flick
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Add tags to a photo.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'photo_id'    => array(
 					'location' => 'query',
@@ -2534,7 +2476,7 @@ More information about the pandas can be found on the <a href="http://code.flick
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Add comment to a photo as the currently authenticated user.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <comment id="97777-72057594037941949-72057594037942602" />
 */
@@ -2560,7 +2502,7 @@ More information about the pandas can be found on the <a href="http://code.flick
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Delete a comment as the currently authenticated user.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'comment_id'    => array(
 					'location' => 'query',
@@ -2579,7 +2521,7 @@ More information about the pandas can be found on the <a href="http://code.flick
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Edit the text of a comment as the currently authenticated user.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'comment_id'    => array(
 					'location' => 'query',
@@ -2601,7 +2543,7 @@ More information about the pandas can be found on the <a href="http://code.flick
 		"flickr.photos.comments.getList" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns the comments for a photo',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <comments photo_id="109722179">
         <comment id="6065-109722179-72057594077818641"
@@ -2653,7 +2595,7 @@ More information about the pandas can be found on the <a href="http://code.flick
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Return the list of photos belonging to your contacts that have been commented on recently.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'date_lastcomment'    => array(
 					'location' => 'query',
@@ -2693,7 +2635,7 @@ More information about the pandas can be found on the <a href="http://code.flick
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Delete a photo from flickr.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'photo_id'    => array(
 					'location' => 'query',
@@ -2714,7 +2656,7 @@ More information about the pandas can be found on the <a href="http://code.flick
 
 Batch corrections are processed in a delayed queue so it may take a few minutes before the changes are reflected in a user\'s photos.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'lat'    => array(
 					'location' => 'query',
@@ -2751,7 +2693,7 @@ Batch corrections are processed in a delayed queue so it may take a few minutes 
 			'extends' => 'defaultGetOperation',
 			'summary' => '',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'photo_id'    => array(
 					'location' => 'query',
@@ -2783,7 +2725,7 @@ Batch corrections are processed in a delayed queue so it may take a few minutes 
 		"flickr.photos.geo.getLocation" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get the geo data (latitude and longitude and the accuracy level) for a photo.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <photo id="123">
         <location latitude="-17.685895" longitude="-63.36914" accuracy="6" />
@@ -2812,7 +2754,7 @@ Batch corrections are processed in a delayed queue so it may take a few minutes 
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get permissions for who may view geo data for a photo.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <perms id="10592" ispublic="0" iscontact="0" isfriend="0" isfamily="1" />
 */
@@ -2834,7 +2776,7 @@ Batch corrections are processed in a delayed queue so it may take a few minutes 
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Return a list of photos for the calling user at a specific latitude, longitude and accuracy',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'lat'    => array(
 					'location' => 'query',
@@ -2877,7 +2819,7 @@ Batch corrections are processed in a delayed queue so it may take a few minutes 
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Removes the geo data associated with a photo.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'photo_id'    => array(
 					'location' => 'query',
@@ -2897,7 +2839,7 @@ Batch corrections are processed in a delayed queue so it may take a few minutes 
 			'summary' => 'Indicate the state of a photo\'s geotagginess beyond latitude and longitude.<br /><br />
 Note : photos passed to this method must already be geotagged (using the <q>flickr.photos.geo.setLocation</q> method).',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'photo_id'    => array(
 					'location' => 'query',
@@ -2922,7 +2864,7 @@ Note : photos passed to this method must already be geotagged (using the <q>flic
 
 Before users may assign location data to a photo they must define who, by default, may view that information. Users can edit this preference at <a href="http://www.flickr.com/account/geo/privacy/">http://www.flickr.com/account/geo/privacy/</a>. If a user has not set this preference, the API method will return an error.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'photo_id'    => array(
 					'location' => 'query',
@@ -2994,7 +2936,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Set the permission for who may view the geo data associated with a photo.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'is_public'    => array(
 					'location' => 'query',
@@ -3028,7 +2970,7 @@ Before users may assign location data to a photo they must define who, by defaul
 		"flickr.photos.getAllContexts" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns all visible sets and pools the photo belongs to.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <set id="392" title="记忆群组" />
 <pool id="34427465471@N01" title="FlickrDiscuss" />
@@ -3051,7 +2993,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Fetch a list of recent photos from the calling users contacts.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <photos>
 	<photo id="2801" owner="12037949629@N01"
@@ -3103,7 +3045,7 @@ Before users may assign location data to a photo they must define who, by defaul
 		"flickr.photos.getContactsPublicPhotos" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Fetch a list of recent public photos from a users\' contacts.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <photos>
 	<photo id="2801" owner="12037949629@N01"
@@ -3159,7 +3101,7 @@ Before users may assign location data to a photo they must define who, by defaul
 		"flickr.photos.getContext" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns next and previous photos for a photo in a photostream.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <prevphoto id="2980" secret="973da1e709"
 	title="boo!" url="/photos/bees/2980/" /> 
@@ -3204,7 +3146,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Gets a list of photo counts for the given date ranges for the calling user.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <photocounts>
 	<photocount count="4" fromdate="1093566950" todate="1093653350" /> 
@@ -3240,7 +3182,7 @@ Before users may assign location data to a photo they must define who, by defaul
 		"flickr.photos.getExif" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Retrieves a list of EXIF/TIFF/GPS tags for a given photo. The calling user must have permission to view the photo.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <photo id="4424" secret="06b8e43bc7" server="2">
 	<exif tagspace="TIFF" tagspaceid="1" tag="271" label="Manufacturer">
@@ -3279,7 +3221,7 @@ Before users may assign location data to a photo they must define who, by defaul
 		"flickr.photos.getFavorites" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns the list of people who have favorited a given photo.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <photo id="1253576" secret="81b96be690" server="1" farm="1"
 	page="1" pages="3" perpage="10" total="27">
@@ -3371,7 +3313,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns a list of your photos that are not part of any sets.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'max_upload_date'    => array(
 					'location' => 'query',
@@ -3431,7 +3373,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get permissions for a photo.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <perms id="2733" ispublic="1" isfriend="1" isfamily="0" permcomment="0" permaddmeta="1" /> 
 */
@@ -3452,7 +3394,7 @@ Before users may assign location data to a photo they must define who, by defaul
 		"flickr.photos.getRecent" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns a list of the latest public photos uploaded to flickr.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'jump_to'    => array(
 					'location' => 'query',
@@ -3486,7 +3428,7 @@ Before users may assign location data to a photo they must define who, by defaul
 		"flickr.photos.getSizes" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns the available sizes for a photo.  The calling user must have permission to view the photo.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <sizes canblog="1" canprint="1" candownload="1">
     <size label="Square" width="75" height="75" source="http://farm2.staticflickr.com/1103/567229075_2cf8456f01_s.jpg" url="http://www.flickr.com/photos/stewart/567229075/sizes/sq/" media="photo" />
@@ -3580,7 +3522,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns a list of your geo-tagged photos.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'min_upload_date'    => array(
 					'location' => 'query',
@@ -3645,7 +3587,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns a list of your photos which haven\'t been geo-tagged.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'max_upload_date'    => array(
 					'location' => 'query',
@@ -3724,7 +3666,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Sets the license for a photo.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'photo_id'    => array(
 					'location' => 'query',
@@ -3747,7 +3689,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Add a note to a photo. Coordinates and sizes are in pixels, based on the 500px image size shown on individual photo pages.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <note id="1234" />
 */
@@ -3789,7 +3731,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Delete a note from a photo.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'note_id'    => array(
 					'location' => 'query',
@@ -3809,7 +3751,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'summary' => 'Edit a note on a photo. Coordinates and sizes are in pixels, based on the 500px image size shown on individual photo pages.
 ',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'note_id'    => array(
 					'location' => 'query',
@@ -3848,7 +3790,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Add a person to a photo. Coordinates and sizes of boxes are optional; they are measured in pixels, based on the 500px image size shown on individual photo pages.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'photo_id'    => array(
 					'location' => 'query',
@@ -3891,7 +3833,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Remove a person from a photo.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'photo_id'    => array(
 					'location' => 'query',
@@ -3919,7 +3861,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Remove the bounding box from a person in a photo',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'photo_id'    => array(
 					'location' => 'query',
@@ -3942,7 +3884,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Edit the bounding box of an existing person on a photo.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'photo_id'    => array(
 					'location' => 'query',
@@ -3985,7 +3927,7 @@ Before users may assign location data to a photo they must define who, by defaul
 		"flickr.photos.people.getList" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get a list of people in a given photo.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <people total="1">
   <person nsid="87944415@N00" username="hitherto" iconserver="1" iconfarm="1"
@@ -4013,7 +3955,7 @@ Before users may assign location data to a photo they must define who, by defaul
 
 <p>Recently modified may mean that the photo\'s metadata (title, description, tags) may have been changed or a comment has been added (or just modified somehow :-)</p>',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <photos page="1" pages="1" perpage="100" total="2">
         <photo id="169885459" owner="35034348999@N01" 
@@ -4058,7 +4000,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Remove a tag from a photo.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'tag_id'    => array(
 					'location' => 'query',
@@ -4076,7 +4018,7 @@ Before users may assign location data to a photo they must define who, by defaul
 		"flickr.photos.search" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Return a list of photos matching some criteria. Only photos visible to the calling user will be returned. To return private or semi-private photos, the caller must be authenticated with read permissions, and have permission to view the photos. Unauthenticated calls will only return public photos.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'user_id'    => array(
 					'location' => 'query',
@@ -4281,7 +4223,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Set the content type of a photo.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <rsp stat="ok">
 <photo id="14814" content_type="3"/>
@@ -4309,7 +4251,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Set one or both of the dates for a photo.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'photo_id'    => array(
 					'location' => 'query',
@@ -4343,7 +4285,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Set the meta information for a photo.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'photo_id'    => array(
 					'location' => 'query',
@@ -4370,7 +4312,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Set permissions for a photo.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <photoid secret="abcdef" originalsecret="abcdef">1234</photoid>
 */
@@ -4412,7 +4354,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Set the safety level of a photo.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <rsp stat="ok">
 <photo id="14814" safety_level="2" hidden="0"/>
@@ -4446,7 +4388,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Set the tags for a photo.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'photo_id'    => array(
 					'location' => 'query',
@@ -4469,7 +4411,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Approve a suggestion for a photo.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'suggestion_id'    => array(
 					'location' => 'query',
@@ -4488,7 +4430,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Return a list of suggestions for a user that are pending approval.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'photo_id'    => array(
 					'location' => 'query',
@@ -4513,7 +4455,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Reject a suggestion for a photo.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'suggestion_id'    => array(
 					'location' => 'query',
@@ -4532,7 +4474,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Remove a suggestion, made by the calling user, from a photo.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'suggestion_id'    => array(
 					'location' => 'query',
@@ -4551,7 +4493,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Suggest a geotagged location for a photo.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'photo_id'    => array(
 					'location' => 'query',
@@ -4598,7 +4540,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Rotate a photo.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <photoid secret="abcdef" originalsecret="abcdef">1234</photoid>
 */
@@ -4623,7 +4565,7 @@ Before users may assign location data to a photo they must define who, by defaul
 		"flickr.photos.upload.checkTickets" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Checks the status of one or more asynchronous photo upload tickets.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <uploader>
 	<ticket id="128" complete="1" photoid="2995" />
@@ -4656,7 +4598,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Add a photo to the end of an existing photoset.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'photoset_id'    => array(
 					'location' => 'query',
@@ -4679,7 +4621,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Add a comment to a photoset.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <comment id="97777-12492-72057594037942601" />
 */
@@ -4705,7 +4647,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Delete a photoset comment as the currently authenticated user.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'comment_id'    => array(
 					'location' => 'query',
@@ -4724,7 +4666,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Edit the text of a comment as the currently authenticated user.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'comment_id'    => array(
 					'location' => 'query',
@@ -4746,7 +4688,7 @@ Before users may assign location data to a photo they must define who, by defaul
 		"flickr.photosets.comments.getList" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns the comments for a photoset.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <comments photoset_id="109722179">
     <comment id="6065-109722179-72057594077818641"
@@ -4773,7 +4715,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Create a new photoset for the calling user.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <photoset id="1234" url="http://www.flickr.com/photos/bees/sets/1234/" />
 */
@@ -4804,7 +4746,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Delete a photoset.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'photoset_id'    => array(
 					'location' => 'query',
@@ -4823,7 +4765,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Modify the meta-data for a photoset.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'photoset_id'    => array(
 					'location' => 'query',
@@ -4851,7 +4793,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Modify the photos in a photoset. Use this method to add, remove and re-order photos.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'photoset_id'    => array(
 					'location' => 'query',
@@ -4877,7 +4819,7 @@ Before users may assign location data to a photo they must define who, by defaul
 		"flickr.photosets.getContext" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns next and previous photos for a photo in a set.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <prevphoto id="2980" secret="973da1e709"
 	title="boo!" url="/photos/bees/2980/" /> 
@@ -4920,7 +4862,7 @@ Before users may assign location data to a photo they must define who, by defaul
 		"flickr.photosets.getInfo" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Gets information about a photoset.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <photoset id="72157624618609504" owner="34427469121@N01" primary="4847770787" secret="6abd09a292" server="4153" farm="5" photos="55" count_views="523" count_comments="1" count_photos="43" count_videos="12" can_comment="1" date_create="1280530593" date_update="1308091378">
     <title>Mah Kittehs</title>
@@ -4944,7 +4886,7 @@ Before users may assign location data to a photo they must define who, by defaul
 		"flickr.photosets.getList" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns the photosets belonging to the specified user.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <photosets page="1" pages="1" perpage="30" total="2" cancreate="1">
     <photoset id="72157626216528324" primary="5504567858" secret="017804c585" server="5174" farm="6" photos="22" videos="0" count_views="137" count_comments="0" can_comment="1" date_create="1299514498" date_update="1300335009">
@@ -4985,7 +4927,7 @@ Before users may assign location data to a photo they must define who, by defaul
 		"flickr.photosets.getPhotos" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get the list of photos in a set.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <photoset id="4" primary="2483" page="1" perpage="500" pages="1" total="2">
 	<photo id="2484" secret="123456" server="1"
@@ -5037,7 +4979,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Set the order of photosets for the calling user.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'photoset_ids'    => array(
 					'location' => 'query',
@@ -5056,7 +4998,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Remove a photo from a photoset.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'photoset_id'    => array(
 					'location' => 'query',
@@ -5079,7 +5021,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Remove multiple photos from a photoset.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'photoset_id'    => array(
 					'location' => 'query',
@@ -5102,7 +5044,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => '',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'photoset_id'    => array(
 					'location' => 'query',
@@ -5125,7 +5067,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Set photoset primary photo',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'photoset_id'    => array(
 					'location' => 'query',
@@ -5148,7 +5090,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Return a list of place IDs for a query string.<br /><br />
 The flickr.places.find method is <b>not</b> a geocoder. It will round <q>up</q> to the nearest place type to which place IDs apply. For example, if you pass it a street level address it will return the city that contains the address rather than the street, or building, itself.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <places query="Alabama" total="3">
    <place place_id="VrrjuESbApjeFS4." woeid="2347559"
@@ -5202,7 +5144,7 @@ For example, if you pass it a street level coordinate it will return the city th
 It will also truncate latitudes and longitudes to three decimal points.
 
 ',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <places latitude="37.76513627957266" longitude="-122.42020770907402" accuracy="16" total="1">
    <place place_id="Y12JWsKbApmnSQpbQg" woeid="23512048"
@@ -5239,7 +5181,7 @@ It will also truncate latitudes and longitudes to three decimal points.
 		"flickr.places.getChildrenWithPhotosPublic" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Return a list of locations with public photos that are parented by a Where on Earth (WOE) or Places ID.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <places total="79">
    <place place_id="HznQfdKbB58biy8sdA" woeid="26332794"
@@ -5282,7 +5224,7 @@ It will also truncate latitudes and longitudes to three decimal points.
 		"flickr.places.getInfo" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get informations about a place.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <place place_id="4hLQygSaBJ92" woeid="3534"
    latitude="45.512" longitude="-73.554"
@@ -5339,7 +5281,7 @@ It will also truncate latitudes and longitudes to three decimal points.
 		"flickr.places.getInfoByUrl" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Lookup information about a place, by its flickr.com/places URL.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <place place_id="4hLQygSaBJ92" woeid="3534"
    latitude="45.512" longitude="-73.554"
@@ -5384,7 +5326,7 @@ It will also truncate latitudes and longitudes to three decimal points.
 		"flickr.places.getPlaceTypes" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Fetches a list of available place types for Flickr.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <place_types>
    <place_type place_type_id="22">neighbourhood</place_type>
@@ -5408,7 +5350,7 @@ It will also truncate latitudes and longitudes to three decimal points.
 		"flickr.places.getShapeHistory" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Return an historical list of all the shape data generated for a Places or Where on Earth (WOE) ID.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <shapes total="2" woe_id="3534" place_id="4hLQygSaBJ92" place_type="locality" place_type_id="7">
    <shapedata created="1223513357" alpha="0.012359619140625"
@@ -5450,7 +5392,7 @@ It will also truncate latitudes and longitudes to three decimal points.
 		"flickr.places.getTopPlacesList" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Return the top 100 most geotagged places for a day.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <places total="100" date_start="1246320000" date_stop="1246406399">
    <place place_id="4KO02SibApitvSBieQ" woeid="23424977"
@@ -5503,7 +5445,7 @@ The maximum allowable size of a bounding box (the distance between the SW and NE
 <li><strong>country</strong>: 500km (310mi)</li>
 <li><strong>continent</strong>: 1500km (932mi)</li>
 </ul>',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <places place_type="neighbourhood" total="21"
    pages="1" page="1" 
@@ -5562,7 +5504,7 @@ The maximum allowable size of a bounding box (the distance between the SW and NE
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Return a list of the top 100 unique places clustered by a given placetype for a user\'s contacts. ',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <places total="1">
    <place place_id="kH8dLOubBZRvX_YZ" woeid="2487956"
@@ -5635,7 +5577,7 @@ The maximum allowable size of a bounding box (the distance between the SW and NE
 		"flickr.places.placesForTags" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Return a list of the top 100 unique places clustered by a given placetype for set of tags or machine tags. ',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <places total="1">
    <place place_id="kH8dLOubBZRvX_YZ" woeid="2487956"
@@ -5718,7 +5660,7 @@ The maximum allowable size of a bounding box (the distance between the SW and NE
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Return a list of the top 100 unique places clustered by a given placetype for a user. ',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <places total="1">
    <place place_id="kH8dLOubBZRvX_YZ" woeid="2487956"
@@ -5787,7 +5729,7 @@ The maximum allowable size of a bounding box (the distance between the SW and NE
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Find Flickr Places information by Place ID.<br /><br />
 This method has been deprecated. It won\'t be removed but you should use <a href="/services/api/flickr.places.getInfo.html">flickr.places.getInfo</a> instead.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <location place_id="kH8dLOubBZRvX_YZ" woeid="2487956" 
                 latitude="37.779" longitude="-122.420"
@@ -5826,7 +5768,7 @@ This method has been deprecated. It won\'t be removed but you should use <a href
 			'summary' => 'Find Flickr Places information by Place URL.<br /><br />
 This method has been deprecated. It won\'t be removed but you should use <a href="/services/api/flickr.places.getInfoByUrl.html">flickr.places.getInfoByUrl</a> instead.
 ',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <location place_id="kH8dLOubBZRvX_YZ" woeid="2487956" 
                 latitude="37.779" longitude="-122.420"
@@ -5863,7 +5805,7 @@ This method has been deprecated. It won\'t be removed but you should use <a href
 		"flickr.places.tagsForPlace" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Return a list of the top 100 unique tags for a Flickr Places or Where on Earth (WOE) ID',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <tags total="100">
    <tag count="31775">montreal</tag>
@@ -5925,7 +5867,7 @@ This method has been deprecated. It won\'t be removed but you should use <a href
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns the default content type preference for the user.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <rsp stat="ok">
 <person nsid="12037949754@N01" content_type="1" />
@@ -5968,7 +5910,7 @@ Possible values for whether or not geo-related EXIF information will be used to 
 
 Users can edit this preference at <a href="http://www.flickr.com/account/geo/exif/?from=privacy">http://www.flickr.com/account/geo/exif/?from=privacy</a>',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <rsp stat="ok">
 <person nsid="12037949754@N01" geoperms="1" importgeoexif="0" />
@@ -5988,7 +5930,7 @@ Users can edit this preference at <a href="http://www.flickr.com/account/geo/exi
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns the default hidden preference for the user.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <rsp stat="ok">
 <person nsid="12037949754@N01" hidden="1" />
@@ -6017,7 +5959,7 @@ Possible values are:
 <li>5 : Private</li>
 </ul>',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <rsp stat="ok">
 <person nsid="12037949754@N01" privacy="1" />
@@ -6037,7 +5979,7 @@ Possible values are:
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns the default safety level preference for the user.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <rsp stat="ok">
 <person nsid="12037949754@N01" safety_level="1" />
@@ -6059,7 +6001,7 @@ Possible values are:
 <br><br>
 <i>(this method is experimental and may change)</i>',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <rsp stat="ok">
   <subscriptions>
@@ -6083,7 +6025,7 @@ Possible values are:
 			'summary' => 'All the different flavours of anteater.
 <br><br>
 <i>(this method is experimental and may change)</i>',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <rsp stat="ok">
   <topics>
@@ -6108,7 +6050,7 @@ Possible values are:
 <br><br>
 <i>(this method is experimental and may change)</i>',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'topic'    => array(
 					'location' => 'query',
@@ -6212,7 +6154,7 @@ Possible values are:
 <br><br>
 <i>(this method is experimental and may change)</i>',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'topic'    => array(
 					'location' => 'query',
@@ -6276,7 +6218,7 @@ Possible values are:
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get a list of referring domains for a collection',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <domains page="1" perpage="25" pages="1" total="3">
 	<domain name="images.search.yahoo.com" views="127" />
@@ -6318,7 +6260,7 @@ Possible values are:
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get a list of referrers from a given domain to a collection',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <domain page="1" perpage="25" pages="1" total="3" name="flickr.com">
 	<referrer url="http://flickr.com/" views="11"/>
@@ -6364,7 +6306,7 @@ Possible values are:
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get the number of views on a collection for a given date.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <stats views="24" />
 */
@@ -6393,7 +6335,7 @@ Possible values are:
 <b>Please note, these files will only be available until June 1, 2010 Noon PDT.</b> 
 For more information <a href="/help/stats/#1369409">please check out this FAQ</a>, or just <a href="/photos/me/stats/downloads/">go download your files</a>.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <stats> 
    <csvfiles> 
@@ -6418,7 +6360,7 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get a list of referring domains for a photo',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <domains page="1" perpage="25" pages="1" total="3">
 	<domain name="images.search.yahoo.com" views="127" />
@@ -6460,7 +6402,7 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get a list of referrers from a given domain to a photo',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <domain page="1" perpage="25" pages="1" total="3" name="flickr.com">
 	<referrer url="http://flickr.com/" views="11"/>
@@ -6505,7 +6447,7 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get a list of referring domains for a photoset',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <domains page="1" perpage="25" pages="1" total="3">
 	<domain name="images.search.yahoo.com" views="127" />
@@ -6547,7 +6489,7 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get a list of referrers from a given domain to a photoset',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <domain page="1" perpage="25" pages="1" total="3" name="flickr.com">
 	<referrer url="http://flickr.com/" views="11"/>
@@ -6592,7 +6534,7 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get the number of views on a photoset for a given date.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <stats views="24" comments="1" />
 */
@@ -6618,7 +6560,7 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get the number of views, comments and favorites on a photo for a given date.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <stats views="24" comments="4" favorites="1"/>
 */
@@ -6644,7 +6586,7 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get a list of referring domains for a photostream',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <domains page="1" perpage="25" pages="1" total="3">
 	<domain name="images.search.yahoo.com" views="127" />
@@ -6681,7 +6623,7 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get a list of referrers from a given domain to a user\'s photostream',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <domain page="1" perpage="25" pages="1" total="3" name="flickr.com">
 	<referrer url="http://flickr.com/" views="11"/>
@@ -6721,7 +6663,7 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get the number of views on a user\'s photostream for a given date.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <stats views="24" />
 */
@@ -6743,7 +6685,7 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 			'extends' => 'defaultGetOperation',
 			'summary' => 'List the photos with the most views, comments or favorites',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <photos page="2" pages="89" perpage="10" total="881">
 	<photo id="2636" owner="47058503995@N01" 
@@ -6792,7 +6734,7 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get the overall view counts for an account',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <stats>
 	<total views="469" />
@@ -6820,7 +6762,7 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 		"flickr.tags.getClusterPhotos" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns the first 24 photos for a given tag cluster',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			'parameters' => array(
 				'tag'    => array(
 					'location' => 'query',
@@ -6842,7 +6784,7 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 		"flickr.tags.getClusters" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Gives you a list of tag clusters for the given tag.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <clusters source="cows" total="2">
 	<cluster total="3">
@@ -6874,7 +6816,7 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 		"flickr.tags.getHotList" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns a list of hot tags for the given period.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <hottags period="day" count="6">
 	<tag score="20">northerncalifornia</tag>
@@ -6908,7 +6850,7 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 		"flickr.tags.getListPhoto" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get the tag list for a given photo.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <photo id="2619">
 	<tags>
@@ -6936,7 +6878,7 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 		"flickr.tags.getListUser" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get the tag list for a given user (or the currently logged in user).',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <who id="12037949754@N01">
 	<tags>
@@ -6966,7 +6908,7 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 		"flickr.tags.getListUserPopular" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get the popular tags for a given user (or the currently logged in user).',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <who id="12037949754@N01">
 	<tags>
@@ -7001,7 +6943,7 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 		"flickr.tags.getListUserRaw" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get the raw versions of a given tag (or all tags) for the currently logged-in user.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <who id="12037949754@N01">
     <tags>
@@ -7032,7 +6974,7 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns a list of most frequently used tags for a user.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <rsp stat="ok">
 <who id="30135021@N05">
@@ -7056,7 +6998,7 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 		"flickr.tags.getRelated" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns a list of tags "related" to the given tag, based on clustered usage analysis.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <tags source="london">
 	<tag>england</tag>
@@ -7084,7 +7026,7 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 //		"flickr.test.echo" => array(
 //			'extends' => 'defaultGetOperation',
 //			'summary' => 'A testing method which echo\'s all parameters back in the response.',
-//			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+//			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 //			/* Example
 //<method>echo</method>
 //<foo>bar</foo>
@@ -7103,7 +7045,7 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 //			'extends' => 'defaultGetOperation',
 //			'summary' => 'A testing method which checks if the caller is logged in then returns their username.',
 //			'needsSigning' => true,
-//			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+//			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 //			/* Example
 //<user id="12037949754@N01">
 //	<username>Bees</username>
@@ -7124,7 +7066,7 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 //			'extends' => 'defaultGetOperation',
 //			'summary' => 'Null test',
 //			'needsSigning' => true,
-//			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+//			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 //			'parameters' => array(
 //				'method'    => array(
 //					'location' => 'query',
@@ -7138,7 +7080,7 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 		"flickr.urls.getGroup" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns the url to a group\'s page.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <group nsid="48508120860@N01" url="http://www.flickr.com/groups/test1/" /> 
 */
@@ -7159,7 +7101,7 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 		"flickr.urls.getUserPhotos" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns the url to a user\'s photos.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <user nsid="12037949754@N01" url="http://www.flickr.com/photos/bees/" />
 */
@@ -7181,7 +7123,7 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 		"flickr.urls.getUserProfile" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns the url to a user\'s profile.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <user nsid="12037949754@N01" url="http://www.flickr.com/people/bees/" />
 */
@@ -7203,7 +7145,7 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 		"flickr.urls.lookupGallery" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns gallery info, by url.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <gallery id="6065-72157617483228192" url="/photos/straup/galleries/72157617483228192" owner="35034348999@N01" 
 primary_photo_id="292882708" 
@@ -7230,7 +7172,7 @@ count_photos="17" count_videos="0" server="112" farm="1" secret="7f29861bc4">
 		"flickr.urls.lookupGroup" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns a group NSID, given the url to a group\'s page or photo pool.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <group id="34427469792@N01">
 	<groupname>FlickrCentral</groupname> 
@@ -7253,7 +7195,7 @@ count_photos="17" count_videos="0" server="112" farm="1" secret="7f29861bc4">
 		"flickr.urls.lookupUser" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns a user NSID, given the url to a user\'s photos or profile.',
-			'responseClass' => null, //'Intahwebz\FlickrAPI\DTO\',
+			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <user id="12037949632@N01">
 	<username>Stewart</username> 

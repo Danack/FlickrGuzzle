@@ -5,7 +5,12 @@ class View {
 
 	var $template;
 	var $variables = array();
+	var $statusMessageArray = array();
 
+
+	function addStatusMessage($message) {
+		$this->statusMessageArray[] = $message;
+	}
 
 	function setTemplate($template){
 		$this->template = $template;
@@ -17,28 +22,26 @@ class View {
 
 	function render(){
 
+		foreach ($this->statusMessageArray as $statusMessage) {
+			echo "$statusMessage <br/>";
+		}
+
 		echo "<h1>FlickrGuzzle</h1>";
-
-//		$renderFunctions = array(
-//			"flickr/flickrNotAuthed" => 'flickrNotAuthed',
-//			"flickr/flickrAuthRequest" => 'flickrAuthRequest',
-//			"flickr/index" => 'index',
-//			"flickr/brands" => 'cameraBrands',
-//			"flickr/brandModels" => 'brandModels',
-//			"flickr/photoList" => 'photoList',
-//			"flickr/apiProgress" => 'apiProgress',
-//		);
-//
-//		if (array_key_exists($this->template, $renderFunctions) == false) {
-//			echo "Unknown template [".$this->template."]";
-//			return;
-//		}
-
 
 		$renderFunction = str_replace('flickr/', '', $this->template);
 
 		$this->{$renderFunction}();
 	}
+
+	function	activityInfo(){
+		$activityInfo = $this->variables['activityInfo'];
+
+		echo "Function call succeeded - have fun with this object:<br/>";
+
+		var_dump($activityInfo);
+		$this->renderFooter();
+	}
+
 
 	function flickrNotAuthed(){
 
@@ -186,7 +189,7 @@ class View {
 		foreach ($institutionList->institutions as $institution) {
 
 			$name = $institution->name;
-			$siteURL = false;
+			$siteURL = FALSE;
 
 			//var_dump($institution->urls);
 
@@ -194,14 +197,14 @@ class View {
 				if ($url->type == 'site') {
 					$siteURL = $url->url; //ugh
 
-					if (strpos($siteURL, 'http://') === false &&
-						strpos($siteURL, 'https://') === false) {
+					if (strpos($siteURL, 'http://') === FALSE &&
+						strpos($siteURL, 'https://') === FALSE) {
 						$siteURL = 'http://'.$siteURL;
 					}
 				}
 			}
 
-			if ($siteURL != false ) {
+			if ($siteURL != FALSE ) {
 				echo "<a href='".$siteURL."'>";
 				echo $name."</a><br/>";
 			}
@@ -209,6 +212,28 @@ class View {
 				echo $name."<br/>";
 			}
 		}
+
+		$this->renderFooter();
+	}
+
+
+	function	flickrUpload(){
+
+		echo "<p>This is the happy fun-time flickr uploader.</p>";
+
+		echo "<form method='post' accept-charset='utf-8' action='/index.php?function=flickrUpload' onsubmit='' class='inlineForm' name='contactForm' enctype='multipart/form-data'>";
+
+		echo "<input type='file' name='fileUpload'/><br/>";
+
+		echo "Title<br/>";
+		echo "<input type='text' name='title' size='100' /><br/>";
+
+		echo "Description<br/>";
+		echo "<textarea rows='8' cols='100' name='description'>";
+		echo "</textarea>";
+		echo "<br/>";
+		echo "<input type='submit' name='submitButton' class='clickyButton' value='Upload'/>";
+		echo "</form>";
 
 		$this->renderFooter();
 	}
