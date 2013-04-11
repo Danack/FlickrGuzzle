@@ -54,6 +54,13 @@ try{
 			break;
 		}
 
+		case 'photoRotate': {
+			$photoID = getVariable('photoID', false);
+			$degrees = getVariable('degrees', false);
+			$flickr->rotate($photoID, $degrees);
+			break;
+		}
+
 		case 'apiProgress': {
 			$flickr->apiProgress();
 			break;

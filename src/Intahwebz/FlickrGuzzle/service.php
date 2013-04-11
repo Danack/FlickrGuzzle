@@ -4540,7 +4540,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Rotate a photo.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
+			'responseClass' => 'Intahwebz\\FlickrGuzzle\\DTO\\PhotoInfoTransform',
 			/* Example
 <photoid secret="abcdef" originalsecret="abcdef">1234</photoid>
 */
@@ -4551,7 +4551,7 @@ Before users may assign location data to a photo they must define who, by defaul
 				),
 				'degrees'    => array(
 					'location' => 'query',
-					'description' => 'todo - describe variable',
+					'description' => 'The amount of degrees by which to rotate the photo (clockwise) from it\'s current orientation. Valid values are 90, 180 and 270.',
 				),
 				'method'    => array(
 					'location' => 'query',

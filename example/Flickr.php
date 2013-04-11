@@ -180,9 +180,6 @@ class Flickr{
 
 		$this->view->assign('photoID', $photoID);
 		$this->view->assign('photoInfo', $photoInfo);
-//		var_dump($photoInfo);
-//		exit(0);
-
 		$this->view->setTemplate("flickr/photo");
 	}
 
@@ -346,13 +343,33 @@ class Flickr{
 			/** @var $result FileUploadResponse */
 			$fileUploadResponse = $command->execute();
 
-			$this->view->addStatusMessage("Photo uploaded ".$fileUploadResponse->photoID);
+			$url = "/index.php?function=photo&photoID=".$fileUploadResponse->photoID;
+
+			$message = "<a href='$url'>Photo uploaded ".$fileUploadResponse->photoID."</a>";
+
+			$this->view->addStatusMessage($message);
 		}
 		else{
 			//echo "Nothing to upload.";
 		}
 
 		$this->view->setTemplate("flickr/flickrUpload");
+	}
+
+	function rotate($photoID, $degrees) {
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
+		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
+
+		$params = array(
+			'photo_id'	=> $photoID,
+			'degrees'	=> $degrees,
+		);
+
+		$command = $flickrGuzzleClient->getCommand('flickr.photos.transform.rotate', $params);
+		$photoTransformInfo = $command->execute();
+
+		$this->view->addStatusMessage("Photo should have been rotated by  ".$degrees.".");
+		$this->photo($photoID);
 	}
 }
 

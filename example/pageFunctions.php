@@ -7,6 +7,18 @@ function pageStart(){
 <html>
 <head>
  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+ <style type="text/css">
+.bordered{
+    border: 2px solid #000000;
+}
+
+form {
+	margin-bottom: 0;
+}
+
+</style>
+
 </head>
 <body>
 

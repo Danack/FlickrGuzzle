@@ -7,7 +7,6 @@ use Intahwebz\FlickrGuzzle\DataMapper;
 
 class PhotoInfo {
 
-
 	use DataMapper;
 
 	static protected $dataMap = array(

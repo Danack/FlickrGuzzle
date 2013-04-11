@@ -242,16 +242,50 @@ class View {
 		$photoID = $this->variables['photoID'];
 		$photoInfo = $this->variables['photoInfo'];
 
+		echo "<table><tr><td>";
+
+
 		echo "PhotoID: ".$photoID."<br/>";
 		$photo = $photoInfo->photo;
 
-		echo "<img src='".$photo->getImageURL()."' /> <br/>";
+		echo "<img src='".$photo->getImageURL()."' />";
+
+		echo "</td><td>";
+
+		$this->displayPhotoButtons($photoID);
+
+		echo "</td></tr></table>";
+
 
 		echo "PhotoInfo: <br/>";
 		var_dump($photoInfo);
 
 		$this->renderFooter();
 	}
+
+	function displayPhotoButtons($photoID){
+		$this->displayRotateButton($photoID);
+	}
+
+	function	displayRotateButton($photoID){
+
+		echo "<div class='bordered'>";
+		echo "<form method='post' accept-charset='utf-8' action='/index.php'>";
+
+			echo "<input type='hidden' name='function' value='photoRotate' />";
+			echo "<input type='hidden' name='photoID' value='".$photoID."' />";
+
+			echo "<select name='degrees'>";
+				echo "<option value='90'>90°</option>";
+				echo "<option value='180'>180°</option>";
+				echo "<option value='270'>270°</option>";
+			echo "</select>";
+
+			echo "<input type='submit' name='submitButton' class='clickyButton' value='Rotate photo'/>";
+		echo "</form>";
+		echo "</div>";
+	}
+
 }
 
 

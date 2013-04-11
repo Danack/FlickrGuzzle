@@ -42,7 +42,14 @@ trait DataMapper {
 
 		if (array_key_exists('unindex', $dataMapElement) == true) {
 			$index = $dataMapElement['unindex'];
-			$dereferenced = $dereferenced[$index];
+
+			//Amazingly sometimes text is returned as $title['_content'] = $text other
+			//times it's just $title = $text
+			if (is_array($dereferenced)) {
+				if (array_key_exists($index, $dereferenced) == true) {
+					$dereferenced = $dereferenced[$index];
+				}
+			}
 		}
 
 		return $dereferenced;

@@ -37,7 +37,7 @@ class Photo {
 		['serverID', 'server'],
 		['farmID', 'farm'],
 		['title', 'title', 'unindex' => '_content'],
-		['description', 'description', 'unindex' => '_content'],
+		['description', 'description', 'unindex' => '_content', 'optional' => true],
 	);
 
 	function getImageURL($size = 'q'){

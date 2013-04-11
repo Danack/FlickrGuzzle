@@ -126,12 +126,13 @@ class FlickrGuzzleClient extends Client{
 			"Intahwebz\\FlickrGuzzle\\DTO\\InstitutionList" => 'institutions',
 			"Intahwebz\\FlickrGuzzle\\DTO\\LicenseList" => null,
 			"Intahwebz\\FlickrGuzzle\\DTO\\ActivityInfo" => 'items',
+			"Intahwebz\\FlickrGuzzle\\DTO\\PhotoInfoTransform" => 'photoid',
 		);
 
 		if (array_key_exists($className, $aliasedResponses) == TRUE) {
 			$dataJson = json_decode($data, TRUE);
 
-			//var_dump($dataJson);
+		//	var_dump($dataJson);
 
 			if (array_key_exists('stat', $dataJson) == TRUE &&
 				$dataJson['stat'] != 'ok') {
