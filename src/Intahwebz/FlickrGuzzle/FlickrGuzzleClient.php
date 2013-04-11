@@ -314,6 +314,30 @@ class FlickrGuzzleClient extends Client{
 		return $rsp;
 	}
 
+	static function getAPIProgress(){
+
+		$serviceDescription = include __DIR__ . '/service.php';
+
+		$operationCount = 0;
+		$operationWithResponseClassCount = 0;
+
+		foreach($serviceDescription['operations'] as $operation) {
+			$operationCount++;
+			if (array_key_exists('responseClass', $operation) == true &&
+				$operation['responseClass'] != null) {
+				$operationWithResponseClassCount++;
+			}
+		}
+
+		$result = array(
+			'operationCount' => $operationCount,
+			'operationWithResponseClassCount' => $operationWithResponseClassCount,
+		);
+
+		return $result;
+	}
+
+
 }
 
 

@@ -24,7 +24,9 @@ class View {
 			"flickr/flickrAuthRequest" => 'flickrAuthRequest',
 			"flickr/index" => 'index',
 			"flickr/brands" => 'cameraBrands',
-			"flickr/brandModels" => 'brandModels'
+			"flickr/brandModels" => 'brandModels',
+			"flickr/photoList" => 'photoList',
+			"flickr/apiProgress" => 'apiProgress',
 		);
 
 		if (array_key_exists($this->template, $renderFunctions) == false) {
@@ -43,20 +45,17 @@ class View {
 			You are not authorized. Click here to <a href='/index.php?function=flickrAuthRequest'>auth</a>.
 		</p>";
 
-		//$this->renderFooter();
+		$this->renderFooter();
 	}
 
 	function flickrAuthRequest(){
-
 		echo "Authorisation request started.<br/>";
-
 		echo "<a href='".$this->variables['flickrURL']."'>Click to go to Flickr to confirm</a>.<br/>";
-
 		echo "(This redirect should be done automatically in a real environment)";
 	}
 
 
-	function index(){
+	function photoList(){
 		//{showPagination page=$photoList->page maxPages=$photoList->pages}
 		$photoList = $this->variables['photoList'];
 		foreach ($photoList->photos as $photo) {
@@ -134,7 +133,27 @@ class View {
 
 		$this->renderFooter();
 	}
+
+	function index(){
+		echo "<p>Please choose one of the options below.</p>";
+		$this->renderFooter();
+	}
+
+	function	apiProgress(){
+
+		$apiProgress = $this->variables['apiProgresss'];
+
+		echo "Methods with response classes: ".$apiProgress['operationWithResponseClassCount']."<br/>";
+		echo "Methods in Flickr API:	     ".$apiProgress['operationCount']."<br/>";
+
+		$percentage = (100 * $apiProgress['operationWithResponseClassCount']) / $apiProgress['operationCount'];
+		$percentageString = sprintf("%01.2f", $percentage);
+
+		echo "Percentage complete: ".$percentageString."% <br/>";
+		$this->renderFooter();
+	}
 }
+
 
 
 

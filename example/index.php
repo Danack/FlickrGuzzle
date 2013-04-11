@@ -17,12 +17,13 @@ require_once "View.php";
 require_once "Flickr.php";
 
 
-$routes = array(
-	'Index' => 'flickr',
+/*$routes = array(
+	'Index' => 'index',
+	'Photos' => 'photoList',
 	'Upload' => 'flickrUpload',
 	'Camera Brands' => 'flickrCameraBrands',
 	'Method List' => 'flickrMethodList',
-);
+); */
 
 session_name(SESSION_NAME);
 session_start();
@@ -34,12 +35,22 @@ try{
 
 	$flickr->prePage('');
 
-	$function = getVariable('function', 'display');
+	$function = getVariable('function', 'index');
 
 	switch($function){
-		case 'display':{
+		case 'index':{
+			$flickr->index();
+			break;
+		}
+
+		case 'apiProgress': {
+			$flickr->apiProgress();
+			break;
+		}
+
+		case 'photoList':{
 			$page = getVariable('page', 1);
-			$flickr->display($page);
+			$flickr->photoList($page);
 			break;
 		}
 

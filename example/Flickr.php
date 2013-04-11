@@ -32,11 +32,15 @@ class Flickr{
 
 	function	prePage($action) {
 		$routes = array(
-			'Index' => 'flickr',
+			'Index' => 'index',
+			'Photos' => 'photoList',
 			'Upload' => 'flickrUpload',
 			'Camera Brands' => 'flickrCameraBrands',
 			'Method List' => 'flickrMethodList',
 			//'Generate method info' => 'flickrMethodListGenerate',
+
+			'API progress' => 'apiProgress',
+
 		);
 
 		$this->view->assign('routes', $routes);
@@ -170,7 +174,11 @@ class Flickr{
 		$this->router->forward('flickr');
 	}
 
-	function display($page){
+
+
+
+	function photoList($page){
+
 
 		$authedFlickrGuzzleClient = false;
 
@@ -253,6 +261,17 @@ class Flickr{
 		$this->view->assign('flickrURL', $flickrURL);
 		$this->view->setTemplate("flickr/flickrAuthRequest");
 	}
+
+	function index(){
+		$this->view->setTemplate("flickr/index");
+	}
+
+	function apiProgress(){
+		$apiProgresss = FlickrGuzzleClient::getAPIProgress();
+		$this->view->assign('apiProgresss', $apiProgresss);
+		$this->view->setTemplate("flickr/apiProgress");
+	}
+
 }
 
 
