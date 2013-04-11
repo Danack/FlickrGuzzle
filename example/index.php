@@ -42,6 +42,18 @@ try{
 			break;
 		}
 
+		case 'photo' :{
+			$photoID = getVariable('photoID', false);
+
+			if ($photoID) {
+				$flickr->photo($photoID);
+			}
+			else{
+				$flickr->index();
+			}
+			break;
+		}
+
 		case 'apiProgress': {
 			$flickr->apiProgress();
 			break;

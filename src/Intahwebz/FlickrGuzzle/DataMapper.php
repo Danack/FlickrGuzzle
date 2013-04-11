@@ -14,7 +14,9 @@ namespace Intahwebz\FlickrGuzzle;
  */
 trait DataMapper {
 
-	static function getValueFromAlias($data, $dataVariableNameArray, &$notSet){
+	static function getValueFromAlias($data, $dataMapElement, &$notSet){
+
+		$dataVariableNameArray = $dataMapElement[1];
 
 		if ($dataVariableNameArray == null){
 			//Return the original data array
@@ -38,6 +40,11 @@ trait DataMapper {
 			$dereferenced = $dereferenced[$dataVariableName];
 		}
 
+		if (array_key_exists('unindex', $dataMapElement) == true) {
+			$index = $dataMapElement['unindex'];
+			$dereferenced = $dereferenced[$index];
+		}
+
 		return $dereferenced;
 	}
 
@@ -58,7 +65,7 @@ trait DataMapper {
 		foreach(static::$dataMap as $dataMapElement){
 
 			$classVariableName = $dataMapElement[0];
-			$dataVariableNameArray = $dataMapElement[1];
+			//$dataVariableNameArray = $dataMapElement[1];
 			$className = FALSE;
 			$multiple = FALSE;
 
@@ -76,7 +83,7 @@ trait DataMapper {
 
 			$notFound = FALSE;
 
-			$sourceValue = self::getValueFromAlias($data, $dataVariableNameArray, $notFound);
+			$sourceValue = self::getValueFromAlias($data, $dataMapElement, $notFound);
 
 			if($notFound == TRUE){
 				if (array_key_exists('optional', $dataMapElement) == TRUE &&
@@ -88,10 +95,10 @@ trait DataMapper {
 //				echo "count is $count <br/>";
 //				var_dump(static::$dataMap);
 
-				$alias = $dataVariableNameArray;
+				$alias = $dataMapElement[1];//$dataVariableNameArray;
 
-				if(is_array($dataVariableNameArray) == TRUE){
-					$alias = implode('->', $dataVariableNameArray);
+				if(is_array($alias) == TRUE){
+					$alias = implode('->', $alias);
 				}
 
 				var_dump($data);

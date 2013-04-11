@@ -177,8 +177,13 @@ class Flickr{
 
 		$command = $flickrGuzzleClient->getCommand('flickr.photos.getInfo', $params);
 		$photoInfo = $command->execute();
-		var_dump($photoInfo);
-		exit(0);
+
+		$this->view->assign('photoID', $photoID);
+		$this->view->assign('photoInfo', $photoInfo);
+//		var_dump($photoInfo);
+//		exit(0);
+
+		$this->view->setTemplate("flickr/photo");
 	}
 
 	function flickrAuthResult(){
@@ -349,7 +354,6 @@ class Flickr{
 
 		$this->view->setTemplate("flickr/flickrUpload");
 	}
-
 }
 
 

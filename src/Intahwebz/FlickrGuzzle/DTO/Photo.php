@@ -28,6 +28,7 @@ class Photo {
 	var $serverID;		//The serverID that the photo is hosted on.
 	var $farmID;
 	var $title;
+	var $description;
 
 	static protected $dataMap = array(
 		['photoID', 'id'],
@@ -35,25 +36,9 @@ class Photo {
 		['secret', 'secret'],
 		['serverID', 'server'],
 		['farmID', 'farm'],
-		['title', 'title'],
+		['title', 'title', 'unindex' => '_content'],
+		['description', 'description', 'unindex' => '_content'],
 	);
-
-	/* public static function fromCommand(OperationCommand $command){
-//		echo "wut";
-//		var_dump($command->getResponse());
-
-
-		//$stream = $command->getRequest()->getResponse()->getBody()->getStream();
-		$data = $command->getRequest()->getResponse()->getBody(true);
-
-		$dataJson = json_decode($data, true);
-		var_dump($dataJson);
-		exit(0);
-
-		return new self();
-		// Return an instantiated DeleteRequest object
-		//return new DeleteRequest($key, $table);
-	}*/
 
 	function getImageURL($size = 'q'){
 		return "http://farm".$this->farmID.".staticflickr.com/".$this->serverID."/".$this->photoID."_".$this->secret."_".$size.".jpg";

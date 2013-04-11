@@ -63,7 +63,7 @@ class View {
 		//{showPagination page=$photoList->page maxPages=$photoList->pages}
 		$photoList = $this->variables['photoList'];
 		foreach ($photoList->photos as $photo) {
-			echo "<a href='/index.php?function=flickrPicture&photoID=".$photo->photoID."'>";
+			echo "<a href='/index.php?function=photo&photoID=".$photo->photoID."'>";
 			echo "<img src='".$photo->getImageURL()."' />";
 			echo "</a>";
 		}
@@ -234,6 +234,21 @@ class View {
 		echo "<br/>";
 		echo "<input type='submit' name='submitButton' class='clickyButton' value='Upload'/>";
 		echo "</form>";
+
+		$this->renderFooter();
+	}
+
+	function	photo(){
+		$photoID = $this->variables['photoID'];
+		$photoInfo = $this->variables['photoInfo'];
+
+		echo "PhotoID: ".$photoID."<br/>";
+		$photo = $photoInfo->photo;
+
+		echo "<img src='".$photo->getImageURL()."' /> <br/>";
+
+		echo "PhotoInfo: <br/>";
+		var_dump($photoInfo);
 
 		$this->renderFooter();
 	}
