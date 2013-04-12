@@ -6809,17 +6809,7 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 		"flickr.tags.getHotList" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns a list of hot tags for the given period.',
-			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
-			/* Example
-<hottags period="day" count="6">
-	<tag score="20">northerncalifornia</tag>
-	<tag score="18">top20</tag>
-	<tag score="15">keychain</tag>
-	<tag score="10">zb</tag>
-	<tag score="9">selfportraittuesday</tag>
-	<tag score="4">jan06</tag>
-</hottags>
-*/
+			'responseClass' => 'Intahwebz\\FlickrGuzzle\\DTO\\TagList',
 			'parameters' => array(
 				'period'    => array(
 					'location' => 'query',
@@ -6881,18 +6871,7 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 		"flickr.tags.getListUserPopular" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get the popular tags for a given user (or the currently logged in user).',
-			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
-			/* Example
-<who id="12037949754@N01">
-	<tags>
-		<tag count="10">bar</tag> 
-		<tag count="11">foo</tag> 
-		<tag count="147">gull</tag> 
-		<tag count="3">tags</tag> 
-		<tag count="3">test</tag> 
-	</tags>
-</who>
-*/
+			'responseClass' => 'Intahwebz\\FlickrGuzzle\\DTO\\TagList',
 			'parameters' => array(
 				'user_id'    => array(
 					'location' => 'query',

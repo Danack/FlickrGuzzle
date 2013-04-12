@@ -135,7 +135,7 @@ class FlickrGuzzleClient extends Client{
 			'Intahwebz\\FlickrGuzzle\\DTO\\LookupGroup' => 'group',
 			'Intahwebz\\FlickrGuzzle\\DTO\\LookupGallery' => 'gallery',
 			"Intahwebz\\FlickrGuzzle\\DTO\\URLInfo" => null,
-			'Intahwebz\\FlickrGuzzle\\DTO\\TagList' => array('photo', 'who'),
+			'Intahwebz\\FlickrGuzzle\\DTO\\TagList' => array('photo', 'who', 'hottags'),
 		);
 
 		if (array_key_exists($className, $aliasedResponses) == TRUE) {
