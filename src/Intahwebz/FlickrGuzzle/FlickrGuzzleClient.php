@@ -135,13 +135,13 @@ class FlickrGuzzleClient extends Client{
 			'Intahwebz\\FlickrGuzzle\\DTO\\LookupGroup' => 'group',
 			'Intahwebz\\FlickrGuzzle\\DTO\\LookupGallery' => 'gallery',
 			"Intahwebz\\FlickrGuzzle\\DTO\\URLInfo" => null,
-			'Intahwebz\\FlickrGuzzle\\DTO\\TagList' => array('photo', 'who', 'hottags'),
+			'Intahwebz\\FlickrGuzzle\\DTO\\TagList' => array('photo', 'who', 'hottags', null),
 		);
 
 		if (array_key_exists($className, $aliasedResponses) == TRUE) {
 			$dataJson = json_decode($data, TRUE);
 
-			//var_dump($dataJson);
+//			var_dump($dataJson);
 
 			if (array_key_exists('stat', $dataJson) == TRUE &&
 				$dataJson['stat'] != 'ok') {
@@ -150,22 +150,29 @@ class FlickrGuzzleClient extends Client{
 
 			$alias = $aliasedResponses[$className];
 
-			if ($alias != NULL) {
-				if (is_array($alias) == true){
-					foreach ($alias as $aliasElement) {
-						if (array_key_exists($aliasElement, $dataJson) ){
-							$aliasedData = $dataJson[$aliasElement];
-							break;
-						}
-					}
+			if (is_array($alias) == false) {
+				$alias = array($alias);
+			}
+
+			$aliasedData = false;
+
+			foreach ($alias as $aliasElement) {
+				if ($aliasElement == null) {
+					$aliasedData = $dataJson;
 				}
 				else{
-					$aliasedData = $dataJson[$alias];
+					if (array_key_exists($aliasElement, $dataJson) ){
+						$aliasedData = $dataJson[$aliasElement];
+						break;
+					}
 				}
 			}
-			else{
-				$aliasedData = $dataJson;
+
+			if ($aliasedData == false) {
+				throw new FlickrGuzzleException("Failed to extract data from returned response. Please check the alias that is meant to point to the data.");
 			}
+
+
 
 			//var_dump($aliasedData);
 

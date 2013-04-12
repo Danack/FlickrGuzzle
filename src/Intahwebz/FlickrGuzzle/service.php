@@ -6895,18 +6895,7 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 		"flickr.tags.getListUserRaw" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get the raw versions of a given tag (or all tags) for the currently logged-in user.',
-			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
-			/* Example
-<who id="12037949754@N01">
-    <tags>
-        <tag clean="foo">
-            <raw>foo</raw>
-            <raw>Foo</raw>
-            <raw>f:oo</raw>
-        </tag>
-    </tags>
-</who>
-*/
+			'responseClass' => 'Intahwebz\\FlickrGuzzle\\DTO\\TagList',
 			'parameters' => array(
 				'tag'    => array(
 					'location' => 'query',
@@ -6940,17 +6929,7 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 		"flickr.tags.getRelated" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns a list of tags "related" to the given tag, based on clustered usage analysis.',
-			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
-			/* Example
-<tags source="london">
-	<tag>england</tag>
-	<tag>thames</tag>
-	<tag>tube</tag>
-	<tag>bigben</tag>
-	<tag>uk</tag>
-</tags>
-
-*/
+			'responseClass' => 'Intahwebz\\FlickrGuzzle\\DTO\\TagList',
 			'parameters' => array(
 				'tag'    => array(
 					'location' => 'query',

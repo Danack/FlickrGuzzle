@@ -387,6 +387,11 @@ class View {
 				echo "&nbsp;";
 				echo $tag->count;
 			}
+
+			echo "&nbsp;";
+			$url = "/index.php?function=getRelatedTags&tagText=".$tag->text;
+			echo "<a href='$url'>Get related</a>";
+
 			echo "<br/>";
 		}
 

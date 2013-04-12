@@ -56,6 +56,8 @@ class Flickr{
 			'Get user photos URL' => 'getUserPhotos',
 
 			'Get user tags'		=> 'getUserTags',
+			'Get user raw tags'		=> 'getUserRawTags',
+
 			'Get user popular tags'		=> 'getUserPopularTags',
 
 			'Get user most frequent tags'		=> 'getUserMostFrequentTags',
@@ -521,6 +523,36 @@ class Flickr{
 		$this->view->setTemplate("flickr/tagList");
 	}
 
+
+
+	function getRelatedTags($tag) {
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
+		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
+
+		$params = array(
+			'tag' => $tag
+		);
+		$command = $flickrGuzzleClient->getCommand('flickr.tags.getRelated', $params);
+		$tagList = $command->execute();
+
+		$this->view->assign('tagList', $tagList);
+		$this->view->setTemplate("flickr/tagList");
+	}
+
+
+	function getUserRawTags() {
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
+		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
+
+		$params = array(
+			//'user_id'
+		);
+		$command = $flickrGuzzleClient->getCommand('flickr.tags.getListUserRaw', $params);
+		$tagList = $command->execute();
+
+		$this->view->assign('tagList', $tagList);
+		$this->view->setTemplate("flickr/tagList");
+	}
 
 
 	function getUserTags() {

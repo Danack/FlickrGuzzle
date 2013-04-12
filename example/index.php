@@ -66,6 +66,12 @@ try{
 			break;
 		}
 
+		case 'getRelatedTags': {
+			$tagText = getVariable('tagText', false);
+			$flickr->getRelatedTags($tagText);
+			break;
+		}
+
 		case 'noteAdd': {
 			$photoID = getVariable('photoID', false);
 			$noteText = getVariable('noteText', false);
