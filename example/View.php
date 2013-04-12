@@ -22,11 +22,11 @@ class View {
 
 	function render(){
 
+		echo "<h1>FlickrGuzzle</h1>";
+
 		foreach ($this->statusMessageArray as $statusMessage) {
 			echo "$statusMessage <br/>";
 		}
-
-		echo "<h1>FlickrGuzzle</h1>";
 
 		$renderFunction = str_replace('flickr/', '', $this->template);
 
@@ -242,6 +242,18 @@ class View {
 		$photoID = $this->variables['photoID'];
 		$photoInfo = $this->variables['photoInfo'];
 
+		if (array_key_exists('tagList', $this->variables) == true){
+			$tagList = $this->variables['tagList'];
+
+			//var_dump($tagList->tags);
+
+			echo "Tags are:<br/>";
+			foreach ($tagList->tags as $tag) {
+				echo $tag->text."<br/>";
+			}
+		}
+
+
 		echo "<table><tr><td>";
 
 		$url = "/index.php?function=photo&photoID=".$photoID;
@@ -280,6 +292,7 @@ class View {
 	function displayPhotoButtons($photoID){
 		$this->displayRotateButton($photoID);
 		$this->displayNoteAddButton($photoID);
+		$this->displayGetTagsButton($photoID);
 	}
 
 	function	displayRotateButton($photoID){
@@ -314,6 +327,17 @@ class View {
 		echo "</div>";
 	}
 
+
+	function displayGetTagsButton($photoID){
+		echo "<div class='bordered'>";
+
+		$url = "/index.php?function=getPhotoTags&photoID=".$photoID;
+
+		echo "<a href='$url'>Get tags for photo</a>";
+		echo "</div>";
+	}
+
+
 	function lookupUser(){
 		echo "Probably hard coded to Danack<br/>&nbsp;<br/>";
 
@@ -343,6 +367,25 @@ class View {
 		$this->renderFooter();
 	}
 
+	function	urlInfo(){
+		$urlInfo = $this->variables['urlInfo'];
+		echo "NSID: ". $urlInfo->nsid."<br/>";
+		echo "URL: ".$urlInfo->url."<br/>";
+		$this->renderFooter();
+	}
+
+
+	function	tagList(){
+		$tagList = $this->variables['tagList'];
+
+		echo "<h2>Tag list</h2>";
+
+		foreach ($tagList->tags as $tag) {
+			echo "".$tag->text."<br/>";
+		}
+
+		$this->renderFooter();
+	}
 
 }
 

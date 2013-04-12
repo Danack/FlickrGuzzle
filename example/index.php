@@ -44,7 +44,6 @@ try{
 
 		case 'photo' :{
 			$photoID = getVariable('photoID', false);
-
 			if ($photoID) {
 				$flickr->photo($photoID);
 			}
@@ -58,6 +57,12 @@ try{
 			$photoID = getVariable('photoID', false);
 			$degrees = getVariable('degrees', false);
 			$flickr->rotate($photoID, $degrees);
+			break;
+		}
+
+		case 'getPhotoTags': {
+			$photoID = getVariable('photoID', false);
+			$flickr->getPhotoTags($photoID);
 			break;
 		}
 

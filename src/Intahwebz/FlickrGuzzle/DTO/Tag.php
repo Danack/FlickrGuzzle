@@ -10,11 +10,11 @@ class Tag {
 	use DataMapper;
 
 	static protected $dataMap = array(
-		['tagID', 		'id'],
-		['authorID',	'author'],
-		['raw',			'raw'],
+		['tagID', 		'id', 'optional' => true],
+		['authorID',	'author', 'optional' => true],
+		['raw',			'raw', 'optional' => true],
 		['text',		'_content'],
-		['machineTag',	'machine_tag']
+		['machineTag',	'machine_tag', 'optional' => true]
 	);
 
 	var $tagID;

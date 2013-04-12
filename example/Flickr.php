@@ -51,11 +51,18 @@ class Flickr{
 			'Lookup user' => 'lookupUser',
 			'Lookup group' => 'lookupGroup',
 
+			'Get Group URL' => 'getGroup',
+			'Get user profile URL' => 'getUserProfile',
+			'Get user photos URL' => 'getUserPhotos',
+
+			'Get user tags'		=> 'getUserTags',
+
 			'Logout'		=> 'logout',
 		);
 
 		$this->view->assign('routes', $routes);
 	}
+
 
 
 
@@ -238,6 +245,7 @@ class Flickr{
 
 			try{
 				$params  = array(
+					//'oauth_token' => $oauthAccessToken->oauthToken
 				);
 
 				$command = $flickrGuzzleClient->getCommand('flickr.auth.oauth.checkToken', $params);
@@ -375,6 +383,25 @@ class Flickr{
 		$this->photo($photoID);
 	}
 
+
+	function getPhotoTags($photoID) {
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
+		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
+
+		$params = array(
+			'photo_id'	=> $photoID,
+		);
+
+		$command = $flickrGuzzleClient->getCommand('flickr.tags.getListPhoto', $params);
+		$tagList = $command->execute();
+
+		$this->view->assign('tagList', $tagList);
+
+		$this->photo($photoID);
+	}
+
+
+
 	function addNote($photoID, $noteText) {
 		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
 		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
@@ -443,6 +470,57 @@ class Flickr{
 		$lookupGroup = $flickrGuzzleClient->getCommand('flickr.urls.lookupGroup', $params)->execute();
 		$this->view->assign('lookupGroup', $lookupGroup);
 		$this->view->setTemplate("flickr/lookupGroup");
+	}
+
+	function getUserTags() {
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
+		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
+
+		$params = array(
+			//'user_id'
+		);
+		$command = $flickrGuzzleClient->getCommand('flickr.tags.getListUser', $params);
+		$tagList = $command->execute();
+
+		$this->view->assign('tagList', $tagList);
+		$this->view->setTemplate("flickr/tagList");
+	}
+
+	function	getUserProfile(){
+		$params = array(
+			'user_id' => '46085186@N02'
+		);
+		$flickrGuzzleClient = FlickrGuzzleClient::factory();
+		$urlInfo = $flickrGuzzleClient->getCommand('flickr.urls.getUserProfile', $params)->execute();
+		$this->view->addStatusMessage("User profile is at:");
+		$this->view->assign('urlInfo', $urlInfo);
+		$this->view->setTemplate("flickr/urlInfo");
+	}
+
+	function	getUserPhotos(){
+		$params = array(
+			'user_id' => '46085186@N02'
+		);
+
+		$flickrGuzzleClient = FlickrGuzzleClient::factory();
+		$urlInfo = $flickrGuzzleClient->getCommand('flickr.urls.getUserPhotos', $params)->execute();
+		$this->view->addStatusMessage("User photos are at:");
+		$this->view->assign('urlInfo', $urlInfo);
+		$this->view->setTemplate("flickr/urlInfo");
+	}
+
+	function	getGroup(){
+		$params = array(
+			'group_id' => '64975644@N00'//Group name Rainbow Lorikeets
+		);
+
+		$flickrGuzzleClient = FlickrGuzzleClient::factory();
+		$urlInfo = $flickrGuzzleClient->getCommand('flickr.urls.getGroup', $params)->execute();
+
+		$this->view->addStatusMessage("Group info is:");
+
+		$this->view->assign('urlInfo', $urlInfo);
+		$this->view->setTemplate("flickr/urlInfo");
 	}
 
 

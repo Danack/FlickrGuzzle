@@ -87,6 +87,9 @@ class FlickrGuzzleClient extends Client{
 	 * @param OperationCommand $command
 	 */
 	public function createObject($className, AbstractCommand $command){
+
+		$className = $command->getOperation()->getResponseClass();
+
 		$data = $command->getRequest()->getResponse()->getBody(TRUE);
 
 		$xmlResponses = array(
@@ -131,8 +134,8 @@ class FlickrGuzzleClient extends Client{
 			'Intahwebz\\FlickrGuzzle\\DTO\\LookupUser' => 'user',
 			'Intahwebz\\FlickrGuzzle\\DTO\\LookupGroup' => 'group',
 			'Intahwebz\\FlickrGuzzle\\DTO\\LookupGallery' => 'gallery',
-
-
+			"Intahwebz\\FlickrGuzzle\\DTO\\URLInfo" => null,
+			'Intahwebz\\FlickrGuzzle\\DTO\\TagList' => array('photo', 'who'),
 		);
 
 		if (array_key_exists($className, $aliasedResponses) == TRUE) {
@@ -146,14 +149,25 @@ class FlickrGuzzleClient extends Client{
 			}
 
 			$alias = $aliasedResponses[$className];
+
 			if ($alias != NULL) {
-				$aliasedData = $dataJson[$alias];
+				if (is_array($alias) == true){
+					foreach ($alias as $aliasElement) {
+						if (array_key_exists($aliasElement, $dataJson) ){
+							$aliasedData = $dataJson[$aliasElement];
+							break;
+						}
+					}
+				}
+				else{
+					$aliasedData = $dataJson[$alias];
+				}
 			}
 			else{
 				$aliasedData = $dataJson;
 			}
 
-		//	var_dump($aliasedData);
+			//var_dump($aliasedData);
 
 			$object = $className::createFromData($aliasedData);
 
@@ -161,7 +175,6 @@ class FlickrGuzzleClient extends Client{
 
 				//TODO - this is for development only.
 				//var_dump($dataJson);
-
 				throw new FlickrGuzzleException("Failed to create object $className - or possibly just failed to return the object from the createFromData function.");
 			}
 
@@ -186,11 +199,8 @@ class FlickrGuzzleClient extends Client{
 
 		$knownErrorCodes = array(
 			1 => 'Required arguments missing',
-
 			//1: Photo not found
-
 			2 => 'Maximum number of tags reached',
-
 			96 => 'Invalid signature',
 			97 => 'Missing signature',
 			98 => 'Invalid auth token.',

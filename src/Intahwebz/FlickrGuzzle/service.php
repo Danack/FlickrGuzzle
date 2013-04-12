@@ -194,13 +194,6 @@ return array (
 			'summary' => 'Returns the credentials attached to an OAuth authentication token.',
 			'needsSigning' => true,
 			'responseClass' => 'Intahwebz\\FlickrGuzzle\\DTO\\OauthCheck',
-			/* Example
-<oauth>
-    <token>72157627611980735-09e87c3024f733da</token>
-    <perms>write</perms>
-    <user nsid="1121451801@N07" username="jamalf" fullname="Jamal F"/>
-</oauth>
-*/
 			'parameters' => array(
 				'oauth_token'    => array(
 					'location' => 'query',
@@ -6850,17 +6843,8 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 		"flickr.tags.getListPhoto" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get the tag list for a given photo.',
-			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
-			/* Example
-<photo id="2619">
-	<tags>
-		<tag id="156" author="12037949754@N01"
-			authorname="Bees" raw="tag 1">tag1</tag> 
-		<tag id="157" author="12037949754@N01"
-			authorname="Bees" raw="tag 2">tag2</tag> 
-	</tags>
-</photo>
-*/
+			'responseClass' => 'Intahwebz\\FlickrGuzzle\\DTO\\TagList',
+
 			'parameters' => array(
 				'photo_id'    => array(
 					'location' => 'query',
@@ -6878,18 +6862,7 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 		"flickr.tags.getListUser" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get the tag list for a given user (or the currently logged in user).',
-			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
-			/* Example
-<who id="12037949754@N01">
-	<tags>
-		<tag>gull</tag> 
-		<tag>tag1</tag> 
-		<tag>tag2</tag> 
-		<tag>tags</tag> 
-		<tag>test</tag> 
-	</tags>
-</who>
-*/
+			'responseClass' => 'Intahwebz\\FlickrGuzzle\\DTO\\TagList',
 			'parameters' => array(
 				'user_id'    => array(
 					'location' => 'query',
@@ -7080,10 +7053,7 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 		"flickr.urls.getGroup" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns the url to a group\'s page.',
-			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
-			/* Example
-<group nsid="48508120860@N01" url="http://www.flickr.com/groups/test1/" /> 
-*/
+			'responseClass' => 'Intahwebz\\FlickrGuzzle\\DTO\\URLInfo',
 			'parameters' => array(
 				'group_id'    => array(
 					'location' => 'query',
@@ -7097,14 +7067,13 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 			),
 		),
 
+
+
 // 202
 		"flickr.urls.getUserPhotos" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns the url to a user\'s photos.',
-			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
-			/* Example
-<user nsid="12037949754@N01" url="http://www.flickr.com/photos/bees/" />
-*/
+			'responseClass' => 'Intahwebz\\FlickrGuzzle\\DTO\\URLInfo',
 			'parameters' => array(
 				'user_id'    => array(
 					'location' => 'query',
@@ -7123,10 +7092,7 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 		"flickr.urls.getUserProfile" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns the url to a user\'s profile.',
-			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
-			/* Example
-<user nsid="12037949754@N01" url="http://www.flickr.com/people/bees/" />
-*/
+			'responseClass' => 'Intahwebz\\FlickrGuzzle\\DTO\\URLInfo',
 			'parameters' => array(
 				'user_id'    => array(
 					'location' => 'query',
