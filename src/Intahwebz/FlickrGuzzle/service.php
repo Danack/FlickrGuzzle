@@ -6926,17 +6926,7 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns a list of most frequently used tags for a user.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
-			/* Example
-<rsp stat="ok">
-<who id="30135021@N05">
-	<tags>
-		<tag count="1">blah</tag>
-		<tag count="5">publicdomain</tag>
-	</tags>
-</who>
-</rsp>
-*/
+			'responseClass' => 'Intahwebz\\FlickrGuzzle\\DTO\\TagList',
 			'parameters' => array(
 				'method'    => array(
 					'location' => 'query',

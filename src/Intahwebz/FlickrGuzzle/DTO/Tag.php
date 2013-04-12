@@ -14,7 +14,9 @@ class Tag {
 		['authorID',	'author', 'optional' => true],
 		['raw',			'raw', 'optional' => true],
 		['text',		'_content'],
-		['machineTag',	'machine_tag', 'optional' => true]
+		['machineTag',	'machine_tag', 'optional' => true],
+
+		['count', 'count', 'optional' => true],
 	);
 
 	var $tagID;
@@ -22,4 +24,6 @@ class Tag {
 	var $raw;
 	var $text;
 	var $machineTag;
+
+	var $count = null;
 }

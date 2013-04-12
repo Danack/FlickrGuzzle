@@ -381,7 +381,13 @@ class View {
 		echo "<h2>Tag list</h2>";
 
 		foreach ($tagList->tags as $tag) {
-			echo "".$tag->text."<br/>";
+			echo "".$tag->text;
+
+			if ($tag->count != null) {
+				echo "&nbsp;";
+				echo $tag->count;
+			}
+			echo "<br/>";
 		}
 
 		$this->renderFooter();

@@ -58,7 +58,7 @@ class Flickr{
 			'Get user tags'		=> 'getUserTags',
 			'Get user popular tags'		=> 'getUserPopularTags',
 
-
+			'Get user most frequent tags'		=> 'getUserMostFrequentTags',
 
 			'Get hotlist tags' => 'getHotListTags',
 
@@ -492,6 +492,20 @@ class Flickr{
 	}
 
 
+
+	function getUserMostFrequentTags() {
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
+		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
+
+		$params = array(
+			//'user_id'
+		);
+		$command = $flickrGuzzleClient->getCommand('flickr.tags.getMostFrequentlyUsed', $params);
+		$tagList = $command->execute();
+
+		$this->view->assign('tagList', $tagList);
+		$this->view->setTemplate("flickr/tagList");
+	}
 
 	function getUserPopularTags() {
 		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
