@@ -89,7 +89,6 @@ class FlickrGuzzleClient extends Client{
 	public function createObject($className, AbstractCommand $command){
 
 		$className = $command->getOperation()->getResponseClass();
-
 		$data = $command->getRequest()->getResponse()->getBody(TRUE);
 
 		$xmlResponses = array(
