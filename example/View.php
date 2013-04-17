@@ -81,6 +81,16 @@ class View {
 			echo $key;
 			echo "</a>&nbsp;";
 		}
+
+		echo "<hr/>";
+		echo "Authed methods:<br/>";
+
+		foreach($this->variables['authedRoutes'] as $key => $value) {
+			echo "<a href='/index.php?function=$value'>";
+			echo $key;
+			echo "</a>&nbsp;";
+		}
+
 	}
 
 	function	cameraBrands(){
@@ -430,6 +440,42 @@ class View {
 		$this->renderFooter();
 	}
 
+	function	accountStat() {
+		$accountStat = $this->variables['accountStat'];
+		var_dump($accountStat);
+		$this->renderFooter();
+	}
+
+	function	placeList() {
+		$placeList = $this->variables['placeList'];
+
+		echo "<table>";
+			echo "<thead>";
+				echo "<tr><td>";
+					echo "Lat.";
+				echo "</td><td>";
+					echo "Long.";
+				echo "</td><td>";
+					echo "Name";
+				echo "</td></tr>";
+			echo "</thead>";
+			echo "<tbody>";
+		foreach ($placeList->places as $place) {
+
+			echo "<tr><td>";
+				echo $place->latitude;
+			echo "</td><td>";
+			echo $place->longitude;
+			echo "</td><td>";
+				echo $place->name;
+			echo "</td></tr>";
+		}
+
+		echo "</tbody>";
+		echo "</table>";
+
+		$this->renderFooter();
+	}
 }
 
 

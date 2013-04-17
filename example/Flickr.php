@@ -52,8 +52,7 @@ class Flickr{
 			'Find user by email' => 'findUserByEmail',
 			'Find user by username' => 'findUserByUsername',
 
-
-
+			'Find place' => 'findPlace',
 
 			'Lookup gallery by URL' => 'lookupGalleryByURL',
 			'Lookup user by URL' => 'lookupUserbyURL',
@@ -62,12 +61,9 @@ class Flickr{
 			'Get Group URL' => 'getGroup',
 			'Get user profile URL' => 'getUserProfile',
 			'Get user photos URL' => 'getUserPhotos',
-
 			'Get user tags'		=> 'getUserTags',
 			'Get user raw tags'		=> 'getUserRawTags',
-
 			'Get user popular tags'		=> 'getUserPopularTags',
-
 			'Get user most frequent tags'		=> 'getUserMostFrequentTags',
 
 			'Get hotlist tags' => 'getHotListTags',
@@ -75,9 +71,44 @@ class Flickr{
 			'Logout'		=> 'logout',
 		);
 
+		$authedRoutes = array(
+			'Get popular photos' => 'getPopularPhotos',
+			'Total views' => 'totalViews',
+
+		);
+
 		$this->view->assign('routes', $routes);
+		$this->view->assign('authedRoutes', $authedRoutes);
+
 	}
 
+	function findPlace() {
+		$params = array(
+			'query' => 'London'
+		);
+
+		$flickrGuzzleClient = FlickrGuzzleClient::factory();
+		$placeList = $flickrGuzzleClient->getCommand("flickr.places.find", $params)->execute();
+		$this->view->assign('placeList', $placeList);
+		$this->view->setTemplate("flickr/placeList");
+	}
+
+	function getPopularPhotos() {
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
+		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
+		$photoList = $flickrGuzzleClient->getCommand('flickr.stats.getPopularPhotos')->execute();
+		$this->view->assign('photoList', $photoList);
+		$this->view->setTemplate("flickr/photoList");
+	}
+
+
+	function totalViews() {
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
+		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
+		$accountStat = $flickrGuzzleClient->getCommand("flickr.stats.getTotalViews")->execute();
+		$this->view->assign('accountStat', $accountStat);
+		$this->view->setTemplate("flickr/accountStat");
+	}
 
 
 	function findUserByUsername() {

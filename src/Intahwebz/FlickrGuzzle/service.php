@@ -5069,28 +5069,13 @@ Before users may assign location data to a photo they must define who, by defaul
 			),
 		),
 
+
 // 148
 		"flickr.places.find" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Return a list of place IDs for a query string.<br /><br />
 The flickr.places.find method is <b>not</b> a geocoder. It will round <q>up</q> to the nearest place type to which place IDs apply. For example, if you pass it a street level address it will return the city that contains the address rather than the street, or building, itself.',
-			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
-			/* Example
-<places query="Alabama" total="3">
-   <place place_id="VrrjuESbApjeFS4." woeid="2347559"
-               latitude="32.614" longitude="-86.680"
-               place_url="/United+States/Alabama"
-               place_type="region">Alabama, Alabama, United States</place>
-   <place place_id="cGHuc0mbApmzEHoP" woeid="2352520"
-               latitude="43.096" longitude="-78.389"
-               place_url="/United+States/New+York/Alabama"
-               place_type="locality">Alabama, New York, United States</place>
-   <place place_id="o4yVPEqYBJvFMP8Q" woeid="1579389"
-               latitude="-26.866" longitude="26.583"
-               place_url="/South+Africa/North+West/Alabama"
-               place_type="locality">Alabama, North West, South Africa</place>
-</places>
-*/
+			'responseClass' => 'Intahwebz\\FlickrGuzzle\\DTO\\PlaceList',
 			'parameters' => array(
 				'query'    => array(
 					'location' => 'query',
@@ -6312,32 +6297,23 @@ Possible values are:
 		),
 
 // 177
-		"flickr.stats.getCSVFiles" => array(
-			'extends' => 'defaultGetOperation',
-			'summary' => 'Returns a list of URLs for text files containing <i>all</i> your stats data (from November 26th 2007 onwards) for the currently auth\'d user.
-
-<b>Please note, these files will only be available until June 1, 2010 Noon PDT.</b> 
-For more information <a href="/help/stats/#1369409">please check out this FAQ</a>, or just <a href="/photos/me/stats/downloads/">go download your files</a>.',
-			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
-			/* Example
-<stats> 
-   <csvfiles> 
-      <csv href="http://farm4.static.flickr.com/3496/stats/72157623902771865_faaa.csv" type="daily" date="2010-04-01" /> 
-      <csv href="http://farm4.static.flickr.com/3376/stats/72157624027152370_fbbb.csv" type="monthly" date="2010-04-01" /> 
-      <csv href="http://farm5.static.flickr.com/4006/stats/72157623627769689_fccc.csv" type="daily" date="2010-03-01" /> 
-      ....
-    </csvfiles> 
-</stats>
-*/
-			'parameters' => array(
-				'method'    => array(
-					'location' => 'query',
-					'description' => 'Which flickr call is being made.',
-					'default' => 'flickr.stats.getCSVFiles',
-				),
-			),
-		),
+//		"flickr.stats.getCSVFiles" => array(
+// 	Not implemented -  "Please note, these files will only be available until June 1, 2010 Noon PDT."
+//			'extends' => 'defaultGetOperation',
+//			'summary' => 'Returns a list of URLs for text files containing <i>all</i> your stats data (from November 26th 2007 onwards) for the currently auth\'d user.
+//
+//<b>Please note, these files will only be available until June 1, 2010 Noon PDT.</b>
+//For more information <a href="/help/stats/#1369409">please check out this FAQ</a>, or just <a href="/photos/me/stats/downloads/">go download your files</a>.',
+//			'needsSigning' => true,
+//			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
+//			'parameters' => array(
+//				'method'    => array(
+//					'location' => 'query',
+//					'description' => 'Which flickr call is being made.',
+//					'default' => 'flickr.stats.getCSVFiles',
+//				),
+//			),
+//		),
 
 // 178
 		"flickr.stats.getPhotoDomains" => array(
@@ -6669,21 +6645,7 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 			'extends' => 'defaultGetOperation',
 			'summary' => 'List the photos with the most views, comments or favorites',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
-			/* Example
-<photos page="2" pages="89" perpage="10" total="881">
-	<photo id="2636" owner="47058503995@N01" 
-		secret="a123456" server="2" title="test_04"
-		ispublic="1" isfriend="0" isfamily="0">
-		<stats views="941" comments="18" favorites="2"/>
-	</photo>
-	<photo id="2635" owner="47058503995@N01"
-		secret="b123456" server="2" title="test_03"
-		ispublic="0" isfriend="1" isfamily="1">
-		<stats views="141" comments="1" favorites="2"/>
-	</photo>
-</photos>
-*/
+			'responseClass' => 'Intahwebz\\FlickrGuzzle\\DTO\\PhotoList',
 			'parameters' => array(
 				'date'    => array(
 					'location' => 'query',
@@ -6718,16 +6680,7 @@ For more information <a href="/help/stats/#1369409">please check out this FAQ</a
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get the overall view counts for an account',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
-			/* Example
-<stats>
-	<total views="469" />
-	<photos views="386" />
-	<photostream views="72" />
-	<sets views="11" />
-	<collections views="0" />
-</stats>
-*/
+			'responseClass' => 'Intahwebz\\FlickrGuzzle\\DTO\\AccountStat',
 			'parameters' => array(
 				'date'    => array(
 					'location' => 'query',

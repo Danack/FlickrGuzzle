@@ -149,12 +149,15 @@ class FlickrGuzzleClient extends Client{
 			'Intahwebz\\FlickrGuzzle\\DTO\\LookupGallery' => 'gallery',
 			"Intahwebz\\FlickrGuzzle\\DTO\\URLInfo" => NULL,
 			'Intahwebz\\FlickrGuzzle\\DTO\\TagList' => array('photo', 'who', 'hottags', NULL),
+			"Intahwebz\\FlickrGuzzle\\DTO\\PlaceList" => 'places',
+			//Intahwebz\FlickrGuzzle\DTO\AccountStat
 		);
 
 		if (array_key_exists($className, $aliasedResponses) == TRUE) {
 			$dataJson = json_decode($data, TRUE);
 
 //			var_dump($dataJson);
+//			exit(0);
 
 			if (array_key_exists('stat', $dataJson) == TRUE &&
 				$dataJson['stat'] != 'ok') {
@@ -194,13 +197,15 @@ class FlickrGuzzleClient extends Client{
 			if ($object == FALSE) {
 
 				//TODO - this is for development only.
-				//var_dump($dataJson);
+				var_dump($data);
+
 				throw new FlickrGuzzleException("Failed to create object $className - or possibly just failed to return the object from the createFromData function.");
 			}
 
 			return $object;
 		}
 
+		var_dump($data);
 		throw new FlickrGuzzleException("Class-name [".$className."] has no instructions on how to create it in createObject.");
 	}
 
@@ -220,6 +225,7 @@ class FlickrGuzzleClient extends Client{
 		$knownErrorCodes = array(
 			1 => 'Required arguments missing',
 			//1: Photo not found
+			//1, "message":"User does not have stats"
 			2 => 'Maximum number of tags reached',
 			96 => 'Invalid signature',
 			97 => 'Missing signature',
