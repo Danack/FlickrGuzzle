@@ -143,6 +143,27 @@ class View {
 		$this->renderFooter();
 	}
 
+
+	function methodList(){
+		$methodList = $this->variables['methodList'];
+
+		foreach ($methodList->methods as $method) {
+			echo "<a href='/index.php?function=methodInfo&method=".$method."'>";
+			echo $method;
+			echo "</a>";
+			echo "<br/>";
+		}
+
+		$this->renderFooter();
+	}
+
+	function methodInfo(){
+		$methodInfo = $this->variables['methodInfo'];
+		var_dump($methodInfo);
+		$this->renderFooter();
+	}
+
+
 	function	apiProgress(){
 
 		$apiProgress = $this->variables['apiProgresss'];
@@ -164,6 +185,19 @@ class View {
 			echo "<br/>";
 		}
 
+		echo "<hr/>";
+
+		echo "<h2>Functions with response classes</h2>";
+
+
+		echo "Copy this to phpstorm.meta.php:<br/>";
+		echo "<br/><br/>";
+
+		$functionsWithResponseClasses = $apiProgress['functionsWithResponseClasses'];
+
+		foreach ($functionsWithResponseClasses as $key => $value) {
+			echo "'".$key."' instanceof ".$value.",<br/>";
+		}
 
 		$this->renderFooter();
 	}
@@ -339,8 +373,6 @@ class View {
 
 
 	function lookupUser(){
-		echo "Probably hard coded to Danack<br/>&nbsp;<br/>";
-
 		$lookupUser = $this->variables['lookupUser'];
 		echo "UserID: ".$lookupUser->userID."<br/>";
   		echo "Username: ".$lookupUser->username."<br/>";

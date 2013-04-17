@@ -14,6 +14,20 @@ use Guzzle\Service\Command\AbstractCommand;
 
 class FlickrGuzzleClient extends Client{
 
+
+	//public static function factoryWithCommand($command, $config = array())
+
+	/**
+	 * @param $command
+	 * @return mixed
+	 */
+	public static function factoryWithCommand($command)
+	{
+		$config = array();
+		$client = self::factory($config);
+		return $client->getCommandAndExecute($command);
+	}
+
 	/**
 	 * Factory method to create a new FlickrAPIClient
 	 *
@@ -86,7 +100,7 @@ class FlickrGuzzleClient extends Client{
 	 * @param $className
 	 * @param OperationCommand $command
 	 */
-	public function createObject($className, AbstractCommand $command){
+	public function createObject(AbstractCommand $command){
 
 		$className = $command->getOperation()->getResponseClass();
 		$data = $command->getRequest()->getResponse()->getBody(TRUE);
@@ -120,21 +134,21 @@ class FlickrGuzzleClient extends Client{
 			'Intahwebz\\FlickrGuzzle\\DTO\\CameraBrandList' => 'brands',
 			"Intahwebz\\FlickrGuzzle\\DTO\\CameraDetailList" => 'cameras',
 			"Intahwebz\\FlickrGuzzle\\DTO\\PhotoList" => 'photos',
-			"Intahwebz\\FlickrGuzzle\\DTO\\Photo" => null,
+			"Intahwebz\\FlickrGuzzle\\DTO\\Photo" => NULL,
 			"Intahwebz\\FlickrGuzzle\\DTO\\PhotoInfo" => 'photo',
 			"Intahwebz\\FlickrGuzzle\\DTO\\OauthCheck" => 'oauth',
-			"Intahwebz\\FlickrGuzzle\\DTO\\MethodInfo" => null,
+			"Intahwebz\\FlickrGuzzle\\DTO\\MethodInfo" => NULL,
 			"Intahwebz\\FlickrGuzzle\\DTO\\MethodList" => 'methods',
 			"Intahwebz\\FlickrGuzzle\\DTO\\InstitutionList" => 'institutions',
-			"Intahwebz\\FlickrGuzzle\\DTO\\LicenseList" => null,
+			"Intahwebz\\FlickrGuzzle\\DTO\\LicenseList" => NULL,
 			"Intahwebz\\FlickrGuzzle\\DTO\\ActivityInfo" => 'items',
 			"Intahwebz\\FlickrGuzzle\\DTO\\PhotoInfoTransform" => 'photoid',
 			"Intahwebz\\FlickrGuzzle\\DTO\\NoteID" => 'note',
 			'Intahwebz\\FlickrGuzzle\\DTO\\LookupUser' => 'user',
 			'Intahwebz\\FlickrGuzzle\\DTO\\LookupGroup' => 'group',
 			'Intahwebz\\FlickrGuzzle\\DTO\\LookupGallery' => 'gallery',
-			"Intahwebz\\FlickrGuzzle\\DTO\\URLInfo" => null,
-			'Intahwebz\\FlickrGuzzle\\DTO\\TagList' => array('photo', 'who', 'hottags', null),
+			"Intahwebz\\FlickrGuzzle\\DTO\\URLInfo" => NULL,
+			'Intahwebz\\FlickrGuzzle\\DTO\\TagList' => array('photo', 'who', 'hottags', NULL),
 		);
 
 		if (array_key_exists($className, $aliasedResponses) == TRUE) {
@@ -149,14 +163,14 @@ class FlickrGuzzleClient extends Client{
 
 			$alias = $aliasedResponses[$className];
 
-			if (is_array($alias) == false) {
+			if (is_array($alias) == FALSE) {
 				$alias = array($alias);
 			}
 
-			$aliasedData = false;
+			$aliasedData = FALSE;
 
 			foreach ($alias as $aliasElement) {
-				if ($aliasElement == null) {
+				if ($aliasElement == NULL) {
 					$aliasedData = $dataJson;
 				}
 				else{
@@ -167,7 +181,7 @@ class FlickrGuzzleClient extends Client{
 				}
 			}
 
-			if ($aliasedData == false) {
+			if ($aliasedData == FALSE) {
 				throw new FlickrGuzzleException("Failed to extract data from returned response. Please check the alias that is meant to point to the data.");
 			}
 
@@ -309,9 +323,11 @@ class FlickrGuzzleClient extends Client{
 		foreach($serviceDescription['operations'] as $operationName => $operation) {
 			if ($operationName != 'defaultGetOperation') {
 				$operationCount++;
-				if (array_key_exists('responseClass', $operation) == true) {
-					if ( $operation['responseClass'] != null) {
+				if (array_key_exists('responseClass', $operation) == TRUE) {
+					if ($operation['responseClass'] != NULL) {
 						$operationWithResponseClassCount++;
+
+						$functionsWithResponseClasses[$operationName] = $operation['responseClass'];
 					}
 					else{
 						$functionsLeftToImplement[] = $operationName;
@@ -323,12 +339,20 @@ class FlickrGuzzleClient extends Client{
 		$result = array(
 			'operationCount' => $operationCount,
 			'operationWithResponseClassCount' => $operationWithResponseClassCount,
-			'functionsLeftToImplement' => $functionsLeftToImplement
+			'functionsLeftToImplement' => $functionsLeftToImplement,
+			'functionsWithResponseClasses' => $functionsWithResponseClasses,
 		);
 
 		return $result;
 	}
 
+
+
+	public function getCommandAndExecute($name, array $args = array()) {
+		$command = $this->getCommand($name, $args);
+		$object = $command->execute();
+		return $object;
+	}
 
 }
 

@@ -157,12 +157,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Danack/intahwebz-utils.git",
-                "reference": "c99d89c4552137c9c81b30844e09919e12527759"
+                "reference": "29b46fd9c1ae26f6eb4b3519dc1b3cb64822eb51"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Danack/intahwebz-utils/zipball/c99d89c4552137c9c81b30844e09919e12527759",
-                "reference": "c99d89c4552137c9c81b30844e09919e12527759",
+                "url": "https://api.github.com/repos/Danack/intahwebz-utils/zipball/29b46fd9c1ae26f6eb4b3519dc1b3cb64822eb51",
+                "reference": "29b46fd9c1ae26f6eb4b3519dc1b3cb64822eb51",
                 "shasum": ""
             },
             "type": "library",
@@ -184,7 +184,7 @@
                 "intahwebz",
                 "library"
             ],
-            "time": "2013-04-11 14:23:10"
+            "time": "2013-04-13 13:49:07"
         }
     ],
     "aliases": [

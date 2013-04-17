@@ -2074,12 +2074,7 @@ More information about the pandas can be found on the <a href="http://code.flick
 		"flickr.people.findByEmail" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Return a user\'s NSID, given their email address',
-			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
-			/* Example
-<user nsid="12037949632@N01">
-	<username>Stewart</username> 
-</user>
-*/
+			'responseClass' => 'Intahwebz\\FlickrGuzzle\\DTO\\LookupUser',
 			'parameters' => array(
 				'find_email'    => array(
 					'location' => 'query',
@@ -2097,12 +2092,8 @@ More information about the pandas can be found on the <a href="http://code.flick
 		"flickr.people.findByUsername" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Return a user\'s NSID, given their username.',
-			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
-			/* Example
-<user nsid="12037949632@N01">
-	<username>Stewart</username> 
-</user>
-*/
+			'responseClass' => 'Intahwebz\\FlickrGuzzle\\DTO\\LookupUser',
+
 			'parameters' => array(
 				'username'    => array(
 					'location' => 'query',

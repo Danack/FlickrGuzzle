@@ -10,7 +10,6 @@ use Intahwebz\FlickrGuzzle\DTO\PhotoList;
 
 use Intahwebz\Utils\UserUploadedFile;
 
-
 define('FLICKR_IMAGES_PER_PAGE', 12);
 
 class Flickr{
@@ -39,6 +38,9 @@ class Flickr{
 			'Upload' => 'flickrUpload',
 			'Camera Brands' => 'flickrCameraBrands',
 			'Method List' => 'flickrMethodList',
+
+
+
 			//'Generate method info' => 'flickrMethodListGenerate',
 			'Institution List' => 'institutionList',
 			'License list' => 'licenseList',
@@ -47,9 +49,15 @@ class Flickr{
 			'User comments' => 'userComments',
 			'User photos' => 'userPhotos',
 
-			'Lookup gallery' => 'lookupGallery',
-			'Lookup user' => 'lookupUser',
-			'Lookup group' => 'lookupGroup',
+			'Find user by email' => 'findUserByEmail',
+			'Find user by username' => 'findUserByUsername',
+
+
+
+
+			'Lookup gallery by URL' => 'lookupGalleryByURL',
+			'Lookup user by URL' => 'lookupUserbyURL',
+			'Lookup group by URL' => 'lookupGroupByURL',
 
 			'Get Group URL' => 'getGroup',
 			'Get user profile URL' => 'getUserProfile',
@@ -72,11 +80,36 @@ class Flickr{
 
 
 
+	function findUserByUsername() {
+
+		$params = array(
+			'username' => 'Danack',
+		);
+
+		$flickrGuzzleClient = FlickrGuzzleClient::factory();
+		$lookupUser = $flickrGuzzleClient->getCommand('flickr.people.findByUsername', $params)->execute();
+		$this->view->assign('lookupUser', $lookupUser);
+		$this->view->setTemplate("flickr/lookupUser");
+	}
+
+	function findUserByEmail() {
+		$params = array(
+			'find_email' => 'Danack@basereality.com',
+		);
+
+		$flickrGuzzleClient = FlickrGuzzleClient::factory();
+		$lookupUser = $flickrGuzzleClient->getCommand('flickr.people.findByEmail', $params)->execute();
+		$this->view->assign('lookupUser', $lookupUser);
+		$this->view->setTemplate("flickr/lookupUser");
+	}
+
 
 	function	userComments(){
 		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
 		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
-		$activityInfo = $flickrGuzzleClient->getCommand('flickr.activity.userComments')->execute();
+		$activityInfo = $flickrGuzzleClient->getCommandAndExecute('flickr.activity.userComments');
+//		$activityInfo = FlickrGuzzleClient::factoryWithCommand('flickr.activity.userComments', $oauthAccessToken);
+		//$activityInfo = $flickrGuzzleClient->getCommand('flickr.activity.userComments')->execute();
 		$this->view->assign('activityInfo', $activityInfo);
 		$this->view->setTemplate("flickr/activityInfo");
 	}
@@ -108,16 +141,17 @@ class Flickr{
 		$this->view->setTemplate("flickr/licenseList");
 	}
 
+	//flickrMethodList
 
 
-	function	displayMethodList(){
+	function	flickrMethodList(){
 		$flickrGuzzleClient = FlickrGuzzleClient::factory();
-		$methodsList = $flickrGuzzleClient->getCommand('flickr.reflection.getMethods')->execute();
-		$this->view->assign('methodsList', $methodsList);
+		$methodList = $flickrGuzzleClient->getCommand('flickr.reflection.getMethods')->execute();
+		$this->view->assign('methodList', $methodList);
 		$this->view->setTemplate("flickr/methodList");
 	}
 
-	function displayMethodInfo($method){
+	function methodInfo($method){
 		$flickrGuzzleClient = FlickrGuzzleClient::factory();
 
 		$params = array(
@@ -446,7 +480,7 @@ class Flickr{
 		$this->photo($photoID);
 	}
 
-	function	lookupGallery(){
+	function	lookupGalleryByURL(){
 		$params = array(
 			'url' => 'http://www.flickr.com/photos/sfhipchick/galleries/72157629326823342/'
 		);
@@ -457,7 +491,7 @@ class Flickr{
 		$this->view->setTemplate("flickr/lookupGallery");
 	}
 
-	function	lookupUser(){
+	function	lookupUserbyURL(){
 		$params = array(
 			'url' => 'http://www.flickr.com/photos/danack/'
 		);
@@ -468,7 +502,7 @@ class Flickr{
 		$this->view->setTemplate("flickr/lookupUser");
 	}
 
-	function	lookupGroup(){
+	function	lookupGroupByURL(){
 		$params = array(
 			'url' => 'http://www.flickr.com/groups/rainbowlorikeets/'
 		);

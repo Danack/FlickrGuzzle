@@ -96,6 +96,13 @@ try{
 			break;
 		}
 
+
+		case 'methodInfo': {
+			$method = getVariable('method', false);
+			$flickr->methodInfo($method);
+			break;
+		}
+
 		case 'photoList':{
 			$page = getVariable('page', 1);
 			$flickr->photoList($page);
@@ -140,7 +147,7 @@ try{
 				break;
 			}
 			echo "Unknown function [".$function."]<br/>";
-			break;
+			return;
 		}
 	}
 
