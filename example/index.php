@@ -159,6 +159,12 @@ try{
 		}
 
 
+		case 'replacePhoto': {
+			$photoID = getVariable('photoID', false);
+			$flickr->replacePhoto($photoID);
+			break;
+		}
+
 
 
 		default: {

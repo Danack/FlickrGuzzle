@@ -337,6 +337,7 @@ class View {
 		$this->displayRotateButton($photoID);
 		$this->displayNoteAddButton($photoID);
 		$this->displayGetTagsButton($photoID);
+		$this->displayReplacePhotoButton($photoID);
 	}
 
 	function	displayRotateButton($photoID){
@@ -378,6 +379,26 @@ class View {
 		$url = "/index.php?function=getPhotoTags&photoID=".$photoID;
 
 		echo "<a href='$url'>Get tags for photo</a>";
+		echo "</div>";
+	}
+
+
+	function displayReplacePhotoButton($photoID){
+
+
+
+		echo "<div class='bordered'>";
+
+		echo "<form method='post' accept-charset='utf-8' action='/index.php' onsubmit='' class='inlineForm' name='contactForm' enctype='multipart/form-data'>";
+
+		echo "<input type='hidden' name='function' value='replacePhoto' />";
+		echo "<input type='hidden' name='photoID' value='".$photoID."' />";
+
+		echo "<input type='file' name='fileUpload'/><br/>";
+
+		$url = "/index.php?function=getPhotoTags&photoID=".$photoID;
+		echo "<input type='submit' name='submitButton' class='clickyButton' value='Replace photo'/>";
+		echo "</form>";
 		echo "</div>";
 	}
 

@@ -315,37 +315,38 @@ class Flickr{
 
 
 
-	function	upload(){
-		$userUploadedFile = UserUploadedFile::getUserUploadedFile('fileUpload');
-
-		$title = getVariable('title', false);
-		$description = getVariable('description', false);
-
-		if ($userUploadedFile != false) {
-			//echo "Hey there is a file to upload.";
-
-			$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
-			$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
-
-			$params = array(
-				'photo' => $userUploadedFile->tmpName,
-				'title' => $title,
-				'description' => $description,
-			);
-
-			$command = $flickrGuzzleClient->getCommand('UploadPhoto', $params);
-
-			/** @var $result FileUploadResponse */
-			$fileUploadResponse = $command->execute();
-
-			$this->view->addStatusMessage("Photo uploaded ".$fileUploadResponse->photoID);
-		}
-		else{
-			//echo "Nothing to upload.";
-		}
-
-		$this->view->setTemplate("flickr/upload");
-	}
+//
+//	function	upload(){
+//		$userUploadedFile = UserUploadedFile::getUserUploadedFile('fileUpload');
+//
+//		$title = getVariable('title', false);
+//		$description = getVariable('description', false);
+//
+//		if ($userUploadedFile != false) {
+//			//echo "Hey there is a file to upload.";
+//
+//			$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
+//			$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
+//
+//			$params = array(
+//				'photo' => $userUploadedFile->tmpName,
+//				'title' => $title,
+//				'description' => $description,
+//			);
+//
+//			$command = $flickrGuzzleClient->getCommand('UploadPhoto', $params);
+//
+//			/** @var $result FileUploadResponse */
+//			$fileUploadResponse = $command->execute();
+//
+//			$this->view->addStatusMessage("Photo uploaded ".$fileUploadResponse->photoID);
+//		}
+//		else{
+//			//echo "Nothing to upload.";
+//		}
+//
+//		$this->view->setTemplate("flickr/upload");
+//	}
 
 
 	function	photo($photoID){
@@ -500,6 +501,31 @@ class Flickr{
 		$this->view->setTemplate("flickr/apiProgress");
 	}
 
+	function replacePhoto($photoID){
+
+		$userUploadedFile = UserUploadedFile::getUserUploadedFile('fileUpload');
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
+		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
+
+		if ($userUploadedFile != false) {
+
+			$params = array(
+				'photo' => $userUploadedFile->tmpName,
+				'photo_id' => $photoID,
+			);
+
+			$command = $flickrGuzzleClient->getCommand('ReplacePhoto', $params);
+			$fileUploadResponse = $command->execute();
+
+			$url = "/index.php?function=photo&photoID=".$fileUploadResponse->photoID;
+			$message = "<a href='$url'>Photo replaced ".$fileUploadResponse->photoID."</a>";
+			$this->view->addStatusMessage($message);
+		}
+
+		$this->view->setTemplate("flickr/flickrUpload");
+	}
+
+
 	function	flickrUpload() {
 
 		$userUploadedFile = UserUploadedFile::getUserUploadedFile('fileUpload');
@@ -508,7 +534,6 @@ class Flickr{
 		$description = getVariable('description', false);
 
 		if ($userUploadedFile != false) {
-			//echo "Hey there is a file to upload.";
 
 			$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
 			$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
@@ -525,9 +550,7 @@ class Flickr{
 			$fileUploadResponse = $command->execute();
 
 			$url = "/index.php?function=photo&photoID=".$fileUploadResponse->photoID;
-
 			$message = "<a href='$url'>Photo uploaded ".$fileUploadResponse->photoID."</a>";
-
 			$this->view->addStatusMessage($message);
 		}
 		else{

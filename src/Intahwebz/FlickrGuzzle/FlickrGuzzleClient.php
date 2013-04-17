@@ -21,6 +21,24 @@ class FlickrGuzzleClient extends Client{
 	const PLACE_TYPE_COUNTRY = 12;
 	const PLACE_TYPE_CONTINENT = 29;
 
+	static public $knownErrorCodes = array(
+		1 => 'Required arguments missing',
+		//1: Photo not found
+		//1, "message":"User does not have stats"
+		2 => 'Maximum number of tags reached',
+		96 => 'Invalid signature',
+		97 => 'Missing signature',
+		98 => 'Invalid auth token.',
+		100 => 'Invalid API Key',
+		105 => 'Service currently unavailable',
+		111 => 'Format "xxx" not found',
+		112 => 'Method "xxx" not found',
+		114 => 'Invalid SOAP envelope',
+		115 => 'Invalid XML-RPC Method',
+		116 => 'Bad URL found',
+	);
+
+
 	/**
 	 * @param $command
 	 * @return mixed
@@ -114,13 +132,15 @@ class FlickrGuzzleClient extends Client{
 		);
 
 		if (in_array($className, $xmlResponses) == TRUE) {
-
 			//Wtf is this shit.
+			//oh - this function call always returns xml even if you request JSON.
 //				xml version="1.0" encoding="utf-8"
 //			<rsp stat="ok">
 //				<photoid>8636447595</photoid>
 //			</rsp>
 			$parsedResponse = $this->getResponseFromXML($data);
+
+			$this->checkErrorResponseFromXML($parsedResponse);
 			return $className::createFromData($parsedResponse);
 		}
 
@@ -162,11 +182,7 @@ class FlickrGuzzleClient extends Client{
 
 //			var_dump($dataJson);
 //			exit(0);
-
-			if (array_key_exists('stat', $dataJson) == TRUE &&
-				$dataJson['stat'] != 'ok') {
-				$this->processErrorResponse($dataJson);
-			}
+			$this->checkErrorResponseFromJSON($dataJson);
 
 			$alias = $aliasedResponses[$className];
 
@@ -192,8 +208,6 @@ class FlickrGuzzleClient extends Client{
 				throw new FlickrGuzzleException("Failed to extract data from returned response. Please check the alias that is meant to point to the data.");
 			}
 
-
-
 			//var_dump($aliasedData);
 
 			$object = $className::createFromData($aliasedData);
@@ -201,7 +215,7 @@ class FlickrGuzzleClient extends Client{
 			if ($object == FALSE) {
 
 				//TODO - this is for development only.
-				var_dump($data);
+//				var_dump($data);
 
 				throw new FlickrGuzzleException("Failed to create object $className - or possibly just failed to return the object from the createFromData function.");
 			}
@@ -213,46 +227,60 @@ class FlickrGuzzleClient extends Client{
 		throw new FlickrGuzzleException("Class-name [".$className."] has no instructions on how to create it in createObject.");
 	}
 
+	function	checkErrorResponseFromJSON($dataJson){
+		if (array_key_exists('stat', $dataJson) == TRUE &&
+			$dataJson['stat'] != 'ok') {
 
-	function	processErrorResponse($dataJson){
-		$errorCode = 0;
-		$flickrReason = "Not set.";
+			$errorCode = 0;
+			$flickrMessage = NULL;
+			if (array_key_exists('code', $dataJson)) {
+				$errorCode = $dataJson['code'];
+			}
 
-		if (array_key_exists('code', $dataJson)) {
-			$errorCode = $dataJson['code'];
+			if (array_key_exists('message', $dataJson)) {
+				$flickrMessage = $dataJson['message'];
+			}
+
+			$this->processErrorResponse($errorCode, $flickrMessage);
 		}
-
-		if (array_key_exists('message', $dataJson)) {
-			$flickrMessage = $dataJson['message'];
-		}
-
-		$knownErrorCodes = array(
-			1 => 'Required arguments missing',
-			//1: Photo not found
-			//1, "message":"User does not have stats"
-			2 => 'Maximum number of tags reached',
-			96 => 'Invalid signature',
-			97 => 'Missing signature',
-			98 => 'Invalid auth token.',
-			100 => 'Invalid API Key',
-			105 => 'Service currently unavailable',
-			111 => 'Format "xxx" not found',
-			112 => 'Method "xxx" not found',
-			114 => 'Invalid SOAP envelope',
-			115 => 'Invalid XML-RPC Method',
-			116 => 'Bad URL found',
-		);
-
-		$errorMeaning = "Unknown error code '$errorCode': '$flickrMessage' ";
-
-		if (array_key_exists($errorCode, $knownErrorCodes)) {
-			$errorMeaning = $knownErrorCodes[$errorCode];
-		}
-
-		throw new FlickrAPIException($errorCode, $flickrMessage, "Exception calling flickr API: ".$errorMeaning);
 	}
 
+	/**
+	 * @param $parsedResponse
+	 */
+	function checkErrorResponseFromXML($parsedResponse) {
+		if (array_key_exists('stat', $parsedResponse) == TRUE &&
+			$parsedResponse['stat'] != 'ok') {
 
+			$errorCode = 0;
+			$message = NULL;
+
+			if (isset($parsedResponse['err']['code']) == TRUE) {
+				$errorCode = $parsedResponse['err']['code'];
+			}
+
+			if (isset($parsedResponse['err']['msg']) == TRUE) {
+				$message = $parsedResponse['err']['msg'];
+			}
+
+			$this->processErrorResponse($errorCode, $message);
+		}
+	}
+
+	function	processErrorResponse($errorCode, $message = NULL){
+
+		if ($message == NULL) {
+			$message = 'No message set.';
+		}
+
+		$errorMeaning = "Unknown error code '$errorCode': '$message' ";
+
+		if (array_key_exists($errorCode, self::$knownErrorCodes)) {
+			$errorMeaning = self::$knownErrorCodes[$errorCode];
+		}
+
+		throw new FlickrAPIException($errorCode, $message, "Exception calling flickr API: ".$errorMeaning);
+	}
 
 	/**
 	 * Get the response structure from an XML response.

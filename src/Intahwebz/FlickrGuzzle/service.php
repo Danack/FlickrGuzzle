@@ -105,6 +105,36 @@ return array (
 		),
 
 
+
+		"ReplacePhoto" => array(
+			"httpMethod" => "POST",
+			'uri' => 'http://api.flickr.com/services/replace/',
+			"summary" => "Uploads a photo.",
+			"responseClass" => "Intahwebz\\FlickrGuzzle\\DTO\\FileUploadResponse",
+
+			"parameters" => array(
+				'format' => array(
+					"location" => "postField",
+					"description" => "",
+					'default' =>  'json',
+				),
+				'photo' => array(
+					"location" => "postFile",
+					"description" => "The file to upload",
+					'required' => true,
+				),
+				'photo_id' => array(
+					"location" => "postField",
+					"description" => "Which photo to replace.",
+					'required' => true,
+				),
+				'async' => array(
+					"location" => "postField",
+					"description" => "Whether to process the file asynchronously.",
+				),
+			),
+		),
+
 		//Every other method is made to just the base URL
 
 		'defaultGetOperation' => array(
