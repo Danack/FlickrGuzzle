@@ -206,7 +206,7 @@ class View {
 		$functionsWithResponseClasses = $apiProgress['functionsWithResponseClasses'];
 
 		foreach ($functionsWithResponseClasses as $key => $value) {
-			echo "'".$key."' instanceof ".$value.",<br/>";
+			echo "'".$key."' instanceof \\".$value.",<br/>";
 		}
 
 		$this->renderFooter();
@@ -451,13 +451,15 @@ class View {
 
 		echo "<table>";
 			echo "<thead>";
-				echo "<tr><td>";
+				echo "<tr><th>";
 					echo "Lat.";
-				echo "</td><td>";
+				echo "</th><th>";
 					echo "Long.";
-				echo "</td><td>";
+				echo "</th><th >"; //Covers the functions that need a woeID
 					echo "Name";
-				echo "</td></tr>";
+				echo "</th><th colspan='2'>";
+					echo "&nbsp;";
+				echo "</th></tr>";
 			echo "</thead>";
 			echo "<tbody>";
 		foreach ($placeList->places as $place) {
@@ -468,6 +470,26 @@ class View {
 			echo $place->longitude;
 			echo "</td><td>";
 				echo $place->name;
+			echo "</td><td>";
+				$url = "/index.php?function=findPlacesWithPhotosPublic&woeID=".$place->woeID;
+				echo "<a href='".$url."'>";
+				//echo $place->woeID;
+				echo "Find public photos";
+				echo "</a>";
+			echo "</td><td>";
+			$url = "/index.php?function=findPlacesForUser&woeID=".$place->woeID;
+			echo "<a href='".$url."'>";
+
+			echo "Find places for user";
+			echo "</a>";
+
+			echo "</td><td>";
+
+			$url = "/index.php?function=findPlacesForContacts&woeID=".$place->woeID;
+			echo "<a href='".$url."'>";
+			echo "Find places for contacts";
+			echo "</a>";
+
 			echo "</td></tr>";
 		}
 

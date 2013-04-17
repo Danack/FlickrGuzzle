@@ -5150,26 +5150,7 @@ It will also truncate latitudes and longitudes to three decimal points.
 		"flickr.places.getChildrenWithPhotosPublic" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Return a list of locations with public photos that are parented by a Where on Earth (WOE) or Places ID.',
-			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
-			/* Example
-<places total="79">
-   <place place_id="HznQfdKbB58biy8sdA" woeid="26332794"
-      latitude="45.498" longitude="-73.575"
-      place_url="/Canada/Quebec/Montreal  /Montreal+Golden+Square+Mile"
-      place_type="neighbourhood" photo_count="2717">
-      Montreal Golden Square Mile, Montreal, QC, CA, Canada
-   </place>
-   <place place_id="K1rYWmGbB59rwn7lOA" woeid="26332799"
-      latitude="45.502" longitude="-73.578"
-      place_url="/Canada/Quebec/Montreal/Downtown+Montr%C3%A9al"
-      place_type="neighbourhood" photo_count="2317">
-      Downtown Montréal, Montreal, QC, CA, Canada
-  </place>
-
-   <!-- and so on... -->
-
-</places>
-*/
+			'responseClass' => 'Intahwebz\\FlickrGuzzle\\DTO\\PlaceList',
 			'parameters' => array(
 				'place_id'    => array(
 					'location' => 'query',
@@ -5357,24 +5338,18 @@ It will also truncate latitudes and longitudes to three decimal points.
 			),
 		),
 
+
+
 // 155
 		"flickr.places.getTopPlacesList" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Return the top 100 most geotagged places for a day.',
-			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
-			/* Example
-<places total="100" date_start="1246320000" date_stop="1246406399">
-   <place place_id="4KO02SibApitvSBieQ" woeid="23424977"
-       latitude="48.890" longitude="-116.982" 
-       place_url="/United+States" place_type="country" 
-       place_type_id="12" photo_count="23371">United States</place>
-   <!-- and so on... -->
-</places>
-*/
+			'responseClass' => 'Intahwebz\\FlickrGuzzle\\DTO\\PlaceList',
 			'parameters' => array(
 				'place_type_id'    => array(
 					'location' => 'query',
 					'description' => 'todo - describe variable',
+					'required' => true,
 				),
 				'date'    => array(
 					'location' => 'query',
@@ -5414,32 +5389,7 @@ The maximum allowable size of a bounding box (the distance between the SW and NE
 <li><strong>country</strong>: 500km (310mi)</li>
 <li><strong>continent</strong>: 1500km (932mi)</li>
 </ul>',
-			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
-			/* Example
-<places place_type="neighbourhood" total="21"
-   pages="1" page="1" 
-   bbox="-122.42307100000001,37.773779,-122.381071,37.815779">
-   <place place_id=".aaSwYSbApnq6seyGw" woeid="23512025"
-      latitude="37.788" longitude="-122.412" 
-      place_url="/United+States/California/San+Francisco/Downtown"
-      place_type="neighbourhood">
-      Downtown, San Francisco, CA, US, United States
-   </place>
-   <place place_id="3KymK1GbCZ41eBVBxg" woeid="28288707"
-      latitude="37.776" longitude="-122.417" 
-      place_url="/United+States/California/San+Francisco/Civic+Center"
-      place_type="neighbourhood">
-      Civic Center, San Francisco, CA, US, United States
-   </place>
-   <place place_id="9xdhxY.bAptvBjHo" woeid="2379855"   
-      latitude="37.796" longitude="-122.407" 
-      place_url="/United+States/California/San+Francisco/Chinatown"
-      place_type="neighbourhood">
-      Chinatown, San Francisco, CA, US, United States
-   </place>
-   <!-- and so on -->
-</places>
-*/
+			'responseClass' => 'Intahwebz\\FlickrGuzzle\\DTO\\PlaceList',
 			'parameters' => array(
 				'bbox'    => array(
 					'location' => 'query',
@@ -5453,9 +5403,11 @@ The maximum allowable size of a bounding box (the distance between the SW and NE
 				'place_type_id'    => array(
 					'location' => 'query',
 					'description' => 'todo - describe variable',
-					'optional' => true,
+					//Need to have a place type
+					//'optional' => true,
 				),
 				'recursive'    => array(
+					//Not listed in API documentation.
 					'location' => 'query',
 					'description' => 'todo - describe variable',
 					'optional' => true,
@@ -5473,16 +5425,7 @@ The maximum allowable size of a bounding box (the distance between the SW and NE
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Return a list of the top 100 unique places clustered by a given placetype for a user\'s contacts. ',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
-			/* Example
-<places total="1">
-   <place place_id="kH8dLOubBZRvX_YZ" woeid="2487956"
-               latitude="37.779" longitude="-122.420"
-               place_url="/United+States/California/San+Francisco"
-               place_type="locality"
-               photo_count="156">San Francisco, California</place>
-</places>
-*/
+			'responseClass' => 'Intahwebz\\FlickrGuzzle\\DTO\\PlaceList',
 			'parameters' => array(
 				'place_type'    => array(
 					'location' => 'query',
@@ -5492,7 +5435,8 @@ The maximum allowable size of a bounding box (the distance between the SW and NE
 				'place_type_id'    => array(
 					'location' => 'query',
 					'description' => 'todo - describe variable',
-					'optional' => true,
+					//'optional' => true,
+					'required' => true,
 				),
 				'woe_id'    => array(
 					'location' => 'query',
@@ -5546,16 +5490,7 @@ The maximum allowable size of a bounding box (the distance between the SW and NE
 		"flickr.places.placesForTags" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Return a list of the top 100 unique places clustered by a given placetype for set of tags or machine tags. ',
-			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
-			/* Example
-<places total="1">
-   <place place_id="kH8dLOubBZRvX_YZ" woeid="2487956"
-               latitude="37.779" longitude="-122.420"
-               place_url="/United+States/California/San+Francisco"
-               place_type="locality"
-               photo_count="156">San Francisco, California</place>
-</places>
-*/
+			'responseClass' => 'Intahwebz\\FlickrGuzzle\\DTO\\PlaceList',
 			'parameters' => array(
 				'place_type_id'    => array(
 					'location' => 'query',
@@ -5579,7 +5514,8 @@ The maximum allowable size of a bounding box (the distance between the SW and NE
 				'tags'    => array(
 					'location' => 'query',
 					'description' => 'todo - describe variable',
-					'optional' => true,
+					//Flickr documentaton is incorrect - this is required.
+					//'optional' => true,
 				),
 				'tag_mode'    => array(
 					'location' => 'query',
@@ -5629,21 +5565,13 @@ The maximum allowable size of a bounding box (the distance between the SW and NE
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Return a list of the top 100 unique places clustered by a given placetype for a user. ',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
-			/* Example
-<places total="1">
-   <place place_id="kH8dLOubBZRvX_YZ" woeid="2487956"
-               latitude="37.779" longitude="-122.420"
-               place_url="/United+States/California/San+Francisco"
-               place_type="locality"
-               photo_count="156">San Francisco, California</place>
-</places>
-*/
+			'responseClass' => 'Intahwebz\\FlickrGuzzle\\DTO\\PlaceList',
 			'parameters' => array(
 				'place_type_id'    => array(
 					'location' => 'query',
 					'description' => 'todo - describe variable',
-					'optional' => true,
+					//'optional' => true,
+					'required' => true,
 				),
 				'place_type'    => array(
 					'location' => 'query',

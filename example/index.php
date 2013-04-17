@@ -96,7 +96,6 @@ try{
 			break;
 		}
 
-
 		case 'methodInfo': {
 			$method = getVariable('method', false);
 			$flickr->methodInfo($method);
@@ -106,6 +105,25 @@ try{
 		case 'photoList':{
 			$page = getVariable('page', 1);
 			$flickr->photoList($page);
+			break;
+		}
+
+
+		case 'findPlacesWithPhotosPublic': {
+			$woeID = getVariable('woeID', false);
+			$flickr->findPlacesWithPhotosPublic($woeID);
+			break;
+		}
+
+		case 'findPlacesForContacts': {
+			$woeID = getVariable('woeID', false);
+			$flickr->findPlacesForContacts($woeID);
+			break;
+		}
+
+		case 'findPlacesForUser': {
+			$woeID = getVariable('woeID', false);
+			$flickr->findPlacesForUser($woeID);
 			break;
 		}
 
@@ -141,6 +159,8 @@ try{
 		}
 
 
+
+
 		default: {
 			if (method_exists ($flickr, $function)) {
 				$flickr->{$function}();
@@ -154,8 +174,9 @@ try{
 	$flickr->view->render();
 }
 catch(\Exception $e){
-	echo "Exception caught: ".$e->getMessage();
-
+	//TODO catch Guzzle\Service\Exception\ValidationException separately
+	echo "Uncaught exception of type: ".get_class($e)."<br/>";
+	echo "Details: ".$e->getMessage();
 	$flickr->view->renderFooter();
 }
 

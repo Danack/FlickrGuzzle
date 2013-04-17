@@ -41,6 +41,8 @@ TODO
 * Start tagging versions.
 * Figure out what to do about every flickr function having it's own set of error codes :(
 * Implement the replace function at http://api.flickr.com/services/replace/
+* Decide whether to implement the flickr.push.* functions.
+
 
 Function end point
 ==================

@@ -15,7 +15,11 @@ use Guzzle\Service\Command\AbstractCommand;
 class FlickrGuzzleClient extends Client{
 
 
-	//public static function factoryWithCommand($command, $config = array())
+	const PLACE_TYPE_NEIGHBOURHOOD = 22;
+	const PLACE_TYPE_LOCALITY = 7;
+	const PLACE_TYPE_REGION = 8;
+	const PLACE_TYPE_COUNTRY = 12;
+	const PLACE_TYPE_CONTINENT = 29;
 
 	/**
 	 * @param $command
@@ -241,7 +245,7 @@ class FlickrGuzzleClient extends Client{
 
 		$errorMeaning = "Unknown error code '$errorCode': '$flickrMessage' ";
 
-		if (in_array($errorCode, $knownErrorCodes)) {
+		if (array_key_exists($errorCode, $knownErrorCodes)) {
 			$errorMeaning = $knownErrorCodes[$errorCode];
 		}
 

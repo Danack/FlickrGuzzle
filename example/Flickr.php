@@ -52,7 +52,12 @@ class Flickr{
 			'Find user by email' => 'findUserByEmail',
 			'Find user by username' => 'findUserByUsername',
 
+			'Find places for tags' => 'findPlacesForTags',
+			'Find places for bounding box' => 'findPlacesForBoundingBox',
+
 			'Find place' => 'findPlace',
+
+			'Find top places' => 'findTopPlaces',
 
 			'Lookup gallery by URL' => 'lookupGalleryByURL',
 			'Lookup user by URL' => 'lookupUserbyURL',
@@ -75,7 +80,10 @@ class Flickr{
 			'Get popular photos' => 'getPopularPhotos',
 			'Total views' => 'totalViews',
 
+			//'Find places for user' => 'findPlacesForUser',
+			//'Find places for contacts' => 'findPlacesForContacts',
 		);
+
 
 		$this->view->assign('routes', $routes);
 		$this->view->assign('authedRoutes', $authedRoutes);
@@ -92,6 +100,92 @@ class Flickr{
 		$this->view->assign('placeList', $placeList);
 		$this->view->setTemplate("flickr/placeList");
 	}
+
+
+
+
+	function findPlacesForUser($woeID) {
+		$params = array(
+			'woe_id' => $woeID,
+			'place_type_id' => FlickrGuzzleClient::PLACE_TYPE_NEIGHBOURHOOD,
+		);
+
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
+		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
+		$placeList = $flickrGuzzleClient->getCommand("flickr.places.placesForUser", $params)->execute();
+		$this->view->assign('placeList', $placeList);
+		$this->view->setTemplate("flickr/placeList");
+	}
+
+
+
+
+	function findPlacesForTags() {
+		$params = array(
+			'place_type_id' => FlickrGuzzleClient::PLACE_TYPE_REGION,
+			'woe_id' => 44418, //London, England
+			'tags' => 'lorikeet'
+		);
+
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
+		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
+		$placeList = $flickrGuzzleClient->getCommand("flickr.places.placesForTags", $params)->execute();
+		$this->view->assign('placeList', $placeList);
+		$this->view->setTemplate("flickr/placeList");
+	}
+
+
+	function findPlacesForContacts($woeID) {
+		$params = array(
+			'woe_id' => $woeID,
+			'threshold' => 5, //Minimum number photos - will promote to higher 'woeID' to get enough photos
+			'place_type_id' => FlickrGuzzleClient::PLACE_TYPE_NEIGHBOURHOOD,
+		);
+
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
+		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
+		$placeList = $flickrGuzzleClient->getCommand("flickr.places.placesForContacts", $params)->execute();
+		$this->view->assign('placeList', $placeList);
+		$this->view->setTemplate("flickr/placeList");
+	}
+
+
+
+	function findTopPlaces() {
+
+		$params = array(
+			'place_type_id' => FlickrGuzzleClient::PLACE_TYPE_REGION,
+		);
+
+		$flickrGuzzleClient = FlickrGuzzleClient::factory();
+		$placeList = $flickrGuzzleClient->getCommand("flickr.places.getTopPlacesList", $params)->execute();
+		$this->view->assign('placeList', $placeList);
+		$this->view->setTemplate("flickr/placeList");
+	}
+
+
+	function findPlacesForBoundingBox() {
+		$params = array(
+			'bbox' => '40.913,-82.66,40.915,-82.64'
+		);
+
+		$flickrGuzzleClient = FlickrGuzzleClient::factory();
+		$placeList = $flickrGuzzleClient->getCommand("flickr.places.placesForBoundingBox", $params)->execute();
+		$this->view->assign('placeList', $placeList);
+		$this->view->setTemplate("flickr/placeList");
+	}
+
+	function findPlacesWithPhotosPublic($woeID) {
+		$params = array(
+			'woe_id' => $woeID
+		);
+
+		$flickrGuzzleClient = FlickrGuzzleClient::factory();
+		$placeList = $flickrGuzzleClient->getCommand("flickr.places.getChildrenWithPhotosPublic", $params)->execute();
+		$this->view->assign('placeList', $placeList);
+		$this->view->setTemplate("flickr/placeList");
+	}
+
 
 	function getPopularPhotos() {
 		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
@@ -138,9 +232,13 @@ class Flickr{
 	function	userComments(){
 		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
 		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
-		$activityInfo = $flickrGuzzleClient->getCommandAndExecute('flickr.activity.userComments');
-//		$activityInfo = FlickrGuzzleClient::factoryWithCommand('flickr.activity.userComments', $oauthAccessToken);
+//		$activityInfo = $flickrGuzzleClient->getCommandAndExecute('flickr.activity.userComments');
 		//$activityInfo = $flickrGuzzleClient->getCommand('flickr.activity.userComments')->execute();
+
+		$activityInfo = \Intahwebz\FlickrGuzzle\FlickrGuzzleClient::factoryWithCommand('flickr.activity.userComments');
+
+		$activityInfo->
+
 		$this->view->assign('activityInfo', $activityInfo);
 		$this->view->setTemplate("flickr/activityInfo");
 	}
