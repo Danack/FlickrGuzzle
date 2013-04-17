@@ -262,15 +262,8 @@ return array (
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get a list of configured blogs for the calling user.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
-			/* Example
-<blogs>
-	<blog id="73" name="Bloxus test" needspassword="0"
-		url="http://remote.bloxus.com/" /> 
-	<blog id="74" name="Manila Test" needspassword="1"
-		url="http://flickrtest1.userland.com/" /> 
-</blogs>
-*/
+			'responseClass' => 'Intahwebz\\FlickrGuzzle\\DTO\\UserBlogList',
+
 			'parameters' => array(
 				'service'    => array(
 					'location' => 'query',
@@ -289,22 +282,7 @@ return array (
 		"flickr.blogs.getServices" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Return a list of Flickr supported blogging services',
-			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
-			/* Example
-<services>
-<service id="beta.blogger.com">Blogger</service>
-<service id="Typepad">Typepad</service>
-<service id="MovableType">Movable Type</service>
-<service id="LiveJournal">LiveJournal</service>
-<service id="MetaWeblogAPI">Wordpress</service>
-<service id="MetaWeblogAPI">MetaWeblogAPI</service>
-<service id="Manila">Manila</service>
-<service id="AtomAPI">AtomAPI</service>
-<service id="BloggerAPI">BloggerAPI</service>
-<service id="Vox">Vox</service>
-<service id="Twitter">Twitter</service>
-</services>
-*/
+			'responseClass' => "Intahwebz\\FlickrGuzzle\\DTO\\BlogServiceList",
 			'parameters' => array(
 				'method'    => array(
 					'location' => 'query',

@@ -77,7 +77,7 @@ trait DataMapper {
 			$multiple = FALSE;
 
 			if (is_array($dataMapElement) == false) {
-				$string = \getVar_DumpOutput(static::$dataMap);
+				$string = var_export(static::$dataMap, true);
 				throw new \Exception("DataMap is meant to be composed of arrays of entries. You've missed some brackets in class ". __CLASS__." : ".$string);
 			}
 

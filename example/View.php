@@ -22,7 +22,7 @@ class View {
 
 	function render(){
 
-		echo "<h1>FlickrGuzzle</h1>";
+		echo "<h1><a href='/index.php'>FlickrGuzzle</a></h1>";
 
 		foreach ($this->statusMessageArray as $statusMessage) {
 			echo "$statusMessage <br/>";
@@ -281,6 +281,32 @@ class View {
 
 		$this->renderFooter();
 	}
+
+	function blogList(){
+		$blogList = $this->variables['blogList'];
+
+		foreach ($blogList->blogList as $blog) {
+			echo "<a href='".$blog->url."'>";
+			echo $blog->name."<br/>";
+			echo "</a><br/>";
+		}
+
+		$this->renderFooter();
+	}
+
+
+
+	function blogServicesList(){
+		$blogServicesList = $this->variables['blogServicesList'];
+
+		foreach($blogServicesList->blogServiceList as $blogService) {
+			echo $blogService->id.": ";
+			echo $blogService->name;
+			echo "<br/>";
+		}
+		$this->renderFooter();
+	}
+
 
 	function	photo(){
 		$photoID = $this->variables['photoID'];

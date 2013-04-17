@@ -71,6 +71,8 @@ class Flickr{
 			'Get user popular tags'		=> 'getUserPopularTags',
 			'Get user most frequent tags'		=> 'getUserMostFrequentTags',
 
+			'Blog service list' => 'findBlogServicesList',
+
 			'Get hotlist tags' => 'getHotListTags',
 
 			'Logout'		=> 'logout',
@@ -80,6 +82,7 @@ class Flickr{
 			'Get popular photos' => 'getPopularPhotos',
 			'Total views' => 'totalViews',
 
+			'Blog list for user' => 'findBlogListForUser',
 			//'Find places for user' => 'findPlacesForUser',
 			//'Find places for contacts' => 'findPlacesForContacts',
 		);
@@ -89,6 +92,25 @@ class Flickr{
 		$this->view->assign('authedRoutes', $authedRoutes);
 
 	}
+
+
+
+	function findBlogServicesList() {
+		$flickrGuzzleClient = FlickrGuzzleClient::factory();
+		$blogServicesList = $flickrGuzzleClient->getCommand("flickr.blogs.getServices")->execute();
+		$this->view->assign('blogServicesList', $blogServicesList);
+		$this->view->setTemplate("flickr/blogServicesList");
+	}
+
+
+	function findBlogListForUser() {
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
+		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
+		$blogList = $flickrGuzzleClient->getCommand("flickr.blogs.getList")->execute();
+		$this->view->assign('blogList', $blogList);
+		$this->view->setTemplate("flickr/blogList");
+	}
+
 
 	function findPlace() {
 		$params = array(
@@ -235,9 +257,7 @@ class Flickr{
 //		$activityInfo = $flickrGuzzleClient->getCommandAndExecute('flickr.activity.userComments');
 		//$activityInfo = $flickrGuzzleClient->getCommand('flickr.activity.userComments')->execute();
 
-		$activityInfo = \Intahwebz\FlickrGuzzle\FlickrGuzzleClient::factoryWithCommand('flickr.activity.userComments');
-
-		$activityInfo->
+		$activityInfo = \Intahwebz\FlickrGuzzle\FlickrGuzzleClient::factoryWithCommand('flickr.activity.userComments', $oauthAccessToken);
 
 		$this->view->assign('activityInfo', $activityInfo);
 		$this->view->setTemplate("flickr/activityInfo");
@@ -270,7 +290,7 @@ class Flickr{
 		$this->view->setTemplate("flickr/licenseList");
 	}
 
-	//flickrMethodList
+
 
 
 	function	flickrMethodList(){
@@ -312,42 +332,6 @@ class Flickr{
 		$this->view->assign('cameraDetailList', $cameraDetailList);
 		$this->view->setTemplate("flickr/brandModels");
 	}
-
-
-
-//
-//	function	upload(){
-//		$userUploadedFile = UserUploadedFile::getUserUploadedFile('fileUpload');
-//
-//		$title = getVariable('title', false);
-//		$description = getVariable('description', false);
-//
-//		if ($userUploadedFile != false) {
-//			//echo "Hey there is a file to upload.";
-//
-//			$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
-//			$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
-//
-//			$params = array(
-//				'photo' => $userUploadedFile->tmpName,
-//				'title' => $title,
-//				'description' => $description,
-//			);
-//
-//			$command = $flickrGuzzleClient->getCommand('UploadPhoto', $params);
-//
-//			/** @var $result FileUploadResponse */
-//			$fileUploadResponse = $command->execute();
-//
-//			$this->view->addStatusMessage("Photo uploaded ".$fileUploadResponse->photoID);
-//		}
-//		else{
-//			//echo "Nothing to upload.";
-//		}
-//
-//		$this->view->setTemplate("flickr/upload");
-//	}
-
 
 	function	photo($photoID){
 		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);

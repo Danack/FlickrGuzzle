@@ -43,9 +43,9 @@ class FlickrGuzzleClient extends Client{
 	 * @param $command
 	 * @return mixed
 	 */
-	public static function factoryWithCommand($command)
+	public static function factoryWithCommand($command, $config = array())
 	{
-		$config = array();
+		//$config = array();
 		$client = self::factory($config);
 		return $client->getCommandAndExecute($command);
 	}
@@ -174,14 +174,14 @@ class FlickrGuzzleClient extends Client{
 			"Intahwebz\\FlickrGuzzle\\DTO\\URLInfo" => NULL,
 			'Intahwebz\\FlickrGuzzle\\DTO\\TagList' => array('photo', 'who', 'hottags', NULL),
 			"Intahwebz\\FlickrGuzzle\\DTO\\PlaceList" => 'places',
+			"Intahwebz\\FlickrGuzzle\\DTO\\UserBlogList" => 'blogs',
+			"Intahwebz\\FlickrGuzzle\\DTO\\BlogServiceList" => 'services',
 			//Intahwebz\FlickrGuzzle\DTO\AccountStat
 		);
 
 		if (array_key_exists($className, $aliasedResponses) == TRUE) {
 			$dataJson = json_decode($data, TRUE);
 
-//			var_dump($dataJson);
-//			exit(0);
 			$this->checkErrorResponseFromJSON($dataJson);
 
 			$alias = $aliasedResponses[$className];

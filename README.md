@@ -42,6 +42,7 @@ TODO
 * Figure out what to do about every flickr function having it's own set of error codes :(
 * Implement the replace function at http://api.flickr.com/services/replace/
 * Decide whether to implement the flickr.push.* functions.
+* Figure out how to return array of objects without having (almost) useless 'List' container objects.
 
 
 Function end point
