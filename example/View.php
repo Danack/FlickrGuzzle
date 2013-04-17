@@ -364,6 +364,11 @@ class View {
 		$this->displayNoteAddButton($photoID);
 		$this->displayGetTagsButton($photoID);
 		$this->displayReplacePhotoButton($photoID);
+
+
+		$this->displayTweetButton($photoID);
+
+
 	}
 
 	function	displayRotateButton($photoID){
@@ -410,9 +415,6 @@ class View {
 
 
 	function displayReplacePhotoButton($photoID){
-
-
-
 		echo "<div class='bordered'>";
 
 		echo "<form method='post' accept-charset='utf-8' action='/index.php' onsubmit='' class='inlineForm' name='contactForm' enctype='multipart/form-data'>";
@@ -427,6 +429,14 @@ class View {
 		echo "</form>";
 		echo "</div>";
 	}
+
+	function displayTweetButton($photoID){
+		echo "<div class='bordered'>";
+		$url = "/index.php?function=blogPost&photoID=".$photoID;
+		echo "<a href='$url'>Tweet this</a>";
+		echo "</div>";
+	}
+
 
 
 	function lookupUser(){

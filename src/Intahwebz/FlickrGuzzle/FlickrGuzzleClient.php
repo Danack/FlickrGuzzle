@@ -182,6 +182,8 @@ class FlickrGuzzleClient extends Client{
 		if (array_key_exists($className, $aliasedResponses) == TRUE) {
 			$dataJson = json_decode($data, TRUE);
 
+			// var_dump($dataJson);
+
 			$this->checkErrorResponseFromJSON($dataJson);
 
 			$alias = $aliasedResponses[$className];

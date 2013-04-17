@@ -165,7 +165,11 @@ try{
 			break;
 		}
 
-
+		case 'blogPost': {
+			$photoID = getVariable('photoID', false);
+			$flickr->blogPost($photoID);
+			break;
+		}
 
 		default: {
 			if (method_exists ($flickr, $function)) {

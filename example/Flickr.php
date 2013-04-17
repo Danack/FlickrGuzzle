@@ -90,10 +90,26 @@ class Flickr{
 
 		$this->view->assign('routes', $routes);
 		$this->view->assign('authedRoutes', $authedRoutes);
-
 	}
 
 
+	function blogPost($photoID) {
+		$params = array(
+			//blog_id (Optional)
+			'title' => '',
+			'photo_id' => $photoID,
+			'service' => 'Twitter',
+			'description' => '',
+		);
+
+		$flickrGuzzleClient = FlickrGuzzleClient::factory();
+		$blogResult = $flickrGuzzleClient->getCommand("flickr.blogs.postPhoto", $params)->execute();
+
+		var_dump($blogResult);
+
+		$this->view->addStatusMessage("Twitter post should be posted.");
+		$this->photo($photoID);
+	}
 
 	function findBlogServicesList() {
 		$flickrGuzzleClient = FlickrGuzzleClient::factory();

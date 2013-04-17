@@ -33,7 +33,12 @@ trait DataMapper {
 
 		foreach($dataVariableNameArray as $dataVariableName){
 			$aliasPath .= '/'.$dataVariableName;
-			if(array_key_exists($dataVariableName, $dereferenced) == FALSE){
+
+			if (is_array($dereferenced) == false ||
+				//Probably an element that can exist as different entries e.g. for tags
+				//[raw]
+				//or [raw, _content]
+				array_key_exists($dataVariableName, $dereferenced) == FALSE){
 				$notSet = TRUE;
 				return FALSE;
 			}
