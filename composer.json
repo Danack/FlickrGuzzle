@@ -1,6 +1,6 @@
 {
 	"name": "intahwebz/flickrguzzle",
-	"description": "A Flickr wrapper to allow you to call the Flickr api with Guzzle as the backend.",
+	"description": "A Flickr wrapper to allow you to call the Flickr api with Guzzle as the backend.\nGoal is to have 100% Flickr api coverage rather than just upload/display photos (currently at 23%).",
 	"keywords": ["flickr", "api", "http", "rest", "web service", "curl", "client", "HTTP client"],
 	"license": "MIT",
 
