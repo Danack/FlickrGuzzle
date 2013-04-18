@@ -176,6 +176,7 @@ class FlickrGuzzleClient extends Client{
 			"Intahwebz\\FlickrGuzzle\\DTO\\PlaceList" => 'places',
 			"Intahwebz\\FlickrGuzzle\\DTO\\UserBlogList" => 'blogs',
 			"Intahwebz\\FlickrGuzzle\\DTO\\BlogServiceList" => 'services',
+			"Intahwebz\\FlickrGuzzle\\DTO\\GenericResponse" => null,
 			//Intahwebz\FlickrGuzzle\DTO\AccountStat
 		);
 

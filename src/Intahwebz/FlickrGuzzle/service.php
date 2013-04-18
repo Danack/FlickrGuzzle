@@ -295,9 +295,9 @@ return array (
 // 11
 		"flickr.blogs.postPhoto" => array(
 			'extends' => 'defaultGetOperation',
-			'summary' => '',
+			'summary' => 'This appears not to work for twitter.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
+			'responseClass' => 'Intahwebz\\FlickrGuzzle\\DTO\\GenericResponse',
 			'parameters' => array(
 				'blog_id'    => array(
 					'location' => 'query',

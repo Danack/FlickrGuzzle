@@ -93,6 +93,14 @@ class Flickr{
 	}
 
 
+	/**
+	 * This function doesn't work and is probably dumb.
+	 *
+	 * If you need to post something to a blog, you should be calling the blog's api directly, not
+	 * calling it through Flickr.
+	 *
+	 * @param $photoID
+	 */
 	function blogPost($photoID) {
 		$params = array(
 			//blog_id (Optional)
@@ -100,12 +108,19 @@ class Flickr{
 			'photo_id' => $photoID,
 			'service' => 'Twitter',
 			'description' => '',
+			'blog_password' => '12345'
 		);
 
-		$flickrGuzzleClient = FlickrGuzzleClient::factory();
-		$blogResult = $flickrGuzzleClient->getCommand("flickr.blogs.postPhoto", $params)->execute();
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', FALSE);
+		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
 
-		var_dump($blogResult);
+		$command = $flickrGuzzleClient->getCommand("flickr.blogs.postPhoto", $params);
+
+		$blogResult = $command->execute();
+
+		$data = $command->getRequest()->getResponse()->getBody(TRUE);
+
+		var_dump($data);
 
 		$this->view->addStatusMessage("Twitter post should be posted.");
 		$this->photo($photoID);
@@ -120,7 +135,7 @@ class Flickr{
 
 
 	function findBlogListForUser() {
-		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', FALSE);
 		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
 		$blogList = $flickrGuzzleClient->getCommand("flickr.blogs.getList")->execute();
 		$this->view->assign('blogList', $blogList);
@@ -148,7 +163,7 @@ class Flickr{
 			'place_type_id' => FlickrGuzzleClient::PLACE_TYPE_NEIGHBOURHOOD,
 		);
 
-		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', FALSE);
 		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
 		$placeList = $flickrGuzzleClient->getCommand("flickr.places.placesForUser", $params)->execute();
 		$this->view->assign('placeList', $placeList);
@@ -165,7 +180,7 @@ class Flickr{
 			'tags' => 'lorikeet'
 		);
 
-		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', FALSE);
 		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
 		$placeList = $flickrGuzzleClient->getCommand("flickr.places.placesForTags", $params)->execute();
 		$this->view->assign('placeList', $placeList);
@@ -180,7 +195,7 @@ class Flickr{
 			'place_type_id' => FlickrGuzzleClient::PLACE_TYPE_NEIGHBOURHOOD,
 		);
 
-		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', FALSE);
 		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
 		$placeList = $flickrGuzzleClient->getCommand("flickr.places.placesForContacts", $params)->execute();
 		$this->view->assign('placeList', $placeList);
@@ -226,7 +241,7 @@ class Flickr{
 
 
 	function getPopularPhotos() {
-		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', FALSE);
 		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
 		$photoList = $flickrGuzzleClient->getCommand('flickr.stats.getPopularPhotos')->execute();
 		$this->view->assign('photoList', $photoList);
@@ -235,7 +250,7 @@ class Flickr{
 
 
 	function totalViews() {
-		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', FALSE);
 		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
 		$accountStat = $flickrGuzzleClient->getCommand("flickr.stats.getTotalViews")->execute();
 		$this->view->assign('accountStat', $accountStat);
@@ -268,7 +283,7 @@ class Flickr{
 
 
 	function	userComments(){
-		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', FALSE);
 		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
 //		$activityInfo = $flickrGuzzleClient->getCommandAndExecute('flickr.activity.userComments');
 		//$activityInfo = $flickrGuzzleClient->getCommand('flickr.activity.userComments')->execute();
@@ -281,7 +296,7 @@ class Flickr{
 
 
 	function	userPhotos(){
-		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', FALSE);
 		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
 		$activityInfo = $flickrGuzzleClient->getCommand('flickr.activity.userPhotos')->execute();
 		$this->view->assign('activityInfo', $activityInfo);
@@ -350,7 +365,7 @@ class Flickr{
 	}
 
 	function	photo($photoID){
-		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', FALSE);
 		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
 		$params = array(
 			'photo_id'=> $photoID,
@@ -365,10 +380,10 @@ class Flickr{
 	}
 
 	function flickrAuthResult(){
-		$oauthToken = getVariable('oauth_token', false);
-		$oauthVerifier = getVariable('oauth_verifier', false);
+		$oauthToken = getVariable('oauth_token', FALSE);
+		$oauthVerifier = getVariable('oauth_verifier', FALSE);
 
-		$tokenSecret = getSessionVariable('tokenSecret', false);
+		$tokenSecret = getSessionVariable('tokenSecret', FALSE);
 
 		if (!$oauthToken ||
 			!$oauthVerifier ||
@@ -385,7 +400,7 @@ class Flickr{
 
 		$flickrGuzzleClient = FlickrGuzzleClient::factory(
 			array(
-				'oauth' => true,
+				'oauth' => TRUE,
 				'token' => $oauthToken,
 				'token_secret' => $tokenSecret,
 			)
@@ -407,11 +422,11 @@ class Flickr{
 
 	function photoList($page){
 
-		$authedFlickrGuzzleClient = false;
+		$authedFlickrGuzzleClient = FALSE;
 
-		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', FALSE);
 
-		if ($oauthAccessToken != false) {
+		if ($oauthAccessToken != FALSE) {
 			$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
 
 			try{
@@ -441,7 +456,7 @@ class Flickr{
 			}
 		}
 
-		if ($authedFlickrGuzzleClient == false) {
+		if ($authedFlickrGuzzleClient == FALSE) {
 			$this->view->setTemplate("flickr/flickrNotAuthed");
 		}
 		else{
@@ -454,7 +469,7 @@ class Flickr{
 
 			$flickrGuzzleClient = FlickrGuzzleClient::factory(
 				array(
-					'oauth' => true,
+					'oauth' => TRUE,
 					'token_secret' => $oauthAccessToken->oauthTokenSecret,
 					'oauth_token' => $oauthAccessToken->oauthToken,
 				)
@@ -474,7 +489,7 @@ class Flickr{
 		$this->clearSessionVariables();
 
 		$flickrGuzzleClient = FlickrGuzzleClient::factory(
-			array('oauth' => true)
+			array('oauth' => TRUE)
 		);
 
 		$params = array(
@@ -504,10 +519,10 @@ class Flickr{
 	function replacePhoto($photoID){
 
 		$userUploadedFile = UserUploadedFile::getUserUploadedFile('fileUpload');
-		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', FALSE);
 		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
 
-		if ($userUploadedFile != false) {
+		if ($userUploadedFile != FALSE) {
 
 			$params = array(
 				'photo' => $userUploadedFile->tmpName,
@@ -530,12 +545,12 @@ class Flickr{
 
 		$userUploadedFile = UserUploadedFile::getUserUploadedFile('fileUpload');
 
-		$title = getVariable('title', false);
-		$description = getVariable('description', false);
+		$title = getVariable('title', FALSE);
+		$description = getVariable('description', FALSE);
 
-		if ($userUploadedFile != false) {
+		if ($userUploadedFile != FALSE) {
 
-			$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
+			$oauthAccessToken = getSessionVariable('oauthAccessToken', FALSE);
 			$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
 
 			$params = array(
@@ -561,7 +576,7 @@ class Flickr{
 	}
 
 	function rotate($photoID, $degrees) {
-		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', FALSE);
 		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
 
 		$params = array(
@@ -578,7 +593,7 @@ class Flickr{
 
 
 	function getPhotoTags($photoID) {
-		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', FALSE);
 		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
 
 		$params = array(
@@ -596,7 +611,7 @@ class Flickr{
 
 
 	function addNote($photoID, $noteText) {
-		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', FALSE);
 		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
 
 		$params = array(
@@ -618,7 +633,7 @@ class Flickr{
 
 
 	function deleteNote($photoID, $noteID) {
-		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', FALSE);
 		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
 
 		$params = array(
@@ -666,7 +681,7 @@ class Flickr{
 	}
 
 	function getHotListTags() {
-		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', FALSE);
 		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
 
 		$params = array(
@@ -682,7 +697,7 @@ class Flickr{
 
 
 	function getUserMostFrequentTags() {
-		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', FALSE);
 		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
 
 		$params = array(
@@ -696,7 +711,7 @@ class Flickr{
 	}
 
 	function getUserPopularTags() {
-		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', FALSE);
 		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
 
 		$params = array(
@@ -712,7 +727,7 @@ class Flickr{
 
 
 	function getRelatedTags($tag) {
-		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', FALSE);
 		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
 
 		$params = array(
@@ -727,7 +742,7 @@ class Flickr{
 
 
 	function getUserRawTags() {
-		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', FALSE);
 		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
 
 		$params = array(
@@ -742,7 +757,7 @@ class Flickr{
 
 
 	function getUserTags() {
-		$oauthAccessToken = getSessionVariable('oauthAccessToken', false);
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', FALSE);
 		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
 
 		$params = array(
