@@ -295,6 +295,23 @@ class View {
 	}
 
 
+	function contactList() {
+		$contactList = $this->variables['contactList'];
+
+		//var_dump($contactList
+
+		echo "Total contacts is:".$contactList->total."<br/>";
+
+		//var_dump($contactList);
+
+		foreach ($contactList->users as $user) {
+			echo $user->userName."<br/>";
+		}
+
+		$this->renderFooter();
+	}
+
+
 
 	function blogServicesList(){
 		$blogServicesList = $this->variables['blogServicesList'];

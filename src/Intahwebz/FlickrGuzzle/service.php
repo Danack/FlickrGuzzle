@@ -449,7 +449,7 @@ iconsmall="http://farm1.static.flickr.com/187/cols/56_43fac2cf79_s.jpg">
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get a list of contacts for the calling user.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
+			'responseClass' => 'Intahwebz\\FlickrGuzzle\\DTO\\UserList',
 			/* Example
 <contacts page="1" pages="1" perpage="1000" total="3">
 	<contact nsid="12037949629@N01" username="Eric" iconserver="1"
@@ -523,14 +523,7 @@ This method is still considered experimental. We don\'t plan for it to change or
 		"flickr.contacts.getPublicList" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get the contact list for a user.',
-			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
-			/* Example
-<contacts page="1" pages="1" perpage="1000" total="3">
-	<contact nsid="12037949629@N01" username="Eric" iconserver="1" ignored="1" /> 
-	<contact nsid="12037949631@N01" username="neb" iconserver="1" ignored="0" /> 
-	<contact nsid="41578656547@N01" username="cal_abc" iconserver="1" ignored="0" />
-</contacts>
-*/
+			'responseClass' => 'Intahwebz\\FlickrGuzzle\\DTO\\UserList',
 			'parameters' => array(
 				'user_id'    => array(
 					'location' => 'query',
@@ -564,14 +557,7 @@ This method is still considered experimental. We don\'t plan for it to change or
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Get suggestions for tagging people in photos based on the calling user\'s contacts.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
-			/* Example
-<rsp stat="ok">
-<contacts page="1" pages="1" perpage="1000" total="1">
-	<contact nsid="30135021@N05" username="Hugo Haas" iconserver="1" iconfarm="1" realname="" friend="0" family="0" path_alias="" />
-</contacts>
-</rsp>
-*/
+			'responseClass' => 'Intahwebz\\FlickrGuzzle\\DTO\\UserList',
 			'parameters' => array(
 				'include_self'    => array(
 					'location' => 'query',

@@ -63,6 +63,11 @@ class Flickr{
 			'Lookup user by URL' => 'lookupUserbyURL',
 			'Lookup group by URL' => 'lookupGroupByURL',
 
+			'Get contact list' => 'getContactList',
+			'Get contact public list' => 'getContactPublicList',
+
+			'Get contact tagging suggestion' => 'getContactTaggingSuggestion',
+
 			'Get Group URL' => 'getGroup',
 			'Get user profile URL' => 'getUserProfile',
 			'Get user photos URL' => 'getUserPhotos',
@@ -159,6 +164,34 @@ class Flickr{
 
 
 
+	function getContactList() {
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', FALSE);
+		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
+		$contactList = $flickrGuzzleClient->getCommand("flickr.contacts.getList")->execute();
+		$this->view->assign('contactList', $contactList);
+		$this->view->setTemplate("flickr/contactList");
+	}
+
+	function getContactPublicList() {
+		$params = array(
+			'user_id' => '46085186@N02'
+		);
+
+		$flickrGuzzleClient = FlickrGuzzleClient::factory();
+		$contactList = $flickrGuzzleClient->getCommand("flickr.contacts.getPublicList", $params)->execute();
+		$this->view->assign('contactList', $contactList);
+		$this->view->setTemplate("flickr/contactList");
+	}
+
+
+
+	function getContactTaggingSuggestion() {
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', FALSE);
+		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
+		$contactList = $flickrGuzzleClient->getCommand("flickr.contacts.getTaggingSuggestions")->execute();
+		$this->view->assign('contactList', $contactList);
+		$this->view->setTemplate("flickr/contactList");
+	}
 
 	function findPlacesForUser($woeID) {
 		$params = array(
