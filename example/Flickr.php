@@ -71,6 +71,9 @@ class Flickr{
 			'Get user popular tags'		=> 'getUserPopularTags',
 			'Get user most frequent tags'		=> 'getUserMostFrequentTags',
 
+			'Get favourites' => 'getFavouritesList',
+			'Get public favourites' => 'getFavouritesPublicList',
+
 			'Blog service list' => 'findBlogServicesList',
 
 			'Get hotlist tags' => 'getHotListTags',
@@ -239,6 +242,28 @@ class Flickr{
 		$this->view->setTemplate("flickr/placeList");
 	}
 
+
+
+	function getFavouritesList() {
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', FALSE);
+		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
+
+		$photoList = $flickrGuzzleClient->getCommand('flickr.favorites.getList')->execute();
+		$this->view->assign('photoList', $photoList);
+		$this->view->setTemplate("flickr/photoList");
+	}
+
+	function getFavouritesPublicList() {
+		$flickrGuzzleClient = FlickrGuzzleClient::factory();
+
+		$params = array(
+			'user_id' => '46085186@N02',
+		);
+
+		$photoList = $flickrGuzzleClient->getCommand('flickr.favorites.getPublicList', $params)->execute();
+		$this->view->assign('photoList', $photoList);
+		$this->view->setTemplate("flickr/photoList");
+	}
 
 	function getPopularPhotos() {
 		$oauthAccessToken = getSessionVariable('oauthAccessToken', FALSE);
@@ -608,6 +633,34 @@ class Flickr{
 		$this->photo($photoID);
 	}
 
+	function addToFavourites($photoID) {
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', FALSE);
+		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
+
+		$params = array(
+			'photo_id'	=> $photoID,
+		);
+
+		$command = $flickrGuzzleClient->getCommand('flickr.favorites.add', $params);
+		$photoTransformInfo = $command->execute();
+		$this->view->addStatusMessage("Photo should now be a favourite.");
+		$this->photo($photoID);
+	}
+
+
+	function removeFromFavourites($photoID) {
+		$oauthAccessToken = getSessionVariable('oauthAccessToken', FALSE);
+		$flickrGuzzleClient = FlickrGuzzleClient::factory($oauthAccessToken);
+
+		$params = array(
+			'photo_id'	=> $photoID,
+		);
+
+		$command = $flickrGuzzleClient->getCommand('flickr.favorites.remove', $params);
+		$photoTransformInfo = $command->execute();
+		$this->view->addStatusMessage("Photo should no longer be a favourite.");
+		$this->photo($photoID);
+	}
 
 
 	function addNote($photoID, $noteText) {

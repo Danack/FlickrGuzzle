@@ -364,6 +364,9 @@ class View {
 		$this->displayNoteAddButton($photoID);
 		$this->displayGetTagsButton($photoID);
 		$this->displayReplacePhotoButton($photoID);
+		$this->displayAddToFavouritesButton($photoID);
+
+		$this->displayRemoveFromFavouritesButton($photoID);
 
 
 		$this->displayTweetButton($photoID);
@@ -400,6 +403,27 @@ class View {
 
 		echo "<input type='submit' name='submitButton' class='clickyButton' value='Add note'/>";
 		echo "</form>";
+		echo "</div>";
+	}
+
+
+
+	function displayAddToFavouritesButton($photoID){
+
+		echo "<div class='bordered'>";
+		$url = "/index.php?function=addToFavourites&photoID=".$photoID;
+
+		echo "<a href='$url'>Add to favourites</a>";
+		echo "</div>";
+	}
+
+
+	function displayRemoveFromFavouritesButton($photoID){
+
+		echo "<div class='bordered'>";
+		$url = "/index.php?function=removeFromFavourites&photoID=".$photoID;
+
+		echo "<a href='$url'>Remove from favourites</a>";
 		echo "</div>";
 	}
 

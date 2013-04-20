@@ -171,6 +171,18 @@ try{
 			break;
 		}
 
+		case 'addToFavourites': {
+			$photoID = getVariable('photoID', false);
+			$flickr->addToFavourites($photoID);
+			break;
+		}
+
+		case 'removeFromFavourites': {
+			$photoID = getVariable('photoID', false);
+			$flickr->removeFromFavourites($photoID);
+			break;
+		}
+
 		default: {
 			if (method_exists ($flickr, $function)) {
 				$flickr->{$function}();

@@ -606,7 +606,7 @@ This method is still considered experimental. We don\'t plan for it to change or
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Adds a photo to a user\'s favorites list.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
+			'responseClass' => 'Intahwebz\\FlickrGuzzle\\DTO\\GenericResponse',
 			'parameters' => array(
 				'photo_id'    => array(
 					'location' => 'query',
@@ -671,7 +671,7 @@ This method is still considered experimental. We don\'t plan for it to change or
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns a list of the user\'s favorite photos. Only photos which the calling user has permission to see are returned.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
+			"responseClass" => "Intahwebz\\FlickrGuzzle\\DTO\\PhotoList",
 			'parameters' => array(
 				'user_id'    => array(
 					'location' => 'query',
@@ -720,7 +720,7 @@ This method is still considered experimental. We don\'t plan for it to change or
 		"flickr.favorites.getPublicList" => array(
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Returns a list of favorite public photos for the given user.',
-			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
+			"responseClass" => "Intahwebz\\FlickrGuzzle\\DTO\\PhotoList",
 			'parameters' => array(
 				'user_id'    => array(
 					'location' => 'query',
