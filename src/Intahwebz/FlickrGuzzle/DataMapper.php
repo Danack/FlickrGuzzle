@@ -18,60 +18,62 @@ trait DataMapper {
 
 		$dataVariableNameArray = $dataMapElement[1];
 
-		if ($dataVariableNameArray == null){
-			//Return the original data array
-			return $data;
-		}
+//		if ($dataVariableNameArray == null){
+//			//Return the original data array
+//			return $data;
+//		}
 
 		if(is_array($dataVariableNameArray) == FALSE){
 			$dataVariableNameArray = array($dataVariableNameArray);
 		}
 
-		$dereferenced = $data;
+		$value = $data;
 
 		$aliasPath = '';
 
 		foreach($dataVariableNameArray as $dataVariableName){
-			$aliasPath .= '/'.$dataVariableName;
+			//$aliasPath .= '/'.$dataVariableName;
 
-			if (is_array($dereferenced) == false ||
-				//Probably an element that can exist as different entries e.g. for tags
-				//[raw]
-				//or [raw, _content]
-				array_key_exists($dataVariableName, $dereferenced) == FALSE){
-//				$notSet = TRUE;
-//				return FALSE;
-				if ($optional == false) {
+			if (is_array($value) == FALSE ||
+				array_key_exists($dataVariableName, $value) == FALSE){
+				if ($optional == true) {
+					return null;
+				}
 //					$alias = $dataMapElement[1];//$dataVariableNameArray;
-//
 //					if(is_array($alias) == TRUE){
 //						$alias = implode('->', $alias);
 //					}
-//
-					var_dump($data);
-					//TODO - actuall do this.
-//					//$dataString = implode(',', $data);
 
-					throw new \Exception("DataMapper cannot find value from  for mapping to actual value in array ");
-				}
+				var_dump($data);
+				//TODO - actually do this.
+//				//$dataString = implode(',', $data);
 
+				throw new \Exception("DataMapper cannot find value from  for mapping to actual value in array ");
+			//	}
 			}
-			$dereferenced = $dereferenced[$dataVariableName];
+			if (is_array($value) == false) {
+				throw new \Exception("Uhoh - not an array");
+			}
+			else if (array_key_exists($dataVariableName, $value) == false) {
+				echo "How can this be?";
+			}
+
+			$value = $value[$dataVariableName];
 		}
 
-		if (array_key_exists('unindex', $dataMapElement) == true) {
+		if (array_key_exists('unindex', $dataMapElement) == TRUE) {
 			$index = $dataMapElement['unindex'];
 
 			//Amazingly sometimes text is returned as $title['_content'] = $text other
 			//times it's just $title = $text
-			if (is_array($dereferenced)) {
-				if (array_key_exists($index, $dereferenced) == true) {
-					$dereferenced = $dereferenced[$index];
+			if (is_array($value)) {
+				if (array_key_exists($index, $value) == TRUE) {
+					$value = $value[$index];
 				}
 			}
 		}
 
-		return $dereferenced;
+		return $value;
 	}
 
 	/**
@@ -85,9 +87,7 @@ trait DataMapper {
 		}
 
 		$instance = new static();
-
 		$instance->mapValuesFromJson($jsonData);
-
 		return $instance;
 	}
 
