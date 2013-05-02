@@ -15,36 +15,17 @@ use Intahwebz\FlickrGuzzle\DataMapper;
  */
 class OauthCheck {
 
-	use DataMapper{
-		createFromData as createFromDataAuto;
-	}
+	use DataMapper;
 
 	public static $dataMap = array(
-//		['oauthToken', 'oauth_token'],
-//		['oauthTokenSecret', 'oauth_token_secret'],
-		['permissions', 'perms'],
+		//TODO - Shouldn't this be multiple e.g. read + write? or does flickr just return one
+		//permission that implies others e.g. write => read + write
+		['permissions', ['perms', '_content']],
 		['user', 'user', 'class' => 'Intahwebz\\FlickrGuzzle\\DTO\\User' ]
 	);
 
 	var $permissions;
 	var $user;
-
-	/**
-	 * @param $data
-	 * @return static
-	 */
-	static function createFromData($data){
-		$object = self::createFromDataAuto($data);
-
-		$remap = array(
-			'permissions',
-		);
-
-		$object->remap($remap, '_content');
-
-		return $object;
-	}
-
 }
 
 ?>

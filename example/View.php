@@ -22,6 +22,8 @@ class View {
 
 	function render(){
 
+		pageStart();
+
 		echo "<h1><a href='/index.php'>FlickrGuzzle</a></h1>";
 
 		foreach ($this->statusMessageArray as $statusMessage) {
@@ -93,13 +95,14 @@ class View {
 
 	}
 
-	function	cameraBrands(){
+	function	brands(){
 
 		$cameraBrandList = $this->variables['cameraBrandList'];
 
 		foreach ($cameraBrandList->cameraBrands as $cameraBrand) {
 			echo "<a href='/index.php?function=flickrCameraBrandModels&cameraBrandID=".$cameraBrand->cameraBrandID."'>";
 			echo "ID: ".$cameraBrand->cameraBrandID;
+			echo "&nbsp;";
 			echo "Name: ".$cameraBrand->name;
 			echo "</a>";
 			echo "<br/>";
@@ -127,6 +130,10 @@ class View {
 			if ($cameraDetail->memoryType) {
 				echo "Memory Type: ".$cameraDetail->memoryType."<br/>";
 			}
+
+			if ($cameraDetail->storageType) {
+				echo "Storage Type: ".$cameraDetail->storageType."<br/>";
+			}
 			if ($cameraDetail->zoom) {
 				echo "Zoom: ".$cameraDetail->zoom."<br/>";
 			}
@@ -135,13 +142,10 @@ class View {
 				echo "StorageType: ".$cameraDetail->storageType."<br/>";
 			}
 
-//	{if $cameraDetail->images}
-//		{if is_array($cameraDetail->images)}
-//			{foreach from=$cameraDetail->images item=image}
-//				{$image}
-//			{/foreach}
-//		{/if}
-//	{/if}
+			if ($cameraDetail->images) {
+			//	var_dump($cameraDetail->images);
+			}
+
 			echo "<br/>";
 		}
 

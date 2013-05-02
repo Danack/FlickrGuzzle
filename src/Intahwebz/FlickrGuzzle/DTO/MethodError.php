@@ -8,7 +8,7 @@ use Intahwebz\FlickrGuzzle\DataMapper;
 class MethodError {
 
 	use DataMapper{
-		createFromData as createFromDataAuto;
+		createFromJson as createFromJsonAuto;
 	}
 
 	static protected $dataMap = array(

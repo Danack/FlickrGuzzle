@@ -20,7 +20,7 @@ require_once "Flickr.php";
 session_name(SESSION_NAME);
 session_start();
 
-pageStart();
+
 
 try{
 	$flickr = new Flickr();

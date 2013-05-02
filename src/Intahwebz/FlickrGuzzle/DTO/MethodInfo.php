@@ -7,9 +7,10 @@ use Intahwebz\FlickrGuzzle\DataMapper;
 
 class MethodInfo {
 
-	use DataMapper{
-		createFromData as createFromDataAuto;
-	}
+	use DataMapper;
+//	{
+//		createFromJson as createFromJsonAuto;
+//	}
 
 	static protected $dataMap = array(
 		['name', ['method', 'name']],
@@ -18,9 +19,9 @@ class MethodInfo {
 		['needsSigning', ['method', 'needssigning']],
 		['requiredPerms', ['method', 'requiredperms']],
 
-		['description', ['method', 'description']],
+		['description', ['method', 'description', '_content']],
 
-		['response', ['method', 'response'], 'optional' => TRUE],
+		['response', ['method', 'response', '_content'], 'optional' => TRUE],
 
 		['arguments', ['arguments', 'argument'], 'class' => 'Intahwebz\\FlickrGuzzle\\DTO\\MethodArgument', 'multiple' => TRUE ],
 		['errors', ['errors', 'error'], 'class' => 'Intahwebz\\FlickrGuzzle\\DTO\\MethodError', 'multiple' => TRUE ],
@@ -39,18 +40,18 @@ class MethodInfo {
 	var $errors = array();
 
 
-	static function createFromData($data){
-		$object = self::createFromDataAuto($data);
-
-		$remap = array(
-			'description',
-			'response',
-		);
-
-		$object->remap($remap, '_content');
-
-		return $object;
-	}
+//	static function createFromJson($data){
+//		$object = self::createFromJsonAuto($data);
+//
+//		$remap = array(
+//			'description',
+//			'response',
+//		);
+//
+//		$object->remap($remap, '_content');
+//
+//		return $object;
+//	}
 }
 
 ?>

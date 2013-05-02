@@ -8,7 +8,7 @@ use Intahwebz\FlickrGuzzle\DataMapper;
 class Institution {
 
 	use DataMapper{
-		createFromData as createFromDataAuto;
+		createFromJson as createFromJsonAuto;
 	}
 
 	static protected $dataMap = array(
@@ -24,8 +24,8 @@ class Institution {
 
 	var $urls = array();
 
-	static function createFromData($data){
-		$object = self::createFromDataAuto($data);
+	static function createFromJson($data){
+		$object = self::createFromJsonAuto($data);
 		$object->name = $object->name['_content'];
 		return $object;
 	}

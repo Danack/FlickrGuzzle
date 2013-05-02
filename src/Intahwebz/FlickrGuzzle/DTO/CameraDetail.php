@@ -8,17 +8,21 @@ use Intahwebz\FlickrGuzzle\DataMapper;
 class CameraDetail {
 
 	use DataMapper{
-		createFromData as createFromDataAuto;
+		createFromJson as createFromJsonAuto;
 	}
 
 	static protected $dataMap = array(
 		['cameraDetailID', 'id'],
 		['name', ['name', '_content']],
 
-		['megaPixels', ['details', 'megapixels'], 'optional' => TRUE ],
-		['zoom', ['details','zoom',],  'optional' => TRUE ],
-		['lcdScreenSize', ['details','lcd_screen_size',], 'optional' => TRUE ],
-		['storageType', ['details','memory_type',], 'optional' => TRUE ],
+		['megaPixels', ['details', 'megapixels', '_content'], 'optional' => TRUE ],
+		['zoom', ['details','zoom', '_content'],  'optional' => TRUE ],
+		['lcdScreenSize', ['details','lcd_screen_size', '_content'], 'optional' => TRUE ],
+
+		['memoryType', ['details','memory_type', '_content'], 'optional' => TRUE ],
+		['storageType', ['details','storage_type', '_content'], 'optional' => TRUE ],
+
+		//['images', ['images','storage_type', '_content'], 'optional' => TRUE, 'multiple' => true ],
 	);
 
 	var $cameraDetailID;
@@ -28,6 +32,7 @@ class CameraDetail {
 	var $lcdScreenSize = NULL;
 	var $memoryType  = NULL;
 	var $zoom = NULL;
+
 	var $storageType = NULL;
 	var $images = array();
 
@@ -36,8 +41,8 @@ class CameraDetail {
 	 * @param $data
 	 * @return static
 	 */
-	static function createFromData($data){
-		$object = self::createFromDataAuto($data);
+	static function createFromJson($data){
+		$object = self::createFromJsonAuto($data);
 
 		if(array_key_exists('images', $data) == TRUE){
 			foreach($data['images'] as $size => $image){
@@ -45,15 +50,15 @@ class CameraDetail {
 			}
 		}
 
-		$remap = array(
-			'megaPixels',
-			'lcdScreenSize',
-			'memoryType',
-			'zoom',
-			'storageType'
-		);
-
-		$object->remap($remap, '_content');
+//		$remap = array(
+//			'megaPixels',
+//			'lcdScreenSize',
+//			'memoryType',
+//			'zoom',
+//			'storageType'
+//		);
+//
+//		$object->remap($remap, '_content');
 
 		return $object;
 	}

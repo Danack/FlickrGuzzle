@@ -151,7 +151,7 @@ class FlickrGuzzleClient extends Client{
 
 		if (in_array($className, $hilariousNonStandardResponses) == TRUE) {
 			$params = splitParameters($data);
-			return $className::createFromData($params);
+			return $className::createFromJson($params);
 		}
 
 		$aliasedResponses = array(
@@ -214,7 +214,7 @@ class FlickrGuzzleClient extends Client{
 
 			//var_dump($aliasedData);
 
-			$object = $className::createFromData($aliasedData);
+			$object = $className::createFromJson($aliasedData);
 
 			if ($object == FALSE) {
 

@@ -9,7 +9,7 @@ use Intahwebz\FlickrGuzzle\DataMapper;
 class MethodList {
 
 	use DataMapper{
-		createFromData as createFromDataAuto;
+		createFromJson as createFromJsonAuto;
 	}
 
 	static protected $dataMap = array(
@@ -19,8 +19,8 @@ class MethodList {
 	var $methods = array();
 
 
-	static function createFromData($data){
-		$object = self::createFromDataAuto($data);
+	static function createFromJson($data){
+		$object = self::createFromJsonAuto($data);
 
 		foreach ($object->methods as &$method) {
 			$method = $method['_content'];	//zomg

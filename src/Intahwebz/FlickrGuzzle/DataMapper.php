@@ -14,7 +14,7 @@ namespace Intahwebz\FlickrGuzzle;
  */
 trait DataMapper {
 
-	static function getValueFromAlias($data, $dataMapElement, &$notSet){
+	static function getValueFromAlias($data, $dataMapElement, $optional){
 
 		$dataVariableNameArray = $dataMapElement[1];
 
@@ -39,8 +39,22 @@ trait DataMapper {
 				//[raw]
 				//or [raw, _content]
 				array_key_exists($dataVariableName, $dereferenced) == FALSE){
-				$notSet = TRUE;
-				return FALSE;
+//				$notSet = TRUE;
+//				return FALSE;
+				if ($optional == false) {
+//					$alias = $dataMapElement[1];//$dataVariableNameArray;
+//
+//					if(is_array($alias) == TRUE){
+//						$alias = implode('->', $alias);
+//					}
+//
+					var_dump($data);
+					//TODO - actuall do this.
+//					//$dataString = implode(',', $data);
+
+					throw new \Exception("DataMapper cannot find value from  for mapping to actual value in array ");
+				}
+
 			}
 			$dereferenced = $dereferenced[$dataVariableName];
 		}
@@ -65,19 +79,25 @@ trait DataMapper {
 	 * @return static
 	 * @throws \Exception
 	 */
-	static function createFromData($data){
+	static function createFromJson($jsonData){
 		if (property_exists(__CLASS__, 'dataMap') == FALSE){
 			throw new \Exception("Class ".__CLASS__." is using DataMapper but has not set DataMap.");
 		}
 
 		$instance = new static();
 
+		$instance->mapValuesFromJson($jsonData);
+
+		return $instance;
+	}
+
+
+	function mapValuesFromJson($data){
 		$count = 0;
 
 		foreach(static::$dataMap as $dataMapElement){
 
 			$classVariableName = $dataMapElement[0];
-			//$dataVariableNameArray = $dataMapElement[1];
 			$className = FALSE;
 			$multiple = FALSE;
 
@@ -93,82 +113,64 @@ trait DataMapper {
 				$multiple = $dataMapElement['multiple'];
 			}
 
-			$notFound = FALSE;
+			//$notFound = FALSE;
 
-			$sourceValue = self::getValueFromAlias($data, $dataMapElement, $notFound);
+			$optional = false;
 
-			if($notFound == TRUE){
-				if (array_key_exists('optional', $dataMapElement) == TRUE &&
-					$dataMapElement['optional'] == TRUE){
-					continue;
-				}
+			if (array_key_exists('optional', $dataMapElement) == true &&
+				$dataMapElement['optional'] == true){
+				$optional = true;
+			}
+
+			$sourceValue = self::getValueFromAlias($data, $dataMapElement, $optional);
+
+//			if($notFound == TRUE){
+//				if (array_key_exists('optional', $dataMapElement) == TRUE &&
+//					$dataMapElement['optional'] == TRUE){
+//					continue;
+//				}
+//
+//				$alias = $dataMapElement[1];//$dataVariableNameArray;
+//
+//				if(is_array($alias) == TRUE){
+//					$alias = implode('->', $alias);
+//				}
 //
 //				var_dump($data);
-//				echo "count is $count <br/>";
-//				var_dump(static::$dataMap);
+//				//$dataString = implode(',', $data);
+//
+//				throw new \Exception("DataMapper cannot find value from [".$alias."] for mapping to actual value in array ");
+//				//.var_export($data)
+//			}
 
-				$alias = $dataMapElement[1];//$dataVariableNameArray;
-
-				if(is_array($alias) == TRUE){
-					$alias = implode('->', $alias);
-				}
-
-				var_dump($data);
-				//$dataString = implode(',', $data);
-
-				throw new \Exception("DataMapper cannot find value from [".$alias."] for mapping to actual value in array ");
-				//.var_export($data)
-			}
-
-			if($multiple == TRUE){
-				$instance->{$classVariableName} = array();
-
-				foreach($sourceValue as $sourceValueInstance){
-					if($className != FALSE){
-						$object = $className::createFromData($sourceValueInstance);
-						$instance->{$classVariableName}[] = $object;
-					}
-					else{
-						$instance->{$classVariableName}[] = $sourceValueInstance;
-					}
-				}
-			}
-			else{
-				if($className != FALSE){
-					$object = $className::createFromData($sourceValue);
-					$instance->{$classVariableName} = $object;
-				}
-				else{
-					$instance->{$classVariableName} = $sourceValue;
-				}
-			}
+			$this->setPropertyValue($classVariableName, $sourceValue, $className, $multiple);
 
 			$count++;
 		}
-
-		return $instance;
 	}
 
 
-//	static function createArrayFromData($dataArray, $deference = FALSE){
-//		$objects = array();
-//
-//		foreach($dataArray as $data){
-//
-//			if($deference == TRUE){ //Flickr need an extra deferencing here.
-//				$data = $data[0]; //$data['urls'] => array(array('type' => 'foo', '_content' => 'bar'))
-//			}
-//
-//			$objects[] = static::createFromData($data);
-//		}
-//
-//		return $objects;
-//	}
+	function setPropertyValue($classVariableName, $sourceValue, $className, $multiple){
+		if($multiple == TRUE){
+			$this->{$classVariableName} = array();
 
-	function remap($remap, $index){
-		foreach($remap as $map){
-			if($this->$map != NULL){
-				$this->$map = $this->{$map}[$index];
+			foreach($sourceValue as $sourceValueInstance){
+				if($className != FALSE){
+					$object = $className::createFromJson($sourceValueInstance);
+					$this->{$classVariableName}[] = $object;
+				}
+				else{
+					$this->{$classVariableName}[] = $sourceValueInstance;
+				}
+			}
+		}
+		else{
+			if($className != FALSE){
+				$object = $className::createFromJson($sourceValue);
+				$this->{$classVariableName} = $object;
+			}
+			else{
+				$this->{$classVariableName} = $sourceValue;
 			}
 		}
 	}

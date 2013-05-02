@@ -493,31 +493,33 @@ iconsmall="http://farm1.static.flickr.com/187/cols/56_43fac2cf79_s.jpg">
 		),
 
 // 18
-		"flickr.contacts.getListRecentlyUploaded" => array(
-			'extends' => 'defaultGetOperation',
-			'summary' => 'Return a list of contacts for a user who have recently uploaded photos along with the total count of photos uploaded.<br /><br />
-
-This method is still considered experimental. We don\'t plan for it to change or to go away but so long as this notice is present you should write your code accordingly.',
-			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
-			'parameters' => array(
-				'date_lastupload'    => array(
-					'location' => 'query',
-					'description' => 'todo - describe variable',
-					'optional' => true,
-				),
-				'filter'    => array(
-					'location' => 'query',
-					'description' => 'todo - describe variable',
-					'optional' => true,
-				),
-				'method'    => array(
-					'location' => 'query',
-					'description' => 'Which flickr call is being made.',
-					'default' => 'flickr.contacts.getListRecentlyUploaded',
-				),
-			),
-		),
+// Not going to implement - marked as experimental and appears broken.
+//
+//		"flickr.contacts.getListRecentlyUploaded" => array(
+//			'extends' => 'defaultGetOperation',
+//			'summary' => 'Return a list of contacts for a user who have recently uploaded photos along with the total count of photos uploaded.<br /><br />
+//
+//This method is still considered experimental. We don\'t plan for it to change or to go away but so long as this notice is present you should write your code accordingly.',
+//			'needsSigning' => true,
+//			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
+//			'parameters' => array(
+//				'date_lastupload'    => array(
+//					'location' => 'query',
+//					'description' => 'todo - describe variable',
+//					'optional' => true,
+//				),
+//				'filter'    => array(
+//					'location' => 'query',
+//					'description' => 'todo - describe variable',
+//					'optional' => true,
+//				),
+//				'method'    => array(
+//					'location' => 'query',
+//					'description' => 'Which flickr call is being made.',
+//					'default' => 'flickr.contacts.getListRecentlyUploaded',
+//				),
+//			),
+//		),
 
 // 19
 		"flickr.contacts.getPublicList" => array(
@@ -755,7 +757,7 @@ This method is still considered experimental. We don\'t plan for it to change or
 			'extends' => 'defaultGetOperation',
 			'summary' => 'Removes a photo from a user\'s favorites list.',
 			'needsSigning' => true,
-			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
+			'responseClass' => 'Intahwebz\\FlickrGuzzle\\DTO\\GenericResponse',
 			'parameters' => array(
 				'photo_id'    => array(
 					'location' => 'query',
