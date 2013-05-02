@@ -17,7 +17,7 @@ class PhotoInfo {
 		['rotation', 'rotation'],
 
 		['visibility', 'visibility', 'class' => 'Intahwebz\\FlickrGuzzle\\DTO\\Visibility' ],
-		['photo', NULL, 'class' => 'Intahwebz\\FlickrGuzzle\\DTO\\Photo' ],
+		['photo', null, 'class' => 'Intahwebz\\FlickrGuzzle\\DTO\\Photo' ],
 		['dates', 'dates', 'class' => 'Intahwebz\\FlickrGuzzle\\DTO\\Dates', ],//  ],
 		['urls', ['urls', 'url'], 'class' => 'Intahwebz\\FlickrGuzzle\\DTO\\URL', 'multiple' => TRUE ],
 		['tags', ['tags', 'tag'], 'class' => 'Intahwebz\\FlickrGuzzle\\DTO\\Tag', 'multiple' => TRUE ],

@@ -16,5 +16,4 @@ class CameraBrand {
 		['cameraBrandID', 'id'],
 		['name', 'name'],
 	);
-
 }

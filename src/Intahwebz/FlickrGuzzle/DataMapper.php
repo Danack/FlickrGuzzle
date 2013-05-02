@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Intahwebz\FlickrGuzzle;
 
 
@@ -13,68 +12,6 @@ namespace Intahwebz\FlickrGuzzle;
  * @package Intahwebz\FlickrGuzzle
  */
 trait DataMapper {
-
-	static function getValueFromAlias($data, $dataMapElement, $optional){
-
-		$dataVariableNameArray = $dataMapElement[1];
-
-//		if ($dataVariableNameArray == null){
-//			//Return the original data array
-//			return $data;
-//		}
-
-		if(is_array($dataVariableNameArray) == FALSE){
-			$dataVariableNameArray = array($dataVariableNameArray);
-		}
-
-		$value = $data;
-
-		$aliasPath = '';
-
-		foreach($dataVariableNameArray as $dataVariableName){
-			//$aliasPath .= '/'.$dataVariableName;
-
-			if (is_array($value) == FALSE ||
-				array_key_exists($dataVariableName, $value) == FALSE){
-				if ($optional == true) {
-					return null;
-				}
-//					$alias = $dataMapElement[1];//$dataVariableNameArray;
-//					if(is_array($alias) == TRUE){
-//						$alias = implode('->', $alias);
-//					}
-
-				var_dump($data);
-				//TODO - actually do this.
-//				//$dataString = implode(',', $data);
-
-				throw new \Exception("DataMapper cannot find value from  for mapping to actual value in array ");
-			//	}
-			}
-			if (is_array($value) == false) {
-				throw new \Exception("Uhoh - not an array");
-			}
-			else if (array_key_exists($dataVariableName, $value) == false) {
-				echo "How can this be?";
-			}
-
-			$value = $value[$dataVariableName];
-		}
-
-		if (array_key_exists('unindex', $dataMapElement) == TRUE) {
-			$index = $dataMapElement['unindex'];
-
-			//Amazingly sometimes text is returned as $title['_content'] = $text other
-			//times it's just $title = $text
-			if (is_array($value)) {
-				if (array_key_exists($index, $value) == TRUE) {
-					$value = $value[$index];
-				}
-			}
-		}
-
-		return $value;
-	}
 
 	/**
 	 * @param $data
@@ -93,64 +30,87 @@ trait DataMapper {
 
 
 	function mapValuesFromJson($data){
-		$count = 0;
-
 		foreach(static::$dataMap as $dataMapElement){
-
-			$classVariableName = $dataMapElement[0];
-			$className = FALSE;
-			$multiple = FALSE;
-
 			if (is_array($dataMapElement) == false) {
 				$string = var_export(static::$dataMap, true);
-				throw new \Exception("DataMap is meant to be composed of arrays of entries. You've missed some brackets in class ". __CLASS__." : ".$string);
+				throw new \Exception("DataMap is meant to be composed of arrays of entries. You've missed some brackets in class ".__CLASS__." : ".$string);
 			}
 
-			if(array_key_exists('class', $dataMapElement) == TRUE){
-				$className = $dataMapElement['class'];
-			}
-			if(array_key_exists('multiple', $dataMapElement) == TRUE){
-				$multiple = $dataMapElement['multiple'];
-			}
-
-			//$notFound = FALSE;
-
-			$optional = false;
-
-			if (array_key_exists('optional', $dataMapElement) == true &&
-				$dataMapElement['optional'] == true){
-				$optional = true;
-			}
-
-			$sourceValue = self::getValueFromAlias($data, $dataMapElement, $optional);
-
-//			if($notFound == TRUE){
-//				if (array_key_exists('optional', $dataMapElement) == TRUE &&
-//					$dataMapElement['optional'] == TRUE){
-//					continue;
-//				}
-//
-//				$alias = $dataMapElement[1];//$dataVariableNameArray;
-//
-//				if(is_array($alias) == TRUE){
-//					$alias = implode('->', $alias);
-//				}
-//
-//				var_dump($data);
-//				//$dataString = implode(',', $data);
-//
-//				throw new \Exception("DataMapper cannot find value from [".$alias."] for mapping to actual value in array ");
-//				//.var_export($data)
-//			}
-
-			$this->setPropertyValue($classVariableName, $sourceValue, $className, $multiple);
-
-			$count++;
+			$sourceValue = self::getValueFromAlias($data, $dataMapElement);
+			$this->setPropertyValue($dataMapElement, $sourceValue);
 		}
 	}
 
+	static function getValueFromAlias($data, $dataMapElement){
 
-	function setPropertyValue($classVariableName, $sourceValue, $className, $multiple){
+		$dataVariableNameArray = $dataMapElement[1];
+
+		if ($dataVariableNameArray == null) {
+			//value is likely to be a class that has been merged into the Json at the root level,
+			//so pass back same array, so that the class that will be instantiated has access to all of it.
+			return $data;
+		}
+
+		if(is_array($dataVariableNameArray) == FALSE){
+			$dataVariableNameArray = array($dataVariableNameArray);
+		}
+
+		$value = $data;
+
+		foreach($dataVariableNameArray as $dataVariableName){
+			if (is_array($value) == FALSE ||
+				array_key_exists($dataVariableName, $value) == FALSE){
+				if (array_key_exists('optional', $dataMapElement) == true &&
+					$dataMapElement['optional'] == true){
+					return null;
+				}
+				//var_dump($data);
+				//var_dump($dataMapElement);
+
+				$dataPath = implode('->', $dataVariableNameArray);
+				throw new \Exception("DataMapper cannot find value from $dataPath in source JSON to map to actual value in class ".__CLASS__);
+			}
+
+			$value = $value[$dataVariableName];
+		}
+
+		$value = self::unindexValue($value, $dataMapElement);
+		return $value;
+	}
+
+
+	//Amazingly sometimes text is returned as $title['_content'] = $text other
+	//times it's just $title = $text
+	public static function unindexValue($value, $dataMapElement){
+
+		if (array_key_exists('unindex', $dataMapElement) == TRUE) {
+			$index = $dataMapElement['unindex'];
+			if (is_array($value)) {
+				if (array_key_exists($index, $value) == TRUE) {
+					$value = $value[$index];
+				}
+			}
+		}
+
+		return $value;
+	}
+
+
+
+
+	function setPropertyValue($dataMapElement, $sourceValue){
+
+		$classVariableName = $dataMapElement[0];
+		$className = false;
+		$multiple = false;
+
+		if(array_key_exists('class', $dataMapElement) == true){
+			$className = $dataMapElement['class'];
+		}
+		if(array_key_exists('multiple', $dataMapElement) == true){
+			$multiple = $dataMapElement['multiple'];
+		}
+
 		if($multiple == TRUE){
 			$this->{$classVariableName} = array();
 

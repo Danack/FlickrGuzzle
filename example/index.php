@@ -128,7 +128,6 @@ try{
 		}
 
 		case 'flickrAuthRequest': {
-
 			$callbackURL = sprintf('%s://%s:%d%s',
 				(@$_SERVER['HTTPS'] == "on") ? 'https' : 'http',
 				$_SERVER['SERVER_NAME'],
