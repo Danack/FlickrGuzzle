@@ -4,7 +4,7 @@
 namespace Intahwebz\FlickrGuzzle;
 
 
-class DataMapperException {
+class DataMapperException extends \Exception {
 
 }
 

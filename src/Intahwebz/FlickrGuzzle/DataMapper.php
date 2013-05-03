@@ -2,6 +2,7 @@
 
 namespace Intahwebz\FlickrGuzzle;
 
+use Intahwebz\FlickrGuzzle\DataMapperException;
 
 /**
  * Trait DataMapper
@@ -16,11 +17,11 @@ trait DataMapper {
 	/**
 	 * @param $data
 	 * @return static An instance of the class that the trait is used in. 'Static' is meant to be the 'late static class' - not many IDEs support this DOC comment yet.
-	 * @throws \Exception
+	 * @throws DataMapperException
 	 */
 	static function createFromJson($jsonData){
-		if (property_exists(__CLASS__, 'dataMap') == FALSE){
-			throw new \Exception("Class ".__CLASS__." is using DataMapper but has not set DataMap.");
+		if (property_exists(__CLASS__, 'dataMap') == false){
+			throw new DataMapperException("Class ".__CLASS__." is using DataMapper but has no DataMap property.");
 		}
 
 		$instance = new static();
@@ -30,13 +31,13 @@ trait DataMapper {
 
 	/**
 	 * @param $data
-	 * @throws \Exception
+	 * @throws DataMapperException
 	 */
 	function mapValuesFromData($data){
 		foreach(static::$dataMap as $dataMapElement){
-			if (is_array($dataMapElement) == FALSE) {
-				$string = var_export(static::$dataMap, TRUE);
-				throw new \Exception("DataMap is meant to be composed of arrays of entries. You've missed some brackets in class ".__CLASS__." : ".$string);
+			if (is_array($dataMapElement) == false) {
+				$string = var_export(static::$dataMap, true);
+				throw new DataMapperException("DataMap is meant to be composed of arrays of entries. You've missed some brackets in class ".__CLASS__." : ".$string);
 			}
 
 			$sourceValue = self::getValueFromData($data, $dataMapElement);
@@ -50,34 +51,34 @@ trait DataMapper {
 	 * @param $data
 	 * @param $dataMapElement
 	 * @return array|null
-	 * @throws \Exception
+	 * @throws DataMapperException
 	 */
 	static function getValueFromData($data, $dataMapElement){
 		$dataVariableNameArray = $dataMapElement[1];
-		if ($dataVariableNameArray == NULL) {
+		if ($dataVariableNameArray == null) {
 			//value is likely to be a class that has been merged into the Json at the root level,
 			//so pass back same array, so that the class that will be instantiated has access to all of it.
 			return $data;
 		}
 
-		if(is_array($dataVariableNameArray) == FALSE){
+		if(is_array($dataVariableNameArray) == false){
 			$dataVariableNameArray = array($dataVariableNameArray);
 		}
 
 		$value = $data;
 
 		foreach($dataVariableNameArray as $dataVariableName){
-			if (is_array($value) == FALSE ||
-				array_key_exists($dataVariableName, $value) == FALSE){
-				if (array_key_exists('optional', $dataMapElement) == TRUE &&
-					$dataMapElement['optional'] == TRUE){
-					return NULL;
+			if (is_array($value) == false ||
+				array_key_exists($dataVariableName, $value) == false){
+				if (array_key_exists('optional', $dataMapElement) == true &&
+					$dataMapElement['optional'] == true){
+					return null;
 				}
 				//var_dump($data);
 				//var_dump($dataMapElement);
 
 				$dataPath = implode('->', $dataVariableNameArray);
-				throw new \Exception("DataMapper cannot find value from $dataPath in source JSON to map to actual value in class ".__CLASS__);
+				throw new DataMapperException("DataMapper cannot find value from $dataPath in source JSON to map to actual value in class ".__CLASS__);
 			}
 
 			$value = $value[$dataVariableName];
@@ -100,10 +101,10 @@ trait DataMapper {
 	 */
 	public static function unindexValue($value, $dataMapElement){
 
-		if (array_key_exists('unindex', $dataMapElement) == TRUE) {
+		if (array_key_exists('unindex', $dataMapElement) == true) {
 			$index = $dataMapElement['unindex'];
 			if (is_array($value)) {
-				if (array_key_exists($index, $value) == TRUE) {
+				if (array_key_exists($index, $value) == true) {
 					$value = $value[$index];
 				}
 			}
@@ -123,21 +124,21 @@ trait DataMapper {
 	 */
 	function setPropertyValue($dataMapElement, $sourceValue){
 		$classVariableName = $dataMapElement[0];
-		$className = FALSE;
-		$multiple = FALSE;
+		$className = false;
+		$multiple = false;
 
-		if(array_key_exists('class', $dataMapElement) == TRUE){
+		if(array_key_exists('class', $dataMapElement) == true){
 			$className = $dataMapElement['class'];
 		}
-		if(array_key_exists('multiple', $dataMapElement) == TRUE){
+		if(array_key_exists('multiple', $dataMapElement) == true){
 			$multiple = $dataMapElement['multiple'];
 		}
 
-		if($multiple == TRUE){
+		if($multiple == true){
 			$this->{$classVariableName} = array();
 
 			foreach($sourceValue as $sourceValueInstance){
-				if($className != FALSE){
+				if($className != false){
 					$object = $className::createFromJson($sourceValueInstance);
 					$this->{$classVariableName}[] = $object;
 				}
@@ -147,7 +148,7 @@ trait DataMapper {
 			}
 		}
 		else{
-			if($className != FALSE){
+			if($className != false){
 				$object = $className::createFromJson($sourceValue);
 				$this->{$classVariableName} = $object;
 			}
