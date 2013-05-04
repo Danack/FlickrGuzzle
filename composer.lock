@@ -1,5 +1,9 @@
 {
-    "hash": "26b1cf46b64c07d344e2952fbc617a65",
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+    ],
+    "hash": "3e307ba62a7d0dddacb2ac9ee326761e",
     "packages": [
         {
             "name": "guzzle/danackguzzle",
@@ -7,12 +11,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Danack/guzzle.git",
-                "reference": "12b8de6add18438ab74b05dee56806b81d012289"
+                "reference": "e602520f7ee245715c9c4058ed788aaa9f7355be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Danack/guzzle/zipball/12b8de6add18438ab74b05dee56806b81d012289",
-                "reference": "12b8de6add18438ab74b05dee56806b81d012289",
+                "url": "https://api.github.com/repos/Danack/guzzle/zipball/e602520f7ee245715c9c4058ed788aaa9f7355be",
+                "reference": "e602520f7ee245715c9c4058ed788aaa9f7355be",
                 "shasum": ""
             },
             "require": {
@@ -93,7 +97,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2013-04-11 00:00:05"
+            "time": "2013-04-18 13:32:20"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -151,49 +155,14 @@
         }
     ],
     "packages-dev": [
-        {
-            "name": "intahwebz/utils",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Danack/intahwebz-utils.git",
-                "reference": "29b46fd9c1ae26f6eb4b3519dc1b3cb64822eb51"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Danack/intahwebz-utils/zipball/29b46fd9c1ae26f6eb4b3519dc1b3cb64822eb51",
-                "reference": "29b46fd9c1ae26f6eb4b3519dc1b3cb64822eb51",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Intahwebz": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "authors": [
-                {
-                    "name": "Dan Ackroyd",
-                    "email": "Danack@basereality.com",
-                    "homepage": "http://www.basereality.com"
-                }
-            ],
-            "description": "Collection of utility PHP classes for intahwebz development.",
-            "keywords": [
-                "intahwebz",
-                "library"
-            ],
-            "time": "2013-04-13 13:49:07"
-        }
+
     ],
     "aliases": [
 
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "guzzle/danackguzzle": 20,
-        "intahwebz/utils": 20
+        "guzzle/danackguzzle": 20
     },
     "platform": [
 
