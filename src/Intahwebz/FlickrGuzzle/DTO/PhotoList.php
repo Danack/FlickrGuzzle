@@ -5,14 +5,13 @@ namespace Intahwebz\FlickrGuzzle\DTO;
 
 use Intahwebz\FlickrGuzzle\DataMapper;
 
-use Intahwebz\Utils\JSONFactory;
-
+//use Intahwebz\Utils\JSONFactory;
 
 
 class PhotoList {
 
 	use DataMapper;
-	use JSONFactory;
+	//use JSONFactory;
 
 	static protected $dataMap = array(
 		['page', 'page'],

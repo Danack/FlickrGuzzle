@@ -20,9 +20,9 @@
 
 	"require":{
 		"guzzle/danackguzzle": "3.3.*@dev"
-	},
-
-	"require-dev": {
-		"intahwebz/utils": "dev-master"
 	}
+
+//	"require-dev": {
+//		"intahwebz/utils": "dev-master"
+//	}
 }
