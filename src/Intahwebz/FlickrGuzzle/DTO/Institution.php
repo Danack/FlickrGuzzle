@@ -12,10 +12,10 @@ class Institution {
 	}
 
 	static protected $dataMap = array(
-		['nsid', 'nsid'],
-		['dateLaunch', 'date_launch'],
-		['name', 'name'],
-		['urls', 	['urls', 'url'], 'class' => 'Intahwebz\\FlickrGuzzle\\DTO\\URL', 'multiple' => true],
+		['nsid',	'nsid'],
+		['dateLaunch',	'date_launch'],
+		['name',	'name'],
+		['urls', 	['urls', 'url'], 'class' => 'Intahwebz\FlickrGuzzle\DTO\URL', 'multiple' => true],
 	);
 
 	var $nsid;

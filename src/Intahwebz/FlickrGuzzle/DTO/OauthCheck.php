@@ -21,7 +21,7 @@ class OauthCheck {
 		//TODO - Shouldn't this be multiple e.g. read + write? or does flickr just return one
 		//permission that implies others e.g. write => read + write
 		['permissions', ['perms', '_content']],
-		['user', 'user', 'class' => 'Intahwebz\\FlickrGuzzle\\DTO\\User' ]
+		['user', 'user', 'class' => 'Intahwebz\FlickrGuzzle\DTO\User' ]
 	);
 
 	var $permissions;

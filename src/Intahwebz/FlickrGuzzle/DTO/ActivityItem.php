@@ -26,7 +26,7 @@ class ActivityItem {
 		['more', 'more', 'optional' => true],
 		['activityEventList',
 			['activity', 'event'],
-			'class' => 'Intahwebz\\FlickrGuzzle\\DTO\\ActivityEvent',
+			'class' => 'Intahwebz\FlickrGuzzle\DTO\ActivityEvent',
 			'multiple' => true
 		],
 		['title', 'title'],

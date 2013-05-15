@@ -10,16 +10,16 @@ class LookupGallery {
 	use DataMapper;
 
 	static protected $dataMap = array(
-		['galleryID', 'id'],
-		['url', 'url'],
-		['owner', 'owner'],
-		['primaryPhotoID', 'primary_photo_id'],
-		['dateCreate', 'date_create'],
-		['dateUpdate', 'date_update'],
-		['countPhotos', 'count_photos'],
-		['countVideos', 'count_videos'],
-		['countViews', 'count_views'],
-		['countComments', 'count_comments'],
+		['galleryID',	'id'],
+		['url',		'url'],
+		['owner',	'owner'],
+		['primaryPhotoID',	'primary_photo_id'],
+		['dateCreate',	'date_create'],
+		['dateUpdate',	'date_update'],
+		['countPhotos',	'count_photos'],
+		['countVideos',	'count_videos'],
+		['countViews',	'count_views'],
+		['countComments',	'count_comments'],
 		['server', 'server', 'optional' => true],
 		['farm', 'farm', 'optional' => true],
 		['secret', 'secret', 'optional' => true ],
@@ -29,7 +29,6 @@ class LookupGallery {
 		['primaryPhotoServer', 'primary_photo_server'],
 		['primaryPhotoFarm', 'primary_photo_farm'],
 		['primaryPhotoSecret', 'primary_photo_secret'],
-
 	);
 
 	var $galleryID;

@@ -10,7 +10,7 @@ class InstitutionList {
 	use DataMapper;
 
 	static protected $dataMap = array(
-		['institutions', 'institution', 'class' => 'Intahwebz\\FlickrGuzzle\\DTO\\Institution', 'multiple' => 'true'],
+		['institutions', 'institution', 'class' => 'Intahwebz\FlickrGuzzle\DTO\Institution', 'multiple' => 'true'],
 	);
 
 	var $institutions = array();

@@ -28,7 +28,6 @@ class MethodList {
 
 		return $object;
 	}
-
 }
 
 //<methods>

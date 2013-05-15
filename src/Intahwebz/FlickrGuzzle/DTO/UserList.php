@@ -9,7 +9,7 @@ class UserList{
 	use DataMapper;
 
 	static protected $dataMap = array(
-		['users', 'contact', 'class' => 'Intahwebz\\FlickrGuzzle\\DTO\\Owner', 'multiple' => TRUE ],
+		['users', 'contact', 'class' => 'Intahwebz\FlickrGuzzle\DTO\Owner', 'multiple' => TRUE ],
 		['page', 'page'],
 		['pages', 'pages'],
 		['perPage', 'perpage'],

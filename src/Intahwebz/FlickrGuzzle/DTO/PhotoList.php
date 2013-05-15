@@ -18,7 +18,7 @@ class PhotoList {
 		['pages', 'pages'],
 		['perPage', 'perpage'],
 		['total', 'total'],
-		['photos', 'photo', 'class' => 'Intahwebz\\FlickrGuzzle\\DTO\\Photo', 'multiple' => TRUE ],
+		['photos', 'photo', 'class' => 'Intahwebz\FlickrGuzzle\DTO\Photo', 'multiple' => TRUE ],
 	);
 
 	var $page;

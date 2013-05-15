@@ -10,9 +10,9 @@ class GeoPerms {
 	use DataMapper;
 
 	static protected $dataMap = array(
-		['isPublic', 'ispublic'],
-		['isContact', 'iscontact'],
-		['isFriend', 'isfriend'],
+		['isPublic',	'ispublic'],
+		['isContact',	'iscontact'],
+		['isFriend',	'isfriend'],
 		['isFamily', 	'isfamily'],
 	);
 

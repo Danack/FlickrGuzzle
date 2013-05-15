@@ -14,7 +14,7 @@ class ActivityInfo {
 		['pages', 'pages'],
 		['perPage', 'perpage'],
 		['total', 'total'],
-		['activityItemList', 'item', 'class' => 'Intahwebz\\FlickrGuzzle\\DTO\\ActivityItem', 'multiple' => true],
+		['activityItemList', 'item', 'class' => 'Intahwebz\FlickrGuzzle\DTO\ActivityItem', 'multiple' => true],
 	);
 
 	var $activityItemList = array();

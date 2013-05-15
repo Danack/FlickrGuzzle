@@ -11,7 +11,7 @@ class CameraBrandList {
 	use DataMapper;
 
 	static protected $dataMap = array(
-		['cameraBrands', 'brand', 'class' => 'Intahwebz\\FlickrGuzzle\\DTO\\CameraBrand', 'multiple' => TRUE ],
+		['cameraBrands', 'brand', 'class' => 'Intahwebz\FlickrGuzzle\DTO\CameraBrand', 'multiple' => TRUE ],
 	);
 
 	var $cameraBrands = array();

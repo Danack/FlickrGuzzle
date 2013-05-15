@@ -23,8 +23,8 @@ class MethodInfo {
 
 		['response', ['method', 'response', '_content'], 'optional' => TRUE],
 
-		['arguments', ['arguments', 'argument'], 'class' => 'Intahwebz\\FlickrGuzzle\\DTO\\MethodArgument', 'multiple' => TRUE ],
-		['errors', ['errors', 'error'], 'class' => 'Intahwebz\\FlickrGuzzle\\DTO\\MethodError', 'multiple' => TRUE ],
+		['arguments', ['arguments', 'argument'], 'class' => 'Intahwebz\FlickrGuzzle\DTO\MethodArgument', 'multiple' => TRUE ],
+		['errors', ['errors', 'error'], 'class' => 'Intahwebz\FlickrGuzzle\DTO\MethodError', 'multiple' => TRUE ],
 	);
 
 	var	$name;

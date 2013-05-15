@@ -23,6 +23,9 @@ use Intahwebz\FlickrGuzzle\DataMapperException;
  * 											an array. Default is false.
  * 			'class'	=> 'Intahwebz\FlickrGuzzle\PropertyName'   Index 'class' - optional flag of whether to create the
  * 																property as an object. Value must be fully namespaced.
+ * 			'unindex' => '_content'				Index 'unindex' - Optional flag of whether to 'unindex' the value from an
+ * 											array to a plain value, if the value is an array. e.g.
+ * 											$tag = $tag['_content']. Has no effect if the value is not an array or if that 											key is not set.
  *     ]
  * );
  *
