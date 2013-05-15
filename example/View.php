@@ -374,7 +374,7 @@ class View {
 		}
 
 
-		echo "PhotoInfo: <br/>";
+		echo "PhotoInfo has lots of info: <br/>";
 		var_dump($photoInfo);
 
 		$this->renderFooter();

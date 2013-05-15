@@ -26,6 +26,12 @@ class FlickrGuzzleClient extends Client{
 		//1: Photo not found
 		//1, "message":"User does not have stats"
 		2 => 'Maximum number of tags reached',
+
+		//Trying to favourite your own picture...
+		//'stat' => string 'fail' (length=4)
+		//'code' => int 2
+		//'message' => string 'Photo is owned by you'
+
 		96 => 'Invalid signature',
 		97 => 'Missing signature',
 		98 => 'Invalid auth token.',
@@ -38,6 +44,41 @@ class FlickrGuzzleClient extends Client{
 		116 => 'Bad URL found',
 	);
 
+	public $xmlResponses = array(
+		"Intahwebz\\FlickrGuzzle\\DTO\\FileUploadResponse"
+	);
+
+	public $nonStandardResponses = array(
+		'Intahwebz\FlickrGuzzle\DTO\OauthAccessToken',
+		'Intahwebz\FlickrGuzzle\DTO\OauthRequestToken',
+	);
+
+	public $aliasedResponses = array(
+		'Intahwebz\FlickrGuzzle\DTO\CameraBrandList' => 'brands',
+		'Intahwebz\FlickrGuzzle\DTO\CameraDetailList' => 'cameras',
+		'Intahwebz\FlickrGuzzle\DTO\PhotoList' => 'photos',
+		//"Intahwebz\\FlickrGuzzle\\DTO\\Photo' => NULL,
+		'Intahwebz\FlickrGuzzle\DTO\PhotoInfo' => 'photo',
+		'Intahwebz\FlickrGuzzle\DTO\OauthCheck' => 'oauth',
+		//"Intahwebz\\FlickrGuzzle\\DTO\\MethodInfo' => NULL,
+		'Intahwebz\FlickrGuzzle\DTO\MethodList' => 'methods',
+		'Intahwebz\FlickrGuzzle\DTO\InstitutionList' => 'institutions',
+		//"Intahwebz\\FlickrGuzzle\\DTO\\LicenseList' => NULL,
+		'Intahwebz\FlickrGuzzle\DTO\ActivityInfo"' => 'items',
+		'Intahwebz\FlickrGuzzle\DTO\PhotoInfoTransform"' => 'photoid',
+		'Intahwebz\FlickrGuzzle\DTO\NoteID' => 'note',
+		'Intahwebz\FlickrGuzzle\DTO\LookupUser' => 'user',
+		'Intahwebz\FlickrGuzzle\DTO\LookupGroup' => 'group',
+		'Intahwebz\FlickrGuzzle\DTO\LookupGallery' => 'gallery',
+		//"Intahwebz\\FlickrGuzzle\\DTO\\URLInfo" => NULL,
+		'Intahwebz\FlickrGuzzle\DTO\TagList' => array('photo', 'who', 'hottags'),
+		'Intahwebz\FlickrGuzzle\DTO\PlaceList' => 'places',
+		'Intahwebz\FlickrGuzzle\DTO\UserBlogList' => 'blogs',
+		'Intahwebz\FlickrGuzzle\DTO\BlogServiceList' => 'services',
+		//"Intahwebz\\FlickrGuzzle\\DTO\\GenericResponse' => NULL,
+		'Intahwebz\FlickrGuzzle\DTO\UserList' => array('contacts'),
+		//Intahwebz\FlickrGuzzle\DTO\AccountStat
+	);
 
 	/**
 	 * @param $command
@@ -116,8 +157,22 @@ class FlickrGuzzleClient extends Client{
 		return $client;
 	}
 
+	
+	function parseXMLResponse($data, $className) {
+		//Wtf is this?
+		//oh - this function call always returns 'xml' even if you request JSON.
+//				xml version="1.0" encoding="utf-8"
+//			<rsp stat="ok">
+//				<photoid>8636447595</photoid>
+//			</rsp>
+		$parsedResponse = $this->getResponseFromXML($data);
+
+		$this->checkErrorResponseFromXML($parsedResponse);
+		return $className::createFromData($parsedResponse);
+	}
+	
 	/**
-	 * Creates DTO objects from the response.
+	 * Creates domain objects from the response.
 	 *
 	 * @param $className
 	 * @param OperationCommand $command
@@ -127,110 +182,77 @@ class FlickrGuzzleClient extends Client{
 		$className = $command->getOperation()->getResponseClass();
 		$data = $command->getRequest()->getResponse()->getBody(TRUE);
 
-		$xmlResponses = array(
-			"Intahwebz\\FlickrGuzzle\\DTO\\FileUploadResponse"
-		);
-
-		if (in_array($className, $xmlResponses) == TRUE) {
-			//Wtf is this shit.
-			//oh - this function call always returns xml even if you request JSON.
-//				xml version="1.0" encoding="utf-8"
-//			<rsp stat="ok">
-//				<photoid>8636447595</photoid>
-//			</rsp>
-			$parsedResponse = $this->getResponseFromXML($data);
-
-			$this->checkErrorResponseFromXML($parsedResponse);
-			return $className::createFromData($parsedResponse);
+		//Some responses are XML
+		if (in_array($className, $this->xmlResponses) == TRUE) {
+			return $this->parseXMLResponse($data, $className);
 		}
 
-		$hilariousNonStandardResponses = array(
-			'Intahwebz\\FlickrGuzzle\\DTO\\OauthAccessToken',
-			'Intahwebz\\FlickrGuzzle\\DTO\\OauthRequestToken',
-		);
-
-		if (in_array($className, $hilariousNonStandardResponses) == TRUE) {
+		//Some responses are key-value pairs :P
+		if (in_array($className, $this->nonStandardResponses) == TRUE) {
 			$params = splitParameters($data);
 			return $className::createFromJson($params);
 		}
 
-		$aliasedResponses = array(
-			'Intahwebz\\FlickrGuzzle\\DTO\\CameraBrandList' => 'brands',
-			"Intahwebz\\FlickrGuzzle\\DTO\\CameraDetailList" => 'cameras',
-			"Intahwebz\\FlickrGuzzle\\DTO\\PhotoList" => 'photos',
-			"Intahwebz\\FlickrGuzzle\\DTO\\Photo" => NULL,
-			"Intahwebz\\FlickrGuzzle\\DTO\\PhotoInfo" => 'photo',
-			"Intahwebz\\FlickrGuzzle\\DTO\\OauthCheck" => 'oauth',
-			"Intahwebz\\FlickrGuzzle\\DTO\\MethodInfo" => NULL,
-			"Intahwebz\\FlickrGuzzle\\DTO\\MethodList" => 'methods',
-			"Intahwebz\\FlickrGuzzle\\DTO\\InstitutionList" => 'institutions',
-			"Intahwebz\\FlickrGuzzle\\DTO\\LicenseList" => NULL,
-			"Intahwebz\\FlickrGuzzle\\DTO\\ActivityInfo" => 'items',
-			"Intahwebz\\FlickrGuzzle\\DTO\\PhotoInfoTransform" => 'photoid',
-			"Intahwebz\\FlickrGuzzle\\DTO\\NoteID" => 'note',
-			'Intahwebz\\FlickrGuzzle\\DTO\\LookupUser' => 'user',
-			'Intahwebz\\FlickrGuzzle\\DTO\\LookupGroup' => 'group',
-			'Intahwebz\\FlickrGuzzle\\DTO\\LookupGallery' => 'gallery',
-			"Intahwebz\\FlickrGuzzle\\DTO\\URLInfo" => NULL,
-			'Intahwebz\\FlickrGuzzle\\DTO\\TagList' => array('photo', 'who', 'hottags', NULL),
-			"Intahwebz\\FlickrGuzzle\\DTO\\PlaceList" => 'places',
-			"Intahwebz\\FlickrGuzzle\\DTO\\UserBlogList" => 'blogs',
-			"Intahwebz\\FlickrGuzzle\\DTO\\BlogServiceList" => 'services',
-			"Intahwebz\\FlickrGuzzle\\DTO\\GenericResponse" => null,
-			"Intahwebz\\FlickrGuzzle\\DTO\\UserList" => array('contacts'),
-			//Intahwebz\FlickrGuzzle\DTO\AccountStat
-		);
+		$decodedData = json_decode($data, TRUE);
 
-		if (array_key_exists($className, $aliasedResponses) == TRUE) {
-			$dataJson = json_decode($data, TRUE);
+		//var_dump($decodedData);
 
-			//var_dump($dataJson);
+		$this->checkErrorResponseFromJSON($decodedData);
 
-			$this->checkErrorResponseFromJSON($dataJson);
-
-			$alias = $aliasedResponses[$className];
-
-			if (is_array($alias) == FALSE) {
-				$alias = array($alias);
-			}
-
-			$aliasedData = FALSE;
-
-			foreach ($alias as $aliasElement) {
-				if ($aliasElement == NULL) {
-					$aliasedData = $dataJson;
-				}
-				else{
-					if (array_key_exists($aliasElement, $dataJson) ){
-						$aliasedData = $dataJson[$aliasElement];
-						break;
-					}
-				}
-			}
-
-			if ($aliasedData == FALSE) {
-				throw new FlickrGuzzleException("Failed to extract data from returned response. Please check the alias that is meant to point to the data.");
-			}
-
-			//var_dump($aliasedData);
-
-			$object = $className::createFromJson($aliasedData);
-
-			if ($object == FALSE) {
-
-				//TODO - this is for development only.
-//				var_dump($data);
-
-				throw new FlickrGuzzleException("Failed to create object $className - or possibly just failed to return the object from the createFromData function.");
-			}
-
-			return $object;
+		$decodedData = $this->unaliasData($className, $decodedData);
+		if ($decodedData == FALSE) {
+			throw new FlickrGuzzleException("Failed to extract data from returned response. Please check the alias that is meant to point to the data.");
 		}
 
-		var_dump($data);
-		throw new FlickrGuzzleException("Class-name [".$className."] has no instructions on how to create it in createObject.");
+
+		$object = $className::createFromJson($decodedData);
+
+		if ($object == FALSE) {
+			//TODO - this is for development only.
+//				var_dump($data);
+			throw new FlickrGuzzleException("Failed to create object $className - or possibly just failed to return the object from the createFromData function.");
+		}
+
+		return $object;
 	}
 
+
+	/**
+	 * The data returned from the flickr API is always encapsulated at the top level
+	 *
+	 * @param $className
+	 * @param $dataJson
+	 * @return mixed
+	 */
+	function unaliasData($className, $dataJson){
+		if (array_key_exists($className, $this->aliasedResponses) == FALSE) {
+			return $dataJson;
+		}
+
+		$alias = $this->aliasedResponses[$className];
+
+		if (is_array($alias) == FALSE) {
+			$alias = array($alias);
+		}
+
+		$aliasedData = $dataJson;
+
+		foreach ($alias as $aliasElement) {
+			if (array_key_exists($aliasElement, $dataJson) ){
+				$aliasedData = $dataJson[$aliasElement];
+				break;//We found the data, stop searching.
+			}
+		}
+
+		return $aliasedData;
+	}
+
+
+	/**
+	 * Check whether stat is set in an JSON response and whether it is 'ok'. if not generate a FlickrAPIException through processErrorResponse
+	 * The Flickr API (generally) doesn't give HTTP error codes. Instead it just sets an appropriate 'stat' code.
+	 * @param $parsedResponse
+	 */
 	function	checkErrorResponseFromJSON($dataJson){
 		if (array_key_exists('stat', $dataJson) == TRUE &&
 			$dataJson['stat'] != 'ok') {
@@ -250,6 +272,8 @@ class FlickrGuzzleClient extends Client{
 	}
 
 	/**
+	 * Check whether stat is set in an XML response and whether it is 'ok'. if not generate a FlickrAPIException through processErrorResponse
+	 * The Flickr API (generally) doesn't give HTTP error codes. Instead it just sets an appropriate 'stat' code.
 	 * @param $parsedResponse
 	 */
 	function checkErrorResponseFromXML($parsedResponse) {
@@ -271,8 +295,12 @@ class FlickrGuzzleClient extends Client{
 		}
 	}
 
+	/**
+	 * @param $errorCode
+	 * @param null $message
+	 * @throws FlickrAPIException
+	 */
 	function	processErrorResponse($errorCode, $message = NULL){
-
 		if ($message == NULL) {
 			$message = 'No message set.';
 		}
