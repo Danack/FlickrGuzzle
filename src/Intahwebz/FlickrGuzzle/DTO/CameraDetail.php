@@ -21,8 +21,6 @@ class CameraDetail {
 
 		['memoryType', ['details','memory_type', '_content'], 'optional' => TRUE ],
 		['storageType', ['details','storage_type', '_content'], 'optional' => TRUE ],
-
-		//['images', ['images','storage_type', '_content'], 'optional' => TRUE, 'multiple' => true ],
 	);
 
 	var $cameraDetailID;

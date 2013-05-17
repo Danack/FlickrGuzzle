@@ -4,6 +4,7 @@
 namespace Intahwebz\FlickrGuzzle;
 
 use Intahwebz\FlickrGuzzle\DTO\OauthAccessToken;
+use Intahwebz\FlickrGuzzle\FlickrAPIException;
 
 use Guzzle\Common\Collection;
 use Guzzle\Service\Client;
@@ -21,6 +22,8 @@ class FlickrGuzzleClient extends Client{
 	const PLACE_TYPE_COUNTRY = 12;
 	const PLACE_TYPE_CONTINENT = 29;
 
+	//The error codes are dependent on which function is being called :P
+	//TODO Need to make a list of errors per function.
 	static public $knownErrorCodes = array(
 		1 => 'Required arguments missing',
 		//1: Photo not found
@@ -84,9 +87,7 @@ class FlickrGuzzleClient extends Client{
 	 * @param $command
 	 * @return mixed
 	 */
-	public static function factoryWithCommand($command, $config = array())
-	{
-		//$config = array();
+	public static function factoryWithCommand($command, $config = array()){
 		$client = self::factory($config);
 		return $client->getCommandAndExecute($command);
 	}
@@ -104,8 +105,7 @@ class FlickrGuzzleClient extends Client{
 	 *
 	 * @return FlickrGuzzleClient
 	 */
-	public static function factory($config = array())
-	{
+	public static function factory($config = array()) {
 		if ($config instanceof OauthAccessToken) {
 			$oauthAccessToken = $config;
 			$config = array(
@@ -157,7 +157,13 @@ class FlickrGuzzleClient extends Client{
 		return $client;
 	}
 
-	
+	/**
+	 * Parse an XML resonse. The Flickr API is hard-coded to return XML for some functions :P
+	 *
+	 * @param $data
+	 * @param $className
+	 * @return mixed
+	 */
 	function parseXMLResponse($data, $className) {
 		//Wtf is this?
 		//oh - this function call always returns 'xml' even if you request JSON.
@@ -203,7 +209,6 @@ class FlickrGuzzleClient extends Client{
 		if ($decodedData == FALSE) {
 			throw new FlickrGuzzleException("Failed to extract data from returned response. Please check the alias that is meant to point to the data.");
 		}
-
 
 		$object = $className::createFromJson($decodedData);
 
@@ -322,11 +327,9 @@ class FlickrGuzzleClient extends Client{
 	 * @param $xml
 	 * @return mixed
 	 *
-	 *
 	 * Taken from https://github.com/dopiaza/DPZFlickr
 	 */
-	private function getResponseFromXML($xml)
-	{
+	private function getResponseFromXML($xml){
 		$rsp = array();
 		$stat = 'fail';
 		$matches = array();
@@ -381,8 +384,11 @@ class FlickrGuzzleClient extends Client{
 		return $rsp;
 	}
 
+	/**
+	 * Calculate how many of the entries in the Service description have been implemented.
+	 * @return array
+	 */
 	static function getAPIProgress(){
-
 		$serviceDescription = include __DIR__ . '/service.php';
 
 		$operationCount = 0;
@@ -416,8 +422,13 @@ class FlickrGuzzleClient extends Client{
 		return $result;
 	}
 
-
-
+	/**
+	 * Get and execute a command in one function. Allows return type hinting.
+	 * http://confluence.jetbrains.com/display/PhpStorm/PhpStorm+Advanced+Metadata
+	 * @param $name
+	 * @param array $args
+	 * @return mixed
+	 */
 	public function getCommandAndExecute($name, array $args = array()) {
 		$command = $this->getCommand($name, $args);
 		$object = $command->execute();
@@ -428,11 +439,9 @@ class FlickrGuzzleClient extends Client{
 
 
 function splitParameters($string){
-
 	//Taken from
 	//https://github.com/dopiaza/DPZFlickr/blob/master/README.md
 	//This function is MIT licensed
-
 	$parameters = array();
 	$keyValuePairs = explode('&', $string);
 	foreach ($keyValuePairs as $kvp)	{

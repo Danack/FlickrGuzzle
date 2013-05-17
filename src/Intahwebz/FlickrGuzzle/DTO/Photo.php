@@ -2,9 +2,7 @@
 
 namespace Intahwebz\FlickrGuzzle\DTO;
 
-//use Intahwebz\Utils as Utils;
 use Intahwebz\FlickrGuzzle\DataMapper;
-//use Intahwebz\Utils\JSONFactory;
 
 //Photo sizes
 //s	small square 75x75
@@ -22,7 +20,6 @@ use Intahwebz\FlickrGuzzle\DataMapper;
 class Photo {
 
 	use DataMapper;
-	//use JSONFactory;
 
 	var $photoID;   	//Unique Id
 	var $owner;			//the owner of the photo
