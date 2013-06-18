@@ -176,7 +176,7 @@ class FlickrGuzzleClient extends Client{
 		$this->checkErrorResponseFromXML($parsedResponse);
 		return $className::createFromData($parsedResponse);
 	}
-	
+
 	/**
 	 * Creates domain objects from the response.
 	 *
@@ -200,8 +200,6 @@ class FlickrGuzzleClient extends Client{
 		}
 
 		$decodedData = json_decode($data, TRUE);
-
-		//var_dump($decodedData);
 
 		$this->checkErrorResponseFromJSON($decodedData);
 
@@ -386,6 +384,7 @@ class FlickrGuzzleClient extends Client{
 
 	/**
 	 * Calculate how many of the entries in the Service description have been implemented.
+	 * This is only used for making progress reports.
 	 * @return array
 	 */
 	static function getAPIProgress(){
