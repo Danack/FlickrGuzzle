@@ -1,9 +1,12 @@
+FlickrGuzzle currently uninstallable
+====================================
 
+I'm aware that the FlickrGuzzle library is currently uninstallable due the fork of the guzzle project it depends on being removed from Packagist. I'm working to resolve the situation.
 
 Flickr Guzzle
 =============
 
-A Guzzle based Flickr API. 
+A Guzzle based Flickr API.
 
 Example
 =======
