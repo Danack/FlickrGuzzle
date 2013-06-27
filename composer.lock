@@ -3,26 +3,29 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "3e307ba62a7d0dddacb2ac9ee326761e",
+    "hash": "7f783da3b978fdc526c85a19a154d7e0",
     "packages": [
         {
-            "name": "guzzle/danackguzzle",
+            "name": "danack/danackguzzle",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Danack/guzzle.git",
-                "reference": "e602520f7ee245715c9c4058ed788aaa9f7355be"
+                "reference": "v3.7.0.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Danack/guzzle/zipball/e602520f7ee245715c9c4058ed788aaa9f7355be",
-                "reference": "e602520f7ee245715c9c4058ed788aaa9f7355be",
+                "url": "https://api.github.com/repos/Danack/guzzle/zipball/v3.7.0.1",
+                "reference": "v3.7.0.1",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
                 "php": ">=5.3.2",
                 "symfony/event-dispatcher": ">=2.1"
+            },
+            "conflict": {
+                "guzzle/guzzle": "*"
             },
             "replace": {
                 "guzzle/batch": "self.version",
@@ -54,15 +57,13 @@
                 "phpunit/phpunit": "3.7.*",
                 "psr/log": "1.0.*",
                 "symfony/class-loader": "*",
-                "zend/zend-cache1": "1.12",
-                "zend/zend-log1": "1.12",
                 "zendframework/zend-cache": "2.0.*",
                 "zendframework/zend-log": "2.0.*"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.3-dev"
+                    "dev-master": "3.7-dev"
                 }
             },
             "autoload": {
@@ -71,7 +72,6 @@
                     "Guzzle": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -89,29 +89,32 @@
             "description": "Guzzle is a PHP HTTP client library and framework for building RESTful web service clients",
             "homepage": "http://guzzlephp.org/",
             "keywords": [
+                "HTTP client",
                 "client",
                 "curl",
                 "framework",
                 "http",
-                "http client",
                 "rest",
                 "web service"
             ],
-            "time": "2013-04-18 13:32:20"
+            "support": {
+                "source": "https://github.com/Danack/guzzle/tree/master"
+            },
+            "time": "2013-06-27 12:16:52"
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.2.1",
+            "version": "v2.3.1",
             "target-dir": "Symfony/Component/EventDispatcher",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/EventDispatcher.git",
-                "reference": "v2.2.1"
+                "reference": "v2.3.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/v2.2.1",
-                "reference": "v2.2.1",
+                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/v2.3.1",
+                "reference": "v2.3.1",
                 "shasum": ""
             },
             "require": {
@@ -121,13 +124,13 @@
                 "symfony/dependency-injection": ">=2.0,<3.0"
             },
             "suggest": {
-                "symfony/dependency-injection": "2.2.*",
-                "symfony/http-kernel": "2.2.*"
+                "symfony/dependency-injection": "",
+                "symfony/http-kernel": ""
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.2-dev"
+                    "dev-master": "2.3-dev"
                 }
             },
             "autoload": {
@@ -151,18 +154,57 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "http://symfony.com",
-            "time": "2013-02-11 11:26:43"
+            "time": "2013-05-13 14:36:40"
         }
     ],
     "packages-dev": [
-
+        {
+            "name": "intahwebz/utils",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Danack/intahwebz-utils.git",
+                "reference": "9f69ec79d59a4e694bf26087b6d3eb6b6712dd4a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Danack/intahwebz-utils/zipball/9f69ec79d59a4e694bf26087b6d3eb6b6712dd4a",
+                "reference": "9f69ec79d59a4e694bf26087b6d3eb6b6712dd4a",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Intahwebz\\Tests": "tests/",
+                    "Intahwebz": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Dan Ackroyd",
+                    "email": "Danack@basereality.com",
+                    "homepage": "http://www.basereality.com"
+                }
+            ],
+            "description": "Collection of utility PHP classes for intahwebz development.",
+            "keywords": [
+                "intahwebz",
+                "library"
+            ],
+            "time": "2013-06-23 13:33:59"
+        }
     ],
     "aliases": [
 
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "guzzle/danackguzzle": 20
+        "danack/danackguzzle": 20,
+        "intahwebz/utils": 20
     },
     "platform": [
 

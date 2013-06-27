@@ -3,6 +3,18 @@ FlickrGuzzle currently uninstallable
 
 I'm aware that the FlickrGuzzle library is currently uninstallable due the fork of the guzzle project it depends on being removed from Packagist. I'm working to resolve the situation.
 
+In the meantime if you wish to deploy any project that uses Flickr guzzle you will need to place the following in your root composer.json file.
+
+		"repositories": [
+    		{
+    			"type": "vcs",
+    			"url": "https://github.com/Danack/guzzle"
+    		}
+    	],
+
+To allow composer to be able to find the fork of Guzzle that is required.
+
+
 Flickr Guzzle
 =============
 
