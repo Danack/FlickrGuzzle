@@ -346,7 +346,12 @@ class Flickr{
 //		$activityInfo = $flickrGuzzleClient->getCommandAndExecute('flickr.activity.userComments');
 		//$activityInfo = $flickrGuzzleClient->getCommand('flickr.activity.userComments')->execute();
 
-		$activityInfo = \Intahwebz\FlickrGuzzle\FlickrGuzzleClient::factoryWithCommand('flickr.activity.userComments', $oauthAccessToken);
+		//This is an example of PHPStorms return type hinting.
+		$activityInfo = FlickrGuzzleClient::factoryWithCommand('flickr.activity.userComments', $oauthAccessToken);
+
+		//If you're using PHPStorm - the arrow below will show autocomplete suggestions for
+		//the ActivityInfo object as PHPstorm knows the variable is of that type.
+		//$activityInfo->
 
 		$this->view->assign('activityInfo', $activityInfo);
 		$this->view->setTemplate("flickr/activityInfo");
@@ -546,13 +551,12 @@ class Flickr{
 
 		$this->clearSessionVariables();
 
-		$flickrGuzzleClient = FlickrGuzzleClient::factory(
-			array('oauth' => TRUE)
-		);
+		$flickrGuzzleClient = FlickrGuzzleClient::factory(array('oauth' => TRUE,));
 
 		$params = array(
-			'oauth_callback' => $callbackURL, //$this->router->generateURLForRoute('flickrAuthResult', array(), true)
+			'oauth_callback' => $callbackURL,
 		);
+
 		$command = $flickrGuzzleClient->getCommand('GetOauthRequestToken', $params);
 		$oauthRequestToken  = $command->execute();
 
