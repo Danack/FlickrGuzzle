@@ -17,8 +17,7 @@ return array (
 			"parameters" => array(
 				'oauth_callback' => array(
 					"location" => "query",
-					"description" => "",
-					//'default' => 'http://basereality.test/flickrAuth',
+					"description" => "The URL that an authorisation request should return the user to.",
 					'required' => true,
 				),
 			),
@@ -404,7 +403,7 @@ return array (
 			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <collections>
-<collection id="12-72157594586579649" title="All My Photos" description="a collection" iconlarge="http://farm1.static.flickr.com/187/cols/37_43fac2cf79_l.jpg" 
+<collection id="12-72157594586579649" title="All My Photos" description="a collection" iconlarge="http://farm1.static.flickr.com/187/cols/37_43fac2cf79_l.jpg"
 iconsmall="http://farm1.static.flickr.com/187/cols/56_43fac2cf79_s.jpg">
 <set id="92157594171298291" title="kitesurfing" description="a set"/>
 <set id="72157594247596158" title="faves" description="some favorites."/>
@@ -454,10 +453,10 @@ iconsmall="http://farm1.static.flickr.com/187/cols/56_43fac2cf79_s.jpg">
 <contacts page="1" pages="1" perpage="1000" total="3">
 	<contact nsid="12037949629@N01" username="Eric" iconserver="1"
 		realname="Eric Costello"
-		friend="1" family="0" ignored="1" /> 
+		friend="1" family="0" ignored="1" />
 	<contact nsid="12037949631@N01" username="neb" iconserver="1"
 		realname="Ben Cerveny"
-		friend="0" family="0" ignored="0" /> 
+		friend="0" family="0" ignored="0" />
 	<contact nsid="41578656547@N01" username="cal_abc" iconserver="1"
 		realname="Cal Henderson"
 		friend="1" family="1" ignored="0" />
@@ -617,7 +616,7 @@ iconsmall="http://farm1.static.flickr.com/187/cols/56_43fac2cf79_s.jpg">
 <rsp stat='ok'>
 <count>3</count>
 <prevphoto id="2980" secret="973da1e709"
-	title="boo!" url="/photos/bees/2980/" /> 
+	title="boo!" url="/photos/bees/2980/" />
 <nextphoto id="2985" secret="059b664012"
 	title="Amsterdam Amstel" url="/photos/bees/2985/" />
 </rsp>
@@ -811,7 +810,7 @@ iconsmall="http://farm1.static.flickr.com/187/cols/56_43fac2cf79_s.jpg">
 			'needsSigning' => true,
 			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
-  <gallery id="50736-72157623680420409" url="http://www.flickr.com/photos/kellan/galleries/72157623680420409" /> 
+  <gallery id="50736-72157623680420409" url="http://www.flickr.com/photos/kellan/galleries/72157623680420409" />
 
 */
 			'parameters' => array(
@@ -924,8 +923,8 @@ iconsmall="http://farm1.static.flickr.com/187/cols/56_43fac2cf79_s.jpg">
 			'summary' => '',
 			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
-<gallery id="6065-72157617483228192" url="http://www.flickr.com/photos/straup/galleries/72157617483228192" 
-owner="35034348999@N01" 
+<gallery id="6065-72157617483228192" url="http://www.flickr.com/photos/straup/galleries/72157617483228192"
+owner="35034348999@N01"
          primary_photo_id="292882708" date_create="1241028772" date_update="1270111667" count_photos="17"
  count_videos="0" primary_photo_server="112" primary_photo_farm="1" primary_photo_secret="7f29861bc4">
 	<title>Cat Pictures I've Sent To Kevin Collins</title>
@@ -952,19 +951,19 @@ owner="35034348999@N01"
 			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <galleries total="9" page="1" pages="1" per_page="100" user_id="34427469121@N01">
-   <gallery id="5704-72157622637971865" 
-             url="http://www.flickr.com/photos/george/galleries/72157622637971865" 
+   <gallery id="5704-72157622637971865"
+             url="http://www.flickr.com/photos/george/galleries/72157622637971865"
              owner="34427469121@N01" date_create="1257711422" date_update="1260360756"
-             primary_photo_id="107391222"  primary_photo_server="39" 
+             primary_photo_id="107391222"  primary_photo_server="39"
              primary_photo_farm="1" primary_photo_secret="ffa"
              count_photos="16" count_videos="2" >
        <title>I like me some black &amp; white</title>
        <description>black and whites</description>
    </gallery>
-   <gallery id="5704-72157622566655097" 
-            url="http://www.flickr.com/photos/george/galleries/72157622566655097" 
-            owner="34427469121@N01" date_create="1256852229" date_update="1260462343" 
-            primary_photo_id="497374910" primary_photo_server="231" 
+   <gallery id="5704-72157622566655097"
+            url="http://www.flickr.com/photos/george/galleries/72157622566655097"
+            owner="34427469121@N01" date_create="1256852229" date_update="1260462343"
+            primary_photo_id="497374910" primary_photo_server="231"
             primary_photo_farm="1" primary_photo_secret="9ae0f"
             count_photos="18" count_videos="0" >
        <title>People Sleeping in Libraries</title>
@@ -1002,19 +1001,19 @@ owner="35034348999@N01"
 			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <galleries total="7" page="1" pages="1" per_page="100">
-    <gallery id="9634-72157621980433950" 
-             url="http://www.flickr.com/photos/revdancatt/galleries/72157621980433950" 
-             owner="35468159852@N01" date_create="1249748647" date_update="1260486168" 
-	     primary_photo_id="2080242123" primary_photo_server="2209" 
+    <gallery id="9634-72157621980433950"
+             url="http://www.flickr.com/photos/revdancatt/galleries/72157621980433950"
+             owner="35468159852@N01" date_create="1249748647" date_update="1260486168"
+	     primary_photo_id="2080242123" primary_photo_server="2209"
 	     primary_photo_farm="3" primary_photo_secret="55c9"
              count_photos="18" count_videos="0">
         <title>Vivitar Ultra Wide &amp; Slim Selection</title>
         <description>The cheap and cheerful camera that isn't quite as cheap as it used to be.</description>
     </gallery>
-   <gallery id="22342631-72157622254010831" 
-             url="http://www.flickr.com/photos/22365685@N03/galleries/72157622254010831" 
-             owner="22365685@N03" date_create="1253035020" date_update="1260431618" 
-             primary_photo_id="3182914049" primary_photo_server="3319" 
+   <gallery id="22342631-72157622254010831"
+             url="http://www.flickr.com/photos/22365685@N03/galleries/72157622254010831"
+             owner="22365685@N03" date_create="1253035020" date_update="1260431618"
+             primary_photo_id="3182914049" primary_photo_server="3319"
              primary_photo_farm="4" primary_photo_secret="b94fb"
              count_photos="13" count_videos="0">
         <title>Awesome Pics</title>
@@ -1052,11 +1051,11 @@ owner="35034348999@N01"
 			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <photos page="1" pages="1" perpage="500" total="2">
-	<photo id="2822546461" owner="78398753@N00" secret="2dbcdb589f" server="1" farm="1" title="FOO" 
+	<photo id="2822546461" owner="78398753@N00" secret="2dbcdb589f" server="1" farm="1" title="FOO"
      ispublic="1" isfriend="0" isfamily="0" is_primary="1" has_comment="1">
 		<comment>best cat picture ever!</comment>
 	</photo>
-	<photo id="2822544806" owner="78398753@N00" secret="bd93cbe917" server="1" farm="1" title="OOK" 
+	<photo id="2822544806" owner="78398753@N00" secret="bd93cbe917" server="1" farm="1" title="OOK"
      ispublic="1" isfriend="0" isfamily="0" is_primary="0" has_comment="0" />
 </photos>
 */
@@ -1096,12 +1095,12 @@ owner="35034348999@N01"
 			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <category name="Alt" path="/Alt" pathids="/63">
-	<subcat id="80" name="18+" count="0" /> 
-	<subcat id="82" name="Absurd" count="4" /> 
+	<subcat id="80" name="18+" count="0" />
+	<subcat id="82" name="Absurd" count="4" />
 	<group nsid="34955637532@N01" name="Cal's Public Test Group"
-		members="13" online="1" chatnsid="34955637533@N01" inchat="0" /> 
+		members="13" online="1" chatnsid="34955637533@N01" inchat="0" />
 	<group nsid="34158032587@N01" name="Eric's Alt Group Test"
-		members="3" online="0" chatnsid="34158032588@N01" inchat="0" /> 
+		members="3" online="0" chatnsid="34158032588@N01" inchat="0" />
 </category>
 
 */
@@ -1569,9 +1568,9 @@ owner="35034348999@N01"
 			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <prevphoto id="2980" secret="973da1e709"
-	title="boo!" url="/photos/bees/2980/" /> 
+	title="boo!" url="/photos/bees/2980/" />
 <nextphoto id="2985" secret="059b664012"
-	title="Amsterdam Amstel" url="/photos/bees/2985/" /> 
+	title="Amsterdam Amstel" url="/photos/bees/2985/" />
 */
 			'parameters' => array(
 				'photo_id'    => array(
@@ -1614,11 +1613,11 @@ owner="35034348999@N01"
 			/* Example
 <groups page="1" pages="1" per_page="400" total="3">
 	<group nsid="33853651696@N01" name="Art and Literature Hoedown"
-		admin="0" privacy="3" photos="2" iconserver="1" /> 
+		admin="0" privacy="3" photos="2" iconserver="1" />
 	<group nsid="34427465446@N01" name="FlickrIdeas"
-		admin="1" privacy="3" photos="20" iconserver="1" /> 
+		admin="1" privacy="3" photos="20" iconserver="1" />
 	<group nsid="34427465497@N01" name="GNEverybody"
-		admin="0" privacy="3" photos="4" iconserver="1" /> 
+		admin="0" privacy="3" photos="4" iconserver="1" />
 </groups>
 */
 			'parameters' => array(
@@ -1650,7 +1649,7 @@ owner="35034348999@N01"
 	<photo id="2645" owner="12037949754@N01" title="36679_o"
 	secret="a9f4a06091" server="2"
 	ispublic="1" isfriend="0" isfamily="0"
-	ownername="Bees / ?" dateadded="1089918707" /> 
+	ownername="Bees / ?" dateadded="1089918707" />
 </photos>
 */
 			'parameters' => array(
@@ -1727,15 +1726,15 @@ owner="35034348999@N01"
 			/* Example
 <groups page="1" pages="14" perpage="5" total="67">
 	<group nsid="3000@N02"
-		name="Frito's Test Group" eighteenplus="0" /> 
+		name="Frito's Test Group" eighteenplus="0" />
 	<group nsid="32825757@N00"
-		name="Free for All" eighteenplus="0" /> 
+		name="Free for All" eighteenplus="0" />
 	<group nsid="33335981560@N01"
-		name="joly's mothers" eighteenplus="0" /> 
+		name="joly's mothers" eighteenplus="0" />
 	<group nsid="33853651681@N01"
-		name="Wintermute tower" eighteenplus="0" /> 
+		name="Wintermute tower" eighteenplus="0" />
 	<group nsid="33853651696@N01"
-		name="Art and Literature Hoedown" eighteenplus="0" /> 
+		name="Art and Literature Hoedown" eighteenplus="0" />
 </groups>
 */
 			'parameters' => array(
@@ -2146,8 +2145,8 @@ More information about the pandas can be found on the <a href="http://code.flick
 	<realname>Cal Henderson</realname>
         <mbox_sha1sum>eea6cd28e3d0003ab51b0058a684d94980b727ac</mbox_sha1sum>
 	<location>Vancouver, Canada</location>
-	<photosurl>http://www.flickr.com/photos/bees/</photosurl> 
-	<profileurl>http://www.flickr.com/people/bees/</profileurl> 
+	<photosurl>http://www.flickr.com/photos/bees/</photosurl>
+	<profileurl>http://www.flickr.com/people/bees/</profileurl>
 	<photos>
 		<firstdate>1071510391</firstdate>
 		<firstdatetaken>1900-09-02 09:11:24</firstdatetaken>
@@ -2274,7 +2273,7 @@ More information about the pandas can be found on the <a href="http://code.flick
 			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <photos page="2" has_next_page="1" perpage="10">
-	<photo id="2636" owner="47058503995@N01" 
+	<photo id="2636" owner="47058503995@N01"
 		secret="a123456" server="2" title="test_04"
 		ispublic="1" isfriend="0" isfamily="0" />
 	<photo id="2635" owner="47058503995@N01"
@@ -2329,11 +2328,11 @@ More information about the pandas can be found on the <a href="http://code.flick
 			/* Example
 <groups>
 	<group nsid="34427469792@N01" name="FlickrCentral"
-		admin="0" eighteenplus="0" invitation_only="0" /> 
+		admin="0" eighteenplus="0" invitation_only="0" />
 	<group nsid="37114057624@N01" name="Cal's Test Group"
-		admin="1" eighteenplus="0" invitation_only="1" /> 
+		admin="1" eighteenplus="0" invitation_only="1" />
 	<group nsid="34955637532@N01" name="18+ Group"
-		admin="1" eighteenplus="1" invitation_only="0" /> 
+		admin="1" eighteenplus="1" invitation_only="0" />
 </groups>
 */
 			'parameters' => array(
@@ -2400,15 +2399,15 @@ More information about the pandas can be found on the <a href="http://code.flick
 			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <user id="12037949754@N01" ispro="1">
-	<username>Bees</username> 
+	<username>Bees</username>
 	<bandwidth
 		maxbytes="2147483648" maxkb="2097152"
 		usedbytes="383724" usedkb="374"
 		remainingbytes="2147099924" remainingkb="2096777"
-	 /> 
+	 />
 	<filesize
 		maxbytes="10485760" maxkb="10240"
-	/> 
+	/>
 	<sets
 		created="27"
 		remaining="lots"
@@ -2978,13 +2977,13 @@ Before users may assign location data to a photo they must define who, by defaul
 <photos>
 	<photo id="2801" owner="12037949629@N01"
 		secret="123456" server="1"
-		username="Eric is the best" title="grease" /> 
+		username="Eric is the best" title="grease" />
 	<photo id="2499" owner="33853651809@N01"
 		secret="123456" server="1"
-		username="cal18" title="36679_o" /> 
+		username="cal18" title="36679_o" />
 	<photo id="2437" owner="12037951898@N01"
 		secret="123456" server="1"
-		username="georgie parker" title="phoenix9_stewart" /> 
+		username="georgie parker" title="phoenix9_stewart" />
 </photos>
 */
 			'parameters' => array(
@@ -3030,13 +3029,13 @@ Before users may assign location data to a photo they must define who, by defaul
 <photos>
 	<photo id="2801" owner="12037949629@N01"
 		secret="123456" server="1"
-		username="Eric is the best" title="grease" /> 
+		username="Eric is the best" title="grease" />
 	<photo id="2499" owner="33853651809@N01"
 		secret="123456" server="1"
-		username="cal18" title="36679_o" /> 
+		username="cal18" title="36679_o" />
 	<photo id="2437" owner="12037951898@N01"
 		secret="123456" server="1"
-		username="georgie parker" title="phoenix9_stewart" /> 
+		username="georgie parker" title="phoenix9_stewart" />
 </photos>
 */
 			'parameters' => array(
@@ -3084,9 +3083,9 @@ Before users may assign location data to a photo they must define who, by defaul
 			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <prevphoto id="2980" secret="973da1e709"
-	title="boo!" url="/photos/bees/2980/" /> 
+	title="boo!" url="/photos/bees/2980/" />
 <nextphoto id="2985" secret="059b664012"
-	title="Amsterdam Amstel" url="/photos/bees/2985/" /> 
+	title="Amsterdam Amstel" url="/photos/bees/2985/" />
 */
 			'parameters' => array(
 				'photo_id'    => array(
@@ -3129,13 +3128,13 @@ Before users may assign location data to a photo they must define who, by defaul
 			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <photocounts>
-	<photocount count="4" fromdate="1093566950" todate="1093653350" /> 
-	<photocount count="0" fromdate="1093653350" todate="1093739750" /> 
-	<photocount count="0" fromdate="1093739750" todate="1093826150" /> 
-	<photocount count="2" fromdate="1093826150" todate="1093912550" /> 
-	<photocount count="0" fromdate="1093912550" todate="1093998950" /> 
-	<photocount count="0" fromdate="1093998950" todate="1094085350" /> 
-	<photocount count="0" fromdate="1094085350" todate="1094171750" /> 
+	<photocount count="4" fromdate="1093566950" todate="1093653350" />
+	<photocount count="0" fromdate="1093653350" todate="1093739750" />
+	<photocount count="0" fromdate="1093739750" todate="1093826150" />
+	<photocount count="2" fromdate="1093826150" todate="1093912550" />
+	<photocount count="0" fromdate="1093912550" todate="1093998950" />
+	<photocount count="0" fromdate="1093998950" todate="1094085350" />
+	<photocount count="0" fromdate="1094085350" todate="1094171750" />
 </photocounts>
 
 */
@@ -3355,7 +3354,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'needsSigning' => true,
 			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
-<perms id="2733" ispublic="1" isfriend="1" isfamily="0" permcomment="0" permaddmeta="1" /> 
+<perms id="2733" ispublic="1" isfriend="1" isfamily="0" permcomment="0" permaddmeta="1" />
 */
 			'parameters' => array(
 				'photo_id'    => array(
@@ -3938,7 +3937,7 @@ Before users may assign location data to a photo they must define who, by defaul
 			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <photos page="1" pages="1" perpage="100" total="2">
-        <photo id="169885459" owner="35034348999@N01" 
+        <photo id="169885459" owner="35034348999@N01"
                secret="c85114c195" server="46" title="Doubting Michael"
                ispublic="1" isfriend="0" isfamily="0" lastupdate="1150755888" />
         <photo id="85022332" owner="35034348999@N01"
@@ -4802,9 +4801,9 @@ Before users may assign location data to a photo they must define who, by defaul
 			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
 <prevphoto id="2980" secret="973da1e709"
-	title="boo!" url="/photos/bees/2980/" /> 
+	title="boo!" url="/photos/bees/2980/" />
 <nextphoto id="2985" secret="059b664012"
-	title="Amsterdam Amstel" url="/photos/bees/2985/" /> 
+	title="Amsterdam Amstel" url="/photos/bees/2985/" />
 */
 			'parameters' => array(
 				'photo_id'    => array(
@@ -4911,9 +4910,9 @@ Before users may assign location data to a photo they must define who, by defaul
 			/* Example
 <photoset id="4" primary="2483" page="1" perpage="500" pages="1" total="2">
 	<photo id="2484" secret="123456" server="1"
-		title="my photo" isprimary="0" /> 
+		title="my photo" isprimary="0" />
 	<photo id="2483" secret="123456" server="1"
-		title="flickr rocks" isprimary="1" /> 
+		title="flickr rocks" isprimary="1" />
 </photoset>
 */
 			'parameters' => array(
@@ -5113,9 +5112,9 @@ It will also truncate latitudes and longitudes to three decimal points.
 			/* Example
 <places latitude="37.76513627957266" longitude="-122.42020770907402" accuracy="16" total="1">
    <place place_id="Y12JWsKbApmnSQpbQg" woeid="23512048"
-      latitude="37.765" longitude="-122.424" 
+      latitude="37.765" longitude="-122.424"
       place_url="/United+States/California/San+Francisco/Mission+Dolores"
-      place_type="neighbourhood" place_type_id="22" 
+      place_type="neighbourhood" place_type_id="22"
       timezone="America/Los_Angeles"
       name="Mission Dolores, San Francisco, CA, US, United States"/>
 </places>
@@ -5180,13 +5179,13 @@ It will also truncate latitudes and longitudes to three decimal points.
       latitude="45.512" longitude="-73.554"
       place_url="/Canada/Quebec/Montreal">Montreal</locality>
    <county place_id="cFBi9x6bCJ8D5rba1g" woeid="29375198"
-      latitude="45.551" longitude="-73.600" 
+      latitude="45.551" longitude="-73.600"
       place_url="/cFBi9x6bCJ8D5rba1g">Montréal</county>
-   <region place_id="CrZUvXebApjI0.72" woeid="2344924" 
+   <region place_id="CrZUvXebApjI0.72" woeid="2344924"
       latitude="53.890" longitude="-68.429"
       place_url="/Canada/Quebec">Quebec</region>
    <country place_id="EESRy8qbApgaeIkbsA" woeid="23424775"
-      latitude="62.358" longitude="-96.582" 
+      latitude="62.358" longitude="-96.582"
       place_url="/Canada">Canada</country>
    <shapedata created="1223513357" alpha="0.012359619140625"
       count_points="34778" count_edges="52"
@@ -5237,13 +5236,13 @@ It will also truncate latitudes and longitudes to three decimal points.
       latitude="45.512" longitude="-73.554"
       place_url="/Canada/Quebec/Montreal">Montreal</locality>
    <county place_id="cFBi9x6bCJ8D5rba1g" woeid="29375198"
-      latitude="45.551" longitude="-73.600" 
+      latitude="45.551" longitude="-73.600"
       place_url="/cFBi9x6bCJ8D5rba1g">Montréal</county>
-   <region place_id="CrZUvXebApjI0.72" woeid="2344924" 
+   <region place_id="CrZUvXebApjI0.72" woeid="2344924"
       latitude="53.890" longitude="-68.429"
       place_url="/Canada/Quebec">Quebec</region>
    <country place_id="EESRy8qbApgaeIkbsA" woeid="23424775"
-      latitude="62.358" longitude="-96.582" 
+      latitude="62.358" longitude="-96.582"
       place_url="/Canada">Canada</country>
    <shapedata created="1223513357" alpha="0.012359619140625"
       count_points="34778" count_edges="52">
@@ -5624,21 +5623,21 @@ The maximum allowable size of a bounding box (the distance between the SW and NE
 This method has been deprecated. It won\'t be removed but you should use <a href="/services/api/flickr.places.getInfo.html">flickr.places.getInfo</a> instead.',
 			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
-<location place_id="kH8dLOubBZRvX_YZ" woeid="2487956" 
+<location place_id="kH8dLOubBZRvX_YZ" woeid="2487956"
                 latitude="37.779" longitude="-122.420"
                 place_url="/United+States/California/San+Francisco"
                 place_type="locality">
    <locality place_id="kH8dLOubBZRvX_YZ" woeid="2487956"
-                 latitude="37.779" longitude="-122.420" 
+                 latitude="37.779" longitude="-122.420"
                  place_url="/United+States/California/San+Francisco">San Francisco</locality>
    <county place_id="hCca8XSYA5nn0X1Sfw" woeid="12587707"
-                 latitude="37.759" longitude="-122.435" 
+                 latitude="37.759" longitude="-122.435"
                  place_url="/hCca8XSYA5nn0X1Sfw">San Francisco</county>
-   <region place_id="SVrAMtCbAphCLAtP" woeid="2347563" 
-                latitude="37.271" longitude="-119.270" 
+   <region place_id="SVrAMtCbAphCLAtP" woeid="2347563"
+                latitude="37.271" longitude="-119.270"
                 place_url="/United+States/California">California</region>
    <country place_id="4KO02SibApitvSBieQ" woeid="23424977"
-                  latitude="48.890" longitude="-116.982" 
+                  latitude="48.890" longitude="-116.982"
                   place_url="/United+States">United States</country>
 </location>
 */
@@ -5663,21 +5662,21 @@ This method has been deprecated. It won\'t be removed but you should use <a href
 ',
 			'responseClass' => null, //'Intahwebz\\FlickrGuzzle\\DTO\\',
 			/* Example
-<location place_id="kH8dLOubBZRvX_YZ" woeid="2487956" 
+<location place_id="kH8dLOubBZRvX_YZ" woeid="2487956"
                 latitude="37.779" longitude="-122.420"
                 place_url="/United+States/California/San+Francisco"
                 place_type="locality">
    <locality place_id="kH8dLOubBZRvX_YZ" woeid="2487956"
-                 latitude="37.779" longitude="-122.420" 
+                 latitude="37.779" longitude="-122.420"
                  place_url="/United+States/California/San+Francisco">San Francisco</locality>
    <county place_id="hCca8XSYA5nn0X1Sfw" woeid="12587707"
-                 latitude="37.759" longitude="-122.435" 
+                 latitude="37.759" longitude="-122.435"
                  place_url="/hCca8XSYA5nn0X1Sfw">San Francisco</county>
-   <region place_id="SVrAMtCbAphCLAtP" woeid="2347563" 
-                latitude="37.271" longitude="-119.270" 
+   <region place_id="SVrAMtCbAphCLAtP" woeid="2347563"
+                latitude="37.271" longitude="-119.270"
                 place_url="/United+States/California">California</region>
    <country place_id="4KO02SibApitvSBieQ" woeid="23424977"
-                  latitude="48.890" longitude="-116.982" 
+                  latitude="48.890" longitude="-116.982"
                   place_url="/United+States">United States</country>
 </location>
 */
@@ -6976,8 +6975,6 @@ Possible values are:
 				),
 			),
 		),
-
-
 	),
 
     "models" => array(
