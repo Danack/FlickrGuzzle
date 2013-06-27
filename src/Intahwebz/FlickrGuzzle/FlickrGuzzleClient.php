@@ -174,7 +174,7 @@ class FlickrGuzzleClient extends Client{
 		$parsedResponse = $this->getResponseFromXML($data);
 
 		$this->checkErrorResponseFromXML($parsedResponse);
-		return $className::createFromData($parsedResponse);
+		return $className::createFromJson($parsedResponse);
 	}
 
 	/**
@@ -213,7 +213,7 @@ class FlickrGuzzleClient extends Client{
 		if ($object == FALSE) {
 			//TODO - this is for development only.
 //				var_dump($data);
-			throw new FlickrGuzzleException("Failed to create object $className - or possibly just failed to return the object from the createFromData function.");
+			throw new FlickrGuzzleException("Failed to create object $className - or possibly just failed to return the object from the createFromJson function.");
 		}
 
 		return $object;
