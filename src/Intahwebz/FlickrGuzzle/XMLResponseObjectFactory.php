@@ -3,7 +3,7 @@
 
 namespace Intahwebz\FlickrGuzzle;
 
-use Guzzle\Service\Command\AbstractCommand;
+use Guzzle\Service\Command\OperationCommand;
 
 class XMLResponseObjectFactory extends AbstractResponseObjectFactory {
 
@@ -13,7 +13,7 @@ class XMLResponseObjectFactory extends AbstractResponseObjectFactory {
 	 * @param $className
 	 * @param OperationCommand $command
 	 */
-	public static function factory(AbstractCommand $command){
+	public static function fromCommand(OperationCommand $command){
 
 		$className = $command->getOperation()->getResponseClass();
 		$data = $command->getRequest()->getResponse()->getBody(TRUE);

@@ -3,13 +3,13 @@
 
 namespace Intahwebz\FlickrGuzzle;
 
-use Guzzle\Service\Command\AbstractCommand;
+use Guzzle\Service\Command\OperationCommand;
+
+use Guzzle\Service\Command\ResponseClassInterface;
 
 
 
-abstract class AbstractResponseObjectFactory {
-
-	abstract public static function factory(AbstractCommand $command);
+abstract class AbstractResponseObjectFactory implements ResponseClassInterface {
 
 	//The error codes are dependent on which function is being called :P
 	//TODO Need to make a list of errors per function.

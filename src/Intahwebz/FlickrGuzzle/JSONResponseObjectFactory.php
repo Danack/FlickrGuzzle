@@ -2,11 +2,12 @@
 
 namespace Intahwebz\FlickrGuzzle;
 
-use Guzzle\Service\Command\AbstractCommand;
+use Guzzle\Service\Command\OperationCommand;
+//use Guzzle\Service\Command\AbstractCommand;
 
 class JSONResponseObjectFactory extends AbstractResponseObjectFactory {
 
-	public $aliasedResponses = array(
+	public static $aliasedResponses = array(
 		'Intahwebz\FlickrGuzzle\DTO\CameraBrandList' => 'brands',
 		'Intahwebz\FlickrGuzzle\DTO\CameraDetailList' => 'cameras',
 		'Intahwebz\FlickrGuzzle\DTO\PhotoList' => 'photos',
@@ -38,7 +39,7 @@ class JSONResponseObjectFactory extends AbstractResponseObjectFactory {
 	 * @param $className
 	 * @param OperationCommand $command
 	 */
-	public static function factory(AbstractCommand $command) {
+	public static function fromCommand(OperationCommand $command) {
 
 		$className = $command->getOperation()->getResponseClass();
 		$data = $command->getRequest()->getResponse()->getBody(true);
@@ -73,7 +74,7 @@ class JSONResponseObjectFactory extends AbstractResponseObjectFactory {
 	 * @return mixed
 	 */
 	static function unaliasData($className, $dataJson) {
-		if (array_key_exists($className, self::aliasedResponses) == false) {
+		if (array_key_exists($className, self::$aliasedResponses) == false) {
 			return $dataJson;
 		}
 
