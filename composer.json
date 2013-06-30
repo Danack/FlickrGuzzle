@@ -25,15 +25,12 @@
 	"repositories": [
 		{
 			"type": "vcs",
-			"url": "/documents/projects/github/DanackGuzzle"
-		},
-		{
-			"packagist": false
+			"url": "https://github.com/Danack/guzzle"
 		}
 	],
 
-
 	"require":{
-		"guzzle/guzzle": "dev-FactoryObjectCreate"
+		"danack/danackguzzle": "3.7.*@dev"
 	}
+
 }
