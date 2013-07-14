@@ -11,7 +11,11 @@ use Guzzle\Service\Client;
 use Guzzle\Service\Description\ServiceDescription;
 use Guzzle\Http\Exception;
 
-use Guzzle\Service\Command\AbstractCommand;
+use Guzzle\Service\Command\OperationCommand;
+
+use         Guzzle\Service\Command\CreateResponseClassEvent;
+
+
 
 class FlickrGuzzleClient extends Client{
 
@@ -21,6 +25,37 @@ class FlickrGuzzleClient extends Client{
 	const PLACE_TYPE_REGION = 8;
 	const PLACE_TYPE_COUNTRY = 12;
 	const PLACE_TYPE_CONTINENT = 29;
+
+    //function parseClass(CreateResponseClassEvent $event) {
+    function parseClass(CreateResponseClassEvent $event) {
+
+        $command = $event->offsetGet('command');
+        $object = null;
+
+        switch($command->getName()){
+            case('GetOauthRequestToken'):
+            case('GetOauthAccessToken'):{
+                $object = KeyValueResponseObjectFactory::fromCommand($command);
+                break;
+            }
+
+            //ReplacePhoto also?
+            case('UploadPhoto'):{
+                $object = XMLResponseObjectFactory::fromCommand($command);
+                break;
+            }
+
+            default:{
+                $object = JSONResponseObjectFactory::fromCommand($command);
+                break;
+            }
+        }
+
+        if ($object != null) {
+            $event->setResult($object);
+        }
+    }
+
 
 	//The error codes are dependent on which function is being called :P
 	//TODO Need to make a list of errors per function.
@@ -45,42 +80,6 @@ class FlickrGuzzleClient extends Client{
 		114 => 'Invalid SOAP envelope',
 		115 => 'Invalid XML-RPC Method',
 		116 => 'Bad URL found',
-	);
-
-	public $xmlResponses = array(
-		"Intahwebz\\FlickrGuzzle\\DTO\\FileUploadResponse"
-	);
-
-	public $nonStandardResponses = array(
-		'Intahwebz\FlickrGuzzle\DTO\OauthAccessToken',
-		'Intahwebz\FlickrGuzzle\DTO\OauthRequestToken',
-	);
-
-	public $aliasedResponses = array(
-		'Intahwebz\FlickrGuzzle\DTO\CameraBrandList' => 'brands',
-		'Intahwebz\FlickrGuzzle\DTO\CameraDetailList' => 'cameras',
-		'Intahwebz\FlickrGuzzle\DTO\PhotoList' => 'photos',
-		//"Intahwebz\\FlickrGuzzle\\DTO\\Photo' => NULL,
-		'Intahwebz\FlickrGuzzle\DTO\PhotoInfo' => 'photo',
-		'Intahwebz\FlickrGuzzle\DTO\OauthCheck' => 'oauth',
-		//"Intahwebz\\FlickrGuzzle\\DTO\\MethodInfo' => NULL,
-		'Intahwebz\FlickrGuzzle\DTO\MethodList' => 'methods',
-		'Intahwebz\FlickrGuzzle\DTO\InstitutionList' => 'institutions',
-		//"Intahwebz\\FlickrGuzzle\\DTO\\LicenseList' => NULL,
-		'Intahwebz\FlickrGuzzle\DTO\ActivityInfo"' => 'items',
-		'Intahwebz\FlickrGuzzle\DTO\PhotoInfoTransform"' => 'photoid',
-		'Intahwebz\FlickrGuzzle\DTO\NoteID' => 'note',
-		'Intahwebz\FlickrGuzzle\DTO\LookupUser' => 'user',
-		'Intahwebz\FlickrGuzzle\DTO\LookupGroup' => 'group',
-		'Intahwebz\FlickrGuzzle\DTO\LookupGallery' => 'gallery',
-		//"Intahwebz\\FlickrGuzzle\\DTO\\URLInfo" => NULL,
-		'Intahwebz\FlickrGuzzle\DTO\TagList' => array('photo', 'who', 'hottags'),
-		'Intahwebz\FlickrGuzzle\DTO\PlaceList' => 'places',
-		'Intahwebz\FlickrGuzzle\DTO\UserBlogList' => 'blogs',
-		'Intahwebz\FlickrGuzzle\DTO\BlogServiceList' => 'services',
-		//"Intahwebz\\FlickrGuzzle\\DTO\\GenericResponse' => NULL,
-		'Intahwebz\FlickrGuzzle\DTO\UserList' => array('contacts'),
-		//Intahwebz\FlickrGuzzle\DTO\AccountStat
 	);
 
 	/**
@@ -154,71 +153,9 @@ class FlickrGuzzleClient extends Client{
 			$client->addSubscriber($oauth);
 		}
 
-		return $client;
+        $client->getEventDispatcher()->addListener('operation.parse_class', [$client, 'parseClass']);
+        return $client;
 	}
-
-	/**
-	 * Parse an XML resonse. The Flickr API is hard-coded to return XML for some functions :P
-	 *
-	 * @param $data
-	 * @param $className
-	 * @return mixed
-	 */
-	function parseXMLResponse($data, $className) {
-		//Wtf is this?
-		//oh - this function call always returns 'xml' even if you request JSON.
-//				xml version="1.0" encoding="utf-8"
-//			<rsp stat="ok">
-//				<photoid>8636447595</photoid>
-//			</rsp>
-		$parsedResponse = $this->getResponseFromXML($data);
-
-		$this->checkErrorResponseFromXML($parsedResponse);
-		return $className::createFromJson($parsedResponse);
-	}
-
-	/**
-	 * Creates domain objects from the response.
-	 *
-	 * @param $className
-	 * @param OperationCommand $command
-	 */
-	public function createObject(AbstractCommand $command){
-
-		$className = $command->getOperation()->getResponseClass();
-		$data = $command->getRequest()->getResponse()->getBody(TRUE);
-
-		//Some responses are XML
-		if (in_array($className, $this->xmlResponses) == TRUE) {
-			return $this->parseXMLResponse($data, $className);
-		}
-
-		//Some responses are key-value pairs :P
-		if (in_array($className, $this->nonStandardResponses) == TRUE) {
-			$params = splitParameters($data);
-			return $className::createFromJson($params);
-		}
-
-		$decodedData = json_decode($data, TRUE);
-
-		$this->checkErrorResponseFromJSON($decodedData);
-
-		$decodedData = $this->unaliasData($className, $decodedData);
-		if ($decodedData == FALSE) {
-			throw new FlickrGuzzleException("Failed to extract data from returned response. Please check the alias that is meant to point to the data.");
-		}
-
-		$object = $className::createFromJson($decodedData);
-
-		if ($object == FALSE) {
-			//TODO - this is for development only.
-//				var_dump($data);
-			throw new FlickrGuzzleException("Failed to create object $className - or possibly just failed to return the object from the createFromJson function.");
-		}
-
-		return $object;
-	}
-
 
 	/**
 	 * The data returned from the flickr API is always encapsulated at the top level
@@ -433,23 +370,6 @@ class FlickrGuzzleClient extends Client{
 		$object = $command->execute();
 		return $object;
 	}
-
-}
-
-
-function splitParameters($string){
-	//Taken from
-	//https://github.com/dopiaza/DPZFlickr/blob/master/README.md
-	//This function is MIT licensed
-	$parameters = array();
-	$keyValuePairs = explode('&', $string);
-	foreach ($keyValuePairs as $kvp)	{
-		$pieces = explode('=', $kvp);
-		if (count($pieces) == 2)		{
-			$parameters[rawurldecode($pieces[0])] = rawurldecode($pieces[1]);
-		}
-	}
-	return $parameters;
 }
 
 

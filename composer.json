@@ -22,15 +22,8 @@
 		"intahwebz/utils": "dev-master"
 	},
 
-	"repositories": [
-		{
-			"type": "vcs",
-			"url": "https://github.com/Danack/guzzle"
-		}
-	],
-
-
 	"require":{
-		"danack/danackguzzle": "3.7.*@dev"
+		"guzzle/guzzle": "dev-custom-response-class as 3.7.x-dev"
 	}
+
 }
