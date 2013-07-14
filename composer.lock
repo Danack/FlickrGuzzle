@@ -3,15 +3,15 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "783b5c1447837cb53c11fd248b0ca663",
+    "hash": "ccd5e566b694389cf9fda54fb1414143",
     "packages": [
         {
             "name": "guzzle/guzzle",
-            "version": "dev-FactoryObjectCreate",
+            "version": "dev-ResponseFactory",
             "source": {
                 "type": "git",
-                "url": "/documents/projects/github/DanackGuzzle",
-                "reference": "75ed7180f187d6800a84e4506c7f474ce9c154b5"
+                "url": "/home/github/DanackGuzzle",
+                "reference": "a046d3a94b9c6420f39033661e9414a5a7d34757"
             },
             "require": {
                 "ext-curl": "*",
@@ -88,7 +88,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2013-06-30 20:04:43"
+            "time": "2013-07-11 21:05:15"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -187,7 +187,12 @@
         }
     ],
     "aliases": [
-
+        {
+            "alias": "3.7.x-dev",
+            "alias_normalized": "3.7.9999999.9999999-dev",
+            "version": "dev-ResponseFactory",
+            "package": "guzzle/guzzle"
+        }
     ],
     "minimum-stability": "stable",
     "stability-flags": {

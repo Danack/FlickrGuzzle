@@ -5,7 +5,7 @@ return array (
 	"name" => "FlickAPI",
     "baseUrl" => "http://api.flickr.com/services/rest/",
     "description" => "Flickr API using Guzzle as a backend",
-	"factoryClass" => "Intahwebz\\FlickrGuzzle\\JSONResponseObjectFactory",
+	"responseFactory" => "Intahwebz\\FlickrGuzzle\\JSONResponseObjectFactory",
 
     "operations" => array(
 		//The first three operations are made to a different URL than all the other requests
@@ -14,7 +14,7 @@ return array (
 			'uri' => 'http://www.flickr.com/services/oauth/request_token',
 			"summary" => "Starts the Oauth process.",
 			"responseClass" => "Intahwebz\\FlickrGuzzle\\DTO\\OauthRequestToken",
-			"factoryClass" => "Intahwebz\\FlickrGuzzle\\KeyValueResponseObjectFactory",
+			"responseFactory" => "Intahwebz\\FlickrGuzzle\\KeyValueResponseObjectFactory",
 
 			"parameters" => array(
 				'oauth_callback' => array(
@@ -30,7 +30,7 @@ return array (
 			'uri' => 'http://www.flickr.com/services/oauth/access_token',
 			"summary" => "Exchanges Oauth request token for access token.",
 			"responseClass" => "Intahwebz\\FlickrGuzzle\\DTO\\OauthAccessToken",
-			"factoryClass" => "Intahwebz\\FlickrGuzzle\\KeyValueResponseObjectFactory",
+			"responseFactory" => "Intahwebz\\FlickrGuzzle\\KeyValueResponseObjectFactory",
 
 			"parameters" => array(
 
@@ -55,7 +55,7 @@ return array (
 			'uri' => 'http://api.flickr.com/services/upload/',
 			"summary" => "Uploads a photo.",
 			"responseClass" => "Intahwebz\\FlickrGuzzle\\DTO\\FileUploadResponse",
-			"factoryClass" => "Intahwebz\\FlickrGuzzle\\XMLResponseObjectFactory",
+			"responseFactory" => "Intahwebz\\FlickrGuzzle\\XMLResponseObjectFactory",
 
 			"parameters" => array(
 				'format' => array(

@@ -30,7 +30,7 @@
 	],
 
 	"require":{
-		"danack/danackguzzle": "3.7.*@dev"
+		"guzzle/guzzle": "dev-ResponseFactory as 3.7.x-dev"
 	}
 
 }
