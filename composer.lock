@@ -3,20 +3,20 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "da41d2b21d2dd5175294b580620799b5",
+    "hash": "76cf42d69bf5006d5e5894facedff79c",
     "packages": [
         {
             "name": "guzzle/guzzle",
-            "version": "dev-custom-response-class",
+            "version": "v3.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "525c9309e929c0005ab25b0fefa128772da97f46"
+                "reference": "v3.7.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/525c9309e929c0005ab25b0fefa128772da97f46",
-                "reference": "525c9309e929c0005ab25b0fefa128772da97f46",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/v3.7.2",
+                "reference": "v3.7.2",
                 "shasum": ""
             },
             "require": {
@@ -95,28 +95,28 @@
                 "rest",
                 "web service"
             ],
-            "time": "2013-07-13 20:31:33"
+            "time": "2013-08-02 18:31:05"
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.3.1",
+            "version": "v2.3.2",
             "target-dir": "Symfony/Component/EventDispatcher",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/EventDispatcher.git",
-                "reference": "v2.3.1"
+                "reference": "v2.3.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/v2.3.1",
-                "reference": "v2.3.1",
+                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/v2.3.2",
+                "reference": "v2.3.2",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
             "require-dev": {
-                "symfony/dependency-injection": ">=2.0,<3.0"
+                "symfony/dependency-injection": "~2.0"
             },
             "suggest": {
                 "symfony/dependency-injection": "",
@@ -194,16 +194,10 @@
         }
     ],
     "aliases": [
-        {
-            "alias": "3.7.x-dev",
-            "alias_normalized": "3.7.9999999.9999999-dev",
-            "version": "dev-custom-response-class",
-            "package": "guzzle/guzzle"
-        }
+
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "guzzle/guzzle": 20,
         "intahwebz/utils": 20
     },
     "platform": [

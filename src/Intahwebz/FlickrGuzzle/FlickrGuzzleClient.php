@@ -26,7 +26,6 @@ class FlickrGuzzleClient extends Client{
 	const PLACE_TYPE_COUNTRY = 12;
 	const PLACE_TYPE_CONTINENT = 29;
 
-    //function parseClass(CreateResponseClassEvent $event) {
     function parseClass(CreateResponseClassEvent $event) {
 
         $command = $event->offsetGet('command');
@@ -153,7 +152,7 @@ class FlickrGuzzleClient extends Client{
 			$client->addSubscriber($oauth);
 		}
 
-        $client->getEventDispatcher()->addListener('operation.parse_class', [$client, 'parseClass']);
+        $client->getEventDispatcher()->addListener('command.parse_response', [$client, 'parseClass']);
         return $client;
 	}
 

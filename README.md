@@ -1,20 +1,3 @@
-FlickrGuzzle currently uninstallable
-====================================
-
-I'm aware that the FlickrGuzzle library is currently uninstallable due the fork of the guzzle project it depends on being removed from Packagist. I'm working to resolve the situation.
-
-In the meantime if you wish to deploy any project that uses Flickr guzzle you will need to place the following in your root composer.json file.
-
-		"repositories": [
-    		{
-    			"type": "vcs",
-    			"url": "https://github.com/Danack/guzzle"
-    		}
-    	],
-
-To allow composer to be able to find the fork of Guzzle that is required.
-
-
 Flickr Guzzle
 =============
 
@@ -32,12 +15,6 @@ A comprehensive set of examples is included as a standalone web application. To 
 3 Copy FlickrGuzzle/example/configSample.php to FlickrGuzzle/example/config.php and put your Flickr key and secret in there.
 
 You should now be able to point your browser to the
-
-
-WARNING
-=======
-
-This currently uses a custom version of Guzzle with a slightly different way of creating the responseObjects. I hope to get this new feature implemented in Guzzle in a few days (when it's polished up) to avoid requiring the custom library.
 
 
 Functions not implemented yet

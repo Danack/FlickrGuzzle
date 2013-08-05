@@ -18,12 +18,19 @@
 		}
 	],
 
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "http://github.com/Danack/guzzle"
+		}
+	],
+
 	"require-dev": {
 		"intahwebz/utils": "dev-master"
 	},
 
 	"require":{
-		"guzzle/guzzle": "dev-custom-response-class as 3.7.x-dev"
+		"guzzle/guzzle": ">=3.7.2"
 	}
 
 }
