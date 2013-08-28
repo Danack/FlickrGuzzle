@@ -58,6 +58,3 @@ class ActivityItem {
 	var $activityEventList = array();
 }
 
-
-
-?>

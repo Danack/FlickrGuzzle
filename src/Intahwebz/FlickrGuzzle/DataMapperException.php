@@ -8,6 +8,3 @@ class DataMapperException extends \Exception {
 
 }
 
-
-
-?>

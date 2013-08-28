@@ -18,6 +18,3 @@ class LookupUser {
 	var $username;
 }
 
-
-
-?>

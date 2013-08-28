@@ -371,5 +371,3 @@ class FlickrGuzzleClient extends Client{
 	}
 }
 
-
-?>

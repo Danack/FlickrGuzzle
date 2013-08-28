@@ -17,7 +17,3 @@ class MethodArgument {
 	var $name;
 	var $optional;
 }
-
-
-
-?>

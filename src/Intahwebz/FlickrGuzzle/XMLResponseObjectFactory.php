@@ -144,6 +144,3 @@ class XMLResponseObjectFactory extends AbstractResponseObjectFactory {
 
 }
 
-
-
-?>

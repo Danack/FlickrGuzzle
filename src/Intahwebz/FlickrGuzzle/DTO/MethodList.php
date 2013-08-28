@@ -38,4 +38,3 @@ class MethodList {
 //		</methods>
 
 
-?>

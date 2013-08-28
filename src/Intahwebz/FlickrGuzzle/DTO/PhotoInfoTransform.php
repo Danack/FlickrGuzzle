@@ -26,6 +26,3 @@ class PhotoInfoTransform {
 	var $originalSecret;
 }
 
-
-
-?>

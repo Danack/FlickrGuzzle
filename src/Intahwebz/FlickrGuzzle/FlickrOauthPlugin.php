@@ -25,6 +25,3 @@ class FlickrOauthPlugin extends OauthPlugin {
 	}
 }
 
-
-
-?>

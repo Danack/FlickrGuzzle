@@ -27,5 +27,3 @@ class OauthCheck {
 	var $permissions;
 	var $user;
 }
-
-?>

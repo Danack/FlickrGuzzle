@@ -16,6 +16,3 @@ class InstitutionList {
 	var $institutions = array();
 }
 
-
-
-?>

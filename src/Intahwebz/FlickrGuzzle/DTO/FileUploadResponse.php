@@ -16,6 +16,3 @@ class FileUploadResponse {
 	var $photoID;
 }
 
-
-
-?>

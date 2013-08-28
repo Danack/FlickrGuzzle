@@ -19,6 +19,3 @@ class License {
 	var $name;
 	var $url;
 }
-
-
-?>

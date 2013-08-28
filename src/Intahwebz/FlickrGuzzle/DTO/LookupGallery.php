@@ -53,7 +53,3 @@ class LookupGallery {
 	var $title;
 	var $description;
 }
-
-
-
-?>

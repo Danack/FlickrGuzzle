@@ -23,6 +23,3 @@ class FlickrAPIException extends \Exception {
 	}
 }
 
-
-
-?>

@@ -38,6 +38,3 @@ class ActivityEvent {
 	var $noteID;
 }
 
-
-
-?>

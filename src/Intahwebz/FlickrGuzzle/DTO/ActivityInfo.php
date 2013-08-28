@@ -24,6 +24,3 @@ class ActivityInfo {
 	var $perPage;
 	var $total;
 }
-
-
-?>

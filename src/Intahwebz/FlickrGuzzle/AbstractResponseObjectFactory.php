@@ -56,6 +56,3 @@ abstract class AbstractResponseObjectFactory implements ResponseClassInterface {
 
 }
 
-
-
-?>

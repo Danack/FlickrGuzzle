@@ -120,5 +120,3 @@ class JSONResponseObjectFactory extends AbstractResponseObjectFactory {
 
 }
 
-
-?>

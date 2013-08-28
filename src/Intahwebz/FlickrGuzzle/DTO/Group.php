@@ -10,6 +10,3 @@ class Group {
 	var $url;
 }
 
-
-
-?>

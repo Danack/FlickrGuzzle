@@ -38,5 +38,3 @@ function splitParameters($string){
 	return $parameters;
 }
 
-
-?>

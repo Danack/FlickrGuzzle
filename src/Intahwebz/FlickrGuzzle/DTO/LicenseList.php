@@ -17,6 +17,3 @@ class LicenseList {
 	var $licenses = array();
 }
 
-
-
-?>

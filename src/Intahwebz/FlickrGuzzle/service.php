@@ -6982,5 +6982,3 @@ Possible values are:
 );
 
 
-
-?>
